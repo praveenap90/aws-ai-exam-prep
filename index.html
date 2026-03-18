@@ -5424,7 +5424,7 @@ flowchart LR
         <div class="mermaid-wrap" id="d5-cloudtrailflow-wrap">
           <button class="mermaid-expand-btn" onclick="expandDiagram('d5-cloudtrailflow')">⤢ Expand</button>
           <div class="mermaid" id="d5-cloudtrailflow-src">
-flowchart LR
+flowchart TD
     A([AWS Resources: EC2, S3, Lambda, RDS, etc.]):::resource
     A --> B([CloudTrail Records API Calls]):::recording
     B --> C([Store Logs in S3 Bucket]):::storage
