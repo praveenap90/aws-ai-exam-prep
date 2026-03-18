@@ -1052,9 +1052,13 @@
       transition: transform 0.15s ease;
       box-shadow: 0 8px 40px rgba(0,0,0,0.6);
       will-change: transform;
+      min-width: min(90vw, 1200px);
+      width: min(90vw, 1200px);
     }
     .diagram-fs-inner svg {
       display: block;
+      width: 100%;
+      height: auto;
       max-width: none;
     }
 
@@ -5424,7 +5428,7 @@ flowchart LR
         <div class="mermaid-wrap" id="d5-cloudtrailflow-wrap">
           <button class="mermaid-expand-btn" onclick="expandDiagram('d5-cloudtrailflow')">⤢ Expand</button>
           <div class="mermaid" id="d5-cloudtrailflow-src">
-flowchart TD
+flowchart LR
     A([AWS Resources: EC2, S3, Lambda, RDS, etc.]):::resource
     A --> B([CloudTrail Records API Calls]):::recording
     B --> C([Store Logs in S3 Bucket]):::storage
@@ -5680,9 +5684,6 @@ function filterQuiz(cat, btn) {
   renderQuestion();
 }
 
-// init
-answered = new Array(allQuestions.length).fill(null);
-
 const questions = allQuestions; // keep backward compat
 
 function renderQuestion() {
@@ -5883,8 +5884,21 @@ window.expandDiagram = function(panelId) {
   if (!srcEl || !fsInner || !fs) return;
   const svgEl = srcEl.querySelector('svg');
   if (!svgEl) { alert('Please wait — render the diagram first by clicking the 🗺️ Diagram tab.'); return; }
-  fsInner.innerHTML = svgEl.outerHTML;
+
+  // Clone and strip fixed dimensions so SVG scales to fill the container
+  const clone = svgEl.cloneNode(true);
+  clone.removeAttribute('width');
+  clone.removeAttribute('height');
+  clone.removeAttribute('style');
+  clone.style.width = '100%';
+  clone.style.height = 'auto';
+  clone.style.display = 'block';
+
+  fsInner.innerHTML = '';
+  fsInner.appendChild(clone);
   forceBlackText(fsInner);
+
+  // Reset zoom and position
   fsZoom = 1;
   fsOffset = { x: 0, y: 0 };
   fsTempOffset = { x: 0, y: 0 };
