@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AWS AI Practitioner | Exam Prep Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --aws-orange: #FF9900;
+      --aws-dark: #0A0E1A;
+      --aws-navy: #0F1B2D;
+      --aws-card: #111827;
+      --aws-border: rgba(255,153,0,0.18);
+      --aws-muted: #8B9AB2;
+      --aws-light: #E8EDF5;
+      --aws-green: #00D68F;
+      --aws-blue: #4DA6FF;
+      --aws-red: #FF5C5C;
+      --glow: 0 0 40px rgba(255,153,0,0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Syne', sans-serif;
+      background: var(--aws-dark);
+      color: var(--aws-light);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,153,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,153,0,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(10,14,26,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--aws-border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--aws-orange);
+      letter-spacing: 0.1em;
+    }
+
+    .nav-logo .badge {
+      background: var(--aws-orange);
+      color: var(--aws-dark);
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 0.7rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--aws-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--aws-orange); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 7rem 2rem 4rem;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--aws-orange);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+
+    .hero h1 span {
+      color: var(--aws-orange);
+      position: relative;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--aws-muted);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: 6px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--aws-orange);
+      color: var(--aws-dark);
+    }
+    .btn-primary:hover { background: #FFAD33; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,153,0,0.35); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--aws-orange);
+      border: 1.5px solid var(--aws-border);
+    }
+    .btn-outline:hover { border-color: var(--aws-orange); background: rgba(255,153,0,0.08); }
+
+    /* Score pill */
+    .score-pill {
+      margin-top: 3rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 2rem;
+      padding: 1rem 2rem;
+      background: var(--aws-card);
+      border: 1px solid var(--aws-border);
+      border-radius: 100px;
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
+
+    .score-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .score-num {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--aws-orange);
+      font-family: 'Space Mono', monospace;
+    }
+
+    .score-label {
+      font-size: 0.65rem;
+      color: var(--aws-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .score-divider { width: 1px; height: 2.5rem; background: var(--aws-border); }
+
+    /* ── SECTION ── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--aws-orange);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      color: var(--aws-muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: 3rem;
+    }
+
+    /* ── DOMAIN CARDS ── */
+    .domains-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .domain-card {
+      background: var(--aws-card);
+      border: 1px solid var(--aws-border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      cursor: pointer;
+    }
+
+    .domain-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--card-accent, var(--aws-orange));
+    }
+
+    .domain-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--glow);
+      border-color: rgba(255,153,0,0.35);
+    }
+
+    .domain-number {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--aws-muted);
+      letter-spacing: 0.15em;
+      margin-bottom: 0.75rem;
+    }
+
+    .domain-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .domain-weight {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--aws-orange);
+      background: rgba(255,153,0,0.1);
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .domain-desc {
+      font-size: 0.875rem;
+      color: var(--aws-muted);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .domain-topics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .topic-tag {
+      font-size: 0.7rem;
+      font-family: 'Space Mono', monospace;
+      padding: 3px 10px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.05);
+      color: var(--aws-muted);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-bar {
+      height: 4px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 4px;
+      margin-top: 1.25rem;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--card-accent, var(--aws-orange));
+      border-radius: 4px;
+      transition: width 1s ease;
+    }
+
+    /* ── SERVICES GRID ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .service-card {
+      background: var(--aws-card);
+      border: 1px solid var(--aws-border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .service-card:hover {
+      border-color: rgba(255,153,0,0.4);
+      transform: translateY(-2px);
+    }
+
+    .service-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .service-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .service-category {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--aws-orange);
+      letter-spacing: 0.1em;
+    }
+
+    .service-desc {
+      font-size: 0.75rem;
+      color: var(--aws-muted);
+      line-height: 1.5;
+    }
+
+    /* ── QUIZ SECTION ── */
+    .quiz-container {
+      background: var(--aws-card);
+      border: 1px solid var(--aws-border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      max-width: 750px;
+    }
+
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .quiz-progress-text {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--aws-muted);
+    }
+
+    .quiz-score-badge {
+      background: rgba(255,153,0,0.1);
+      border: 1px solid var(--aws-border);
+      padding: 4px 14px;
+      border-radius: 100px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--aws-orange);
+    }
+
+    .quiz-question {
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .quiz-domain-tag {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--aws-blue);
+      background: rgba(77,166,255,0.1);
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .quiz-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      border: 1.5px solid var(--aws-border);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: transparent;
+      color: var(--aws-light);
+      text-align: left;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .quiz-option:hover:not(:disabled) {
+      border-color: var(--aws-orange);
+      background: rgba(255,153,0,0.06);
+    }
+
+    .quiz-option.correct {
+      border-color: var(--aws-green);
+      background: rgba(0,214,143,0.08);
+      color: var(--aws-light);
+    }
+
+    .quiz-option.wrong {
+      border-color: var(--aws-red);
+      background: rgba(255,92,92,0.08);
+    }
+
+    .quiz-option.selected-wrong {
+      border-color: var(--aws-red);
+      background: rgba(255,92,92,0.1);
+    }
+
+    .option-letter {
+      flex-shrink: 0;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .quiz-option.correct .option-letter { background: var(--aws-green); color: #000; }
+    .quiz-option.selected-wrong .option-letter { background: var(--aws-red); color: #fff; }
+
+    .quiz-explanation {
+      background: rgba(77,166,255,0.08);
+      border: 1px solid rgba(77,166,255,0.2);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      font-size: 0.875rem;
+      color: var(--aws-muted);
+      line-height: 1.6;
+      display: none;
+    }
+
+    .quiz-explanation.visible { display: block; }
+    .quiz-explanation strong { color: var(--aws-blue); }
+
+    .quiz-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
+    }
+
+    /* ── CHEAT SHEET ── */
+    .cheat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .cheat-card {
+      background: var(--aws-card);
+      border: 1px solid var(--aws-border);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+
+    .cheat-card h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--aws-orange);
+    }
+
+    .cheat-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .cheat-card ul li {
+      font-size: 0.8rem;
+      color: var(--aws-muted);
+      font-family: 'Space Mono', monospace;
+      padding-left: 1rem;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .cheat-card ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--aws-orange);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--aws-border);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--aws-muted);
+    }
+
+    footer a { color: var(--aws-orange); text-decoration: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .animate-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── TABS ── */
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 0.5rem 1.25rem;
+      border-radius: 6px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      border: 1.5px solid var(--aws-border);
+      background: transparent;
+      color: var(--aws-muted);
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: var(--aws-orange);
+      color: var(--aws-dark);
+      border-color: var(--aws-orange);
+      font-weight: 700;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      padding-left: 2.5rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px; top: 10px; bottom: 10px;
+      width: 1px;
+      background: var(--aws-border);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2.5rem;
+      top: 4px;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--aws-card);
+      border: 2px solid var(--aws-orange);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .timeline-dot.done { background: var(--aws-orange); }
+
+    .timeline-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--aws-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline-content {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline-note {
+      font-size: 0.8rem;
+      color: var(--aws-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .score-pill { gap: 1rem; padding: 0.75rem 1.25rem; }
+      .quiz-container { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="badge">AWS</span>
+    AI Practitioner · AIF-C01
+  </div>
+  <ul class="nav-links">
+    <li><a href="#domains">Domains</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#quiz">Practice</a></li>
+    <li><a href="#cheatsheet">Cheat Sheet</a></li>
+    <li><a href="#study-plan">Study Plan</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">▸ AWS Certified · AIF-C01</p>
+  <h1>AWS AI<br/><span>Practitioner</span><br/>Exam Prep</h1>
+  <p class="hero-sub">A complete study portfolio covering all 5 exam domains, key AWS AI/ML services, practice questions, and a structured study plan.</p>
+  <div class="hero-actions">
+    <a href="#quiz" class="btn btn-primary">▶ Start Practice Quiz</a>
+    <a href="#domains" class="btn btn-outline">Explore Domains →</a>
+  </div>
+  <div class="score-pill">
+    <div class="score-item">
+      <span class="score-num">5</span>
+      <span class="score-label">Domains</span>
+    </div>
+    <div class="score-divider"></div>
+    <div class="score-item">
+      <span class="score-num">85</span>
+      <span class="score-label">Questions</span>
+    </div>
+    <div class="score-divider"></div>
+    <div class="score-item">
+      <span class="score-num">700</span>
+      <span class="score-label">Pass Score</span>
+    </div>
+    <div class="score-divider"></div>
+    <div class="score-item">
+      <span class="score-num">90</span>
+      <span class="score-label">Minutes</span>
+    </div>
+  </div>
+</div>
+
+<!-- DOMAINS -->
+<section id="domains">
+  <p class="section-label">▸ Exam Blueprint</p>
+  <h2 class="section-title">The 5 Exam Domains</h2>
+  <p class="section-desc">The AIF-C01 exam covers five weighted domains. Understanding each domain's weight helps you focus your study time effectively.</p>
+
+  <div class="domains-grid">
+
+    <div class="domain-card animate-in" style="--card-accent: #FF9900;">
+      <p class="domain-number">DOMAIN 01</p>
+      <h3 class="domain-title">Fundamentals of AI & ML</h3>
+      <span class="domain-weight">⚖ 20% of exam</span>
+      <p class="domain-desc">Core concepts of AI, ML, and deep learning. Types of ML (supervised, unsupervised, reinforcement), model training, evaluation, and the ML pipeline.</p>
+      <div class="domain-topics">
+        <span class="topic-tag">Supervised Learning</span>
+        <span class="topic-tag">Neural Networks</span>
+        <span class="topic-tag">Model Evaluation</span>
+        <span class="topic-tag">Bias & Variance</span>
+        <span class="topic-tag">Feature Engineering</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 0%" data-target="78"></div></div>
+    </div>
+
+    <div class="domain-card animate-in" style="--card-accent: #4DA6FF;">
+      <p class="domain-number">DOMAIN 02</p>
+      <h3 class="domain-title">Fundamentals of Generative AI</h3>
+      <span class="domain-weight">⚖ 24% of exam</span>
+      <p class="domain-desc">Foundation models, large language models, prompt engineering, tokens, embeddings, and the lifecycle of generative AI applications.</p>
+      <div class="domain-topics">
+        <span class="topic-tag">Foundation Models</span>
+        <span class="topic-tag">Prompt Engineering</span>
+        <span class="topic-tag">Tokens & Embeddings</span>
+        <span class="topic-tag">RAG</span>
+        <span class="topic-tag">Fine-tuning</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 0%" data-target="85"></div></div>
+    </div>
+
+    <div class="domain-card animate-in" style="--card-accent: #00D68F;">
+      <p class="domain-number">DOMAIN 03</p>
+      <h3 class="domain-title">Applications of Foundation Models</h3>
+      <span class="domain-weight">⚖ 28% of exam</span>
+      <p class="domain-desc">Design patterns for GenAI applications, selecting the right model, Amazon Bedrock capabilities, agents, knowledge bases, and deployment patterns.</p>
+      <div class="domain-topics">
+        <span class="topic-tag">Amazon Bedrock</span>
+        <span class="topic-tag">Agents for Bedrock</span>
+        <span class="topic-tag">Knowledge Bases</span>
+        <span class="topic-tag">Model Selection</span>
+        <span class="topic-tag">Guardrails</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 0%" data-target="72"></div></div>
+    </div>
+
+    <div class="domain-card animate-in" style="--card-accent: #FF5C5C;">
+      <p class="domain-number">DOMAIN 04</p>
+      <h3 class="domain-title">Guidelines for Responsible AI</h3>
+      <span class="domain-weight">⚖ 14% of exam</span>
+      <p class="domain-desc">AI ethics, bias mitigation, fairness, transparency, privacy, and AWS tools for responsible AI development and deployment.</p>
+      <div class="domain-topics">
+        <span class="topic-tag">AI Bias</span>
+        <span class="topic-tag">Fairness</span>
+        <span class="topic-tag">Explainability</span>
+        <span class="topic-tag">AWS AI Ethics</span>
+        <span class="topic-tag">Privacy</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 0%" data-target="90"></div></div>
+    </div>
+
+    <div class="domain-card animate-in" style="--card-accent: #B47FFF;">
+      <p class="domain-number">DOMAIN 05</p>
+      <h3 class="domain-title">Security, Compliance & Governance</h3>
+      <span class="domain-weight">⚖ 14% of exam</span>
+      <p class="domain-desc">Securing AI workloads on AWS, compliance frameworks, data governance, IAM for AI services, and encryption for AI data.</p>
+      <div class="domain-topics">
+        <span class="topic-tag">IAM for AI</span>
+        <span class="topic-tag">Encryption</span>
+        <span class="topic-tag">VPC Endpoints</span>
+        <span class="topic-tag">Compliance</span>
+        <span class="topic-tag">Audit Logging</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width: 0%" data-target="68"></div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- AWS SERVICES -->
+<section id="services">
+  <p class="section-label">▸ Must-Know Services</p>
+  <h2 class="section-title">AWS AI/ML Services</h2>
+  <p class="section-desc">These are the core AWS services you must know for the exam. Grouped by category.</p>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="filterServices('all', this)">All Services</button>
+    <button class="tab-btn" onclick="filterServices('genai', this)">Generative AI</button>
+    <button class="tab-btn" onclick="filterServices('ml', this)">ML Platform</button>
+    <button class="tab-btn" onclick="filterServices('vision', this)">Vision & Language</button>
+    <button class="tab-btn" onclick="filterServices('data', this)">Data & Storage</button>
+  </div>
+
+  <div class="services-grid" id="servicesGrid">
+    <div class="service-card animate-in" data-cat="genai">
+      <div class="service-icon">🤖</div>
+      <div class="service-name">Amazon Bedrock</div>
+      <div class="service-category">GENERATIVE AI</div>
+      <div class="service-desc">Fully managed service to build GenAI apps with foundation models from Amazon, Anthropic, Meta, Mistral & more.</div>
+    </div>
+    <div class="service-card animate-in" data-cat="genai">
+      <div class="service-icon">✨</div>
+      <div class="service-name">Amazon Q</div>
+      <div class="service-category">GENERATIVE AI</div>
+      <div class="service-desc">AI assistant for business (Q Business) and developer productivity (Q Developer). Connects to company data.</div>
+    </div>
+    <div class="service-card animate-in" data-cat="genai">
+      <div class="service-icon">📚</div>
+      <div class="service-name">Bedrock Knowledge Bases</div>
+      <div class="service-category">GENERATIVE AI</div>
+      <div class="service-desc">RAG implementation — connect FMs to your data sources for accurate, grounded responses.</div>
+    </div>
+    <div class="service-card animate-in" data-cat="genai">
+      <div class="service-icon">🕵️</div>
+      <div class="service-name">Bedrock Agents</div>
+      <div class="service-category">GENERATIVE AI</div>
+      <div class="service-desc">Automate multi-step tasks by combining FMs with APIs, data sources, and Lambda functions.</div>
+    </div>
+    <div class="service-card animate-in" data-cat="genai">
+      <div class="service-icon">🛡️</div>
+      <div class="service-name">Bedrock Guardrails</div>
+      <div class="service-category">GENERATIVE AI</div>
+      <div class="service-desc">Content filtering, topic denial, PII redaction, and grounding checks for responsible AI.</div>
+    </div>
+    <div class="service-card animate-in" data-cat="ml">
+      <div class="service-icon">🧪</div>
+      <div class="service-name">Amazon SageMaker</div>
+      <div class="service-category">ML PLATFORM</div>
+      <div class="service-desc">End-to-end ML platform: build, train, deploy, and monitor custom ML models at scale.</div>
+    </div>
+    <div class="service-card animate-in" data-cat="ml">
+      <div class="service-icon">🚀</div>
+      <div class="service-name">SageMaker JumpStart</div>
+      <div class="service-category">ML PLATFORM</div>
+      <div class="service-desc">Pre-built ML solutions and FMs you can deploy or fine-tune with one click.</div>
+    </div>
+    <div class="service-card animate-in" data-cat="ml">
+      <div class="service-icon">🔧</div>
+      <div class="service-name">SageMaker Autopilot</div>
+      <div class="service-category">ML PLATFORM</div>
+      <div class="service-desc">AutoML — automatically trains and tunes ML models from your tabular data.</div>
+    </div>
+    <div class="service-card animate-in" data-cat="ml">
+      <div class="service-icon">📊</div>
+      <div class="service-name">SageMaker Clarify</div>
+      <div class="service-category">ML PLATFORM</div>
+      <div class="service-desc">Detect bias in datasets and models. Provides explainability reports (SHAP values).</div>
+    </div>
+    <div class="service-card animate-in" data-cat="vision">
+      <div class="service-icon">👁️</div>
+      <div class="service-name">Amazon Rekognition</div>
+      <div class="service-category">VISION & LANGUAGE</div>
+      <div class="service-desc">Image & video analysis: object detection, facial recognition, content moderation, text extraction.</div>
+    </div>
+    <div class="service-card animate-in" data-cat="vision">
+      <div class="service-icon">🎙️</div>
+      <div class="service-name">Amazon Transcribe</div>
+      <div class="service-category">VISION & LANGUAGE</div>
+      <div class="service-desc">Automatic speech recognition (ASR). Converts audio to text with speaker diarization.</div>
+    </div>
+    <div class="service-card animate-in" data-cat="vision">
+      <div class="service-icon">🌐</div>
+      <div class="service-name">Amazon Translate</div>
+      <div class="service-category">VISION & LANGUAGE</div>
+      <div class="service-desc">Neural machine translation service supporting 75+ languages for real-time and batch translation.</div>
+    </div>
+    <div class="service-card animate-in" data-cat="vision">
+      <div class="service-icon">💬</div>
+      <div class="service-name">Amazon Comprehend</div>
+      <div class="service-category">VISION & LANGUAGE</div>
+      <div class="service-desc">NLP: entity recognition, sentiment analysis, key phrase extraction, PII detection.</div>
+    </div>
+    <div class="service-card animate-in" data-cat="vision">
+      <div class="service-icon">📄</div>
+      <div class="service-name">Amazon Textract</div>
+      <div class="service-category">VISION & LANGUAGE</div>
+      <div class="service-desc">Extract text, forms, tables, and structured data from scanned documents and images.</div>
+    </div>
+    <div class="service-card animate-in" data-cat="vision">
+      <div class="service-icon">🔊</div>
+      <div class="service-name">Amazon Polly</div>
+      <div class="service-category">VISION & LANGUAGE</div>
+      <div class="service-desc">Text-to-speech service with lifelike neural voices supporting 60+ languages.</div>
+    </div>
+    <div class="service-card animate-in" data-cat="data">
+      <div class="service-icon">🗄️</div>
+      <div class="service-name">Amazon S3</div>
+      <div class="service-category">DATA & STORAGE</div>
+      <div class="service-desc">Object storage for training datasets, model artifacts, and ML pipeline outputs.</div>
+    </div>
+    <div class="service-card animate-in" data-cat="data">
+      <div class="service-icon">🔍</div>
+      <div class="service-name">Amazon OpenSearch</div>
+      <div class="service-category">DATA & STORAGE</div>
+      <div class="service-desc">Vector store for RAG embeddings. Enables semantic similarity search for GenAI apps.</div>
+    </div>
+    <div class="service-card animate-in" data-cat="data">
+      <div class="service-icon">🏗️</div>
+      <div class="service-name">AWS Glue</div>
+      <div class="service-category">DATA & STORAGE</div>
+      <div class="service-desc">ETL service for data preparation. Catalog, clean, and transform data for ML pipelines.</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz">
+  <p class="section-label">▸ Practice Questions</p>
+  <h2 class="section-title">Test Your Knowledge</h2>
+  <p class="section-desc">10 practice questions covering all exam domains. Select an answer to see the explanation.</p>
+
+  <div class="quiz-container animate-in">
+    <div class="quiz-header">
+      <span class="quiz-progress-text" id="quizProgress">Question 1 of 10</span>
+      <span class="quiz-score-badge" id="quizScore">Score: 0/0</span>
+    </div>
+
+    <div id="quizDomainTag" class="quiz-domain-tag"></div>
+    <p class="quiz-question" id="quizQuestion"></p>
+
+    <div class="quiz-options" id="quizOptions"></div>
+    <div class="quiz-explanation" id="quizExplanation"></div>
+
+    <div class="quiz-controls">
+      <button class="btn btn-outline" id="prevBtn" onclick="prevQuestion()">← Prev</button>
+      <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Next →</button>
+    </div>
+  </div>
+</section>
+
+<!-- CHEAT SHEET -->
+<section id="cheatsheet">
+  <p class="section-label">▸ Quick Reference</p>
+  <h2 class="section-title">Cheat Sheet</h2>
+  <p class="section-desc">Key concepts and mnemonics to memorize before exam day.</p>
+
+  <div class="cheat-grid">
+    <div class="cheat-card animate-in">
+      <h4>🔢 ML Types at a Glance</h4>
+      <ul>
+        <li>Supervised → labeled data, predict output</li>
+        <li>Unsupervised → unlabeled data, find patterns</li>
+        <li>Reinforcement → rewards/penalties, learn behavior</li>
+        <li>Self-supervised → generates own labels (LLMs)</li>
+      </ul>
+    </div>
+    <div class="cheat-card animate-in">
+      <h4>📐 Model Evaluation Metrics</h4>
+      <ul>
+        <li>Accuracy → (TP+TN) / total</li>
+        <li>Precision → TP / (TP + FP)</li>
+        <li>Recall → TP / (TP + FN)</li>
+        <li>F1 Score → harmonic mean of P & R</li>
+        <li>AUC-ROC → discrimination ability</li>
+        <li>RMSE → regression error magnitude</li>
+      </ul>
+    </div>
+    <div class="cheat-card animate-in">
+      <h4>🧠 GenAI Key Terms</h4>
+      <ul>
+        <li>Token → smallest unit of text (≈ ¾ word)</li>
+        <li>Embedding → numerical vector of meaning</li>
+        <li>Context window → max tokens model can handle</li>
+        <li>Temperature → controls output randomness</li>
+        <li>Hallucination → confident but wrong output</li>
+        <li>RAG → ground FM with your own data</li>
+      </ul>
+    </div>
+    <div class="cheat-card animate-in">
+      <h4>⚡ Prompt Engineering Techniques</h4>
+      <ul>
+        <li>Zero-shot → no examples, direct question</li>
+        <li>Few-shot → 2-5 examples in prompt</li>
+        <li>Chain-of-thought → "think step by step"</li>
+        <li>System prompt → sets context/persona</li>
+        <li>ReAct → reason + act in loops</li>
+      </ul>
+    </div>
+    <div class="cheat-card animate-in">
+      <h4>🛡️ Responsible AI Pillars</h4>
+      <ul>
+        <li>Fairness → unbiased across groups</li>
+        <li>Explainability → why did it decide X?</li>
+        <li>Privacy → protect PII/PHI</li>
+        <li>Robustness → stable under adversarial input</li>
+        <li>Transparency → honest about AI usage</li>
+        <li>Veracity → accurate, grounded outputs</li>
+      </ul>
+    </div>
+    <div class="cheat-card animate-in">
+      <h4>🔐 Security Must-Knows</h4>
+      <ul>
+        <li>Bedrock uses VPC endpoints (no public internet)</li>
+        <li>IAM roles → least privilege for AI services</li>
+        <li>CloudTrail → audit logs for Bedrock API calls</li>
+        <li>AWS Macie → PII detection in S3 datasets</li>
+        <li>KMS → encrypt model artifacts & data</li>
+      </ul>
+    </div>
+    <div class="cheat-card animate-in">
+      <h4>🏗️ Bedrock Quick Facts</h4>
+      <ul>
+        <li>No ML expertise needed to use Bedrock</li>
+        <li>Data NOT used to train base models</li>
+        <li>Models: Claude, Llama, Mistral, Titan, etc.</li>
+        <li>Fine-tuning → custom model on your data</li>
+        <li>Continued pre-training → domain adaptation</li>
+        <li>Model evaluation → compare FM outputs</li>
+      </ul>
+    </div>
+    <div class="cheat-card animate-in">
+      <h4>📊 SageMaker Key Features</h4>
+      <ul>
+        <li>Studio → unified ML IDE</li>
+        <li>Autopilot → AutoML for tabular data</li>
+        <li>Clarify → bias detection + SHAP explainability</li>
+        <li>Pipelines → MLOps CI/CD for ML</li>
+        <li>Model Monitor → detect data drift in prod</li>
+        <li>Ground Truth → managed data labeling</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STUDY PLAN -->
+<section id="study-plan">
+  <p class="section-label">▸ Structured Preparation</p>
+  <h2 class="section-title">4-Week Study Plan</h2>
+  <p class="section-desc">A focused study schedule to prepare for the AIF-C01 exam in 4 weeks. Adjust based on your experience.</p>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
+    <div class="timeline animate-in">
+      <div class="timeline-item">
+        <div class="timeline-dot done"></div>
+        <p class="timeline-date">WEEK 1</p>
+        <p class="timeline-content">AI/ML Fundamentals & Concepts</p>
+        <p class="timeline-note">Cover Domain 1: ML types, neural networks, training pipeline, evaluation metrics. Read AWS AI/ML whitepaper.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot done"></div>
+        <p class="timeline-date">WEEK 2</p>
+        <p class="timeline-content">Generative AI & Foundation Models</p>
+        <p class="timeline-note">Domain 2: LLMs, prompt engineering, tokens, RAG, fine-tuning. Hands-on with Amazon Bedrock playground.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-date">WEEK 3</p>
+        <p class="timeline-content">AWS AI Services & Applications</p>
+        <p class="timeline-note">Domain 3: Deep dive Amazon Bedrock, SageMaker, AI services (Rekognition, Comprehend, Textract, etc.).</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-date">WEEK 4</p>
+        <p class="timeline-content">Responsible AI, Security & Practice Tests</p>
+        <p class="timeline-note">Domains 4 & 5: Ethics, compliance, IAM for AI. Then take 3+ full practice exams and review weak areas.</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="cheat-card animate-in" style="margin-bottom: 1.25rem;">
+        <h4>📚 Recommended Resources</h4>
+        <ul>
+          <li>AWS Skill Builder – AIF-C01 course (free)</li>
+          <li>AWS AI Practitioner exam guide (PDF)</li>
+          <li>AWS Bedrock documentation & FAQs</li>
+          <li>Stephane Maarek Udemy course</li>
+          <li>Tutorials Dojo practice exams</li>
+          <li>AWS re:Invent GenAI sessions on YouTube</li>
+        </ul>
+      </div>
+      <div class="cheat-card animate-in">
+        <h4>🎯 Exam Day Tips</h4>
+        <ul>
+          <li>Read all 4 options before selecting answer</li>
+          <li>Eliminate obviously wrong choices first</li>
+          <li>Look for "most cost-effective" / "least operational" clues</li>
+          <li>Bedrock = managed, SageMaker = custom control</li>
+          <li>Flag difficult questions & return to them</li>
+          <li>Pass score is 700/1000 (scaled scoring)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>AWS AI Practitioner Exam Prep · AIF-C01 · Built with GitHub Pages</p>
+  <p style="margin-top: 0.5rem;">
+    <a href="https://aws.amazon.com/certification/certified-ai-practitioner/" target="_blank">Official Exam Page</a>
+    &nbsp;·&nbsp;
+    <a href="https://explore.skillbuilder.aws/" target="_blank">AWS Skill Builder</a>
+    &nbsp;·&nbsp;
+    <a href="https://github.com" target="_blank">GitHub Repo</a>
+  </p>
+</footer>
+
+<script>
+// ── QUIZ DATA ──
+const questions = [
+  {
+    domain: "Domain 1 · AI/ML Fundamentals",
+    question: "A data scientist wants to build a model that predicts house prices based on historical sales data with known price labels. Which type of machine learning is most appropriate?",
+    options: ["Unsupervised Learning", "Supervised Learning", "Reinforcement Learning", "Self-supervised Learning"],
+    correct: 1,
+    explanation: "Supervised learning uses labeled training data (input-output pairs). Since we have historical data with known house prices (labels), this is a supervised regression problem. Unsupervised learning finds patterns in unlabeled data. Reinforcement learning learns through trial and error with rewards."
+  },
+  {
+    domain: "Domain 2 · Generative AI",
+    question: "Which technique grounds a foundation model's responses in a company's proprietary documents to reduce hallucinations without retraining the model?",
+    options: ["Prompt caching", "Retrieval-Augmented Generation (RAG)", "Fine-tuning", "Transfer learning"],
+    correct: 1,
+    explanation: "RAG (Retrieval-Augmented Generation) retrieves relevant documents from a knowledge base at inference time and injects them into the prompt context. This grounds responses in factual company data without the cost of fine-tuning. Amazon Bedrock Knowledge Bases implements RAG natively."
+  },
+  {
+    domain: "Domain 3 · Foundation Model Applications",
+    question: "A company wants to use a foundation model to answer customer questions about their products using only their internal product catalog. They want the solution to require minimal ML expertise. Which AWS service should they use?",
+    options: ["Amazon SageMaker with custom training", "Amazon Comprehend", "Amazon Bedrock with Knowledge Bases", "Amazon Kendra"],
+    correct: 2,
+    explanation: "Amazon Bedrock with Knowledge Bases provides a fully managed RAG solution. It indexes the product catalog, retrieves relevant content, and grounds FM responses — requiring no ML expertise. SageMaker would require significant ML knowledge. Kendra is a search service but isn't directly tied to FM generation."
+  },
+  {
+    domain: "Domain 4 · Responsible AI",
+    question: "A machine learning model trained on historical hiring data shows significantly lower approval rates for candidates from certain demographic groups. What type of AI issue does this represent?",
+    options: ["Overfitting", "Data drift", "Algorithmic bias", "Low model accuracy"],
+    correct: 2,
+    explanation: "Algorithmic bias occurs when a model perpetuates or amplifies unfair discrimination, often because the training data reflects historical biases. AWS SageMaker Clarify can detect this type of bias in datasets and model predictions, producing fairness metrics across demographic groups."
+  },
+  {
+    domain: "Domain 5 · Security & Governance",
+    question: "A company using Amazon Bedrock must ensure that API calls are auditable for compliance purposes. Which AWS service should they enable?",
+    options: ["AWS Config", "AWS CloudTrail", "Amazon GuardDuty", "AWS Security Hub"],
+    correct: 1,
+    explanation: "AWS CloudTrail records all API calls made to AWS services, including Amazon Bedrock. This provides a complete audit trail of who called which FM, with what parameters, and when — which is essential for compliance and security investigations."
+  },
+  {
+    domain: "Domain 2 · Generative AI",
+    question: "Which prompt engineering technique provides 2-5 examples of desired input-output pairs within the prompt itself to guide the model's response format?",
+    options: ["Zero-shot prompting", "Chain-of-thought prompting", "Few-shot prompting", "System prompting"],
+    correct: 2,
+    explanation: "Few-shot prompting includes a small number of examples (typically 2-5) directly in the prompt to demonstrate the desired output format and style. Zero-shot provides no examples. Chain-of-thought encourages step-by-step reasoning. System prompts set the overall context and persona."
+  },
+  {
+    domain: "Domain 3 · Foundation Model Applications",
+    question: "A developer wants to build an automated workflow where an FM can look up customer orders in a database and send email confirmations — all triggered by natural language. Which Bedrock feature enables this?",
+    options: ["Bedrock Guardrails", "Bedrock Model Evaluation", "Agents for Amazon Bedrock", "Bedrock Knowledge Bases"],
+    correct: 2,
+    explanation: "Agents for Amazon Bedrock enables FMs to orchestrate multi-step tasks by calling APIs, executing Lambda functions, and querying data sources — all through natural language. The agent breaks down the task, determines required actions, and executes them in sequence. Guardrails handle content filtering, not orchestration."
+  },
+  {
+    domain: "Domain 1 · AI/ML Fundamentals",
+    question: "Which metric is most appropriate for evaluating a binary classification model when the dataset is highly imbalanced (e.g., 99% negative, 1% positive)?",
+    options: ["Accuracy", "F1 Score", "Mean Squared Error", "R-squared"],
+    correct: 1,
+    explanation: "F1 Score (harmonic mean of Precision and Recall) is better than raw accuracy for imbalanced datasets. A model that always predicts 'negative' would achieve 99% accuracy but 0% F1. MSE and R-squared are for regression tasks, not classification."
+  },
+  {
+    domain: "Domain 4 · Responsible AI",
+    question: "Which AWS service can automatically detect and redact Personally Identifiable Information (PII) in S3 datasets before they are used for ML model training?",
+    options: ["Amazon Comprehend", "AWS Macie", "Amazon Rekognition", "AWS Shield"],
+    correct: 1,
+    explanation: "Amazon Macie uses ML to automatically discover, classify, and protect PII in Amazon S3. It can generate findings for data containing names, social security numbers, credit card data, etc. Amazon Comprehend can also detect PII in text, but Macie is the primary service for S3 data discovery at scale."
+  },
+  {
+    domain: "Domain 3 · Foundation Model Applications",
+    question: "A company needs to adapt a foundation model to understand proprietary industry jargon and domain-specific terminology at a deep level, requiring updates to the model's weights. Which Bedrock customization approach should they use?",
+    options: ["Prompt engineering", "RAG with Knowledge Bases", "Continued pre-training", "Bedrock Guardrails"],
+    correct: 2,
+    explanation: "Continued pre-training (domain adaptation pre-training) updates the model's weights using large amounts of unlabeled domain-specific text. This teaches the model industry terminology and patterns. It differs from fine-tuning (which uses labeled input-output pairs for task-specific behavior). RAG and prompt engineering don't update model weights."
+  }
+];
+
+let currentQ = 0;
+let score = 0;
+let answered = new Array(questions.length).fill(null);
+
+function renderQuestion() {
+  const q = questions[currentQ];
+  document.getElementById('quizProgress').textContent = `Question ${currentQ + 1} of ${questions.length}`;
+  document.getElementById('quizDomainTag').textContent = q.domain;
+  document.getElementById('quizQuestion').textContent = q.question;
+
+  const optionsEl = document.getElementById('quizOptions');
+  optionsEl.innerHTML = '';
+  const letters = ['A','B','C','D'];
+
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option';
+    btn.innerHTML = `<span class="option-letter">${letters[i]}</span>${opt}`;
+    btn.onclick = () => selectAnswer(i);
+
+    if (answered[currentQ] !== null) {
+      btn.disabled = true;
+      if (i === q.correct) btn.classList.add('correct');
+      if (i === answered[currentQ] && answered[currentQ] !== q.correct) btn.classList.add('selected-wrong');
+    }
+    optionsEl.appendChild(btn);
+  });
+
+  const expEl = document.getElementById('quizExplanation');
+  if (answered[currentQ] !== null) {
+    expEl.innerHTML = `<strong>Explanation:</strong> ${q.explanation}`;
+    expEl.classList.add('visible');
+  } else {
+    expEl.classList.remove('visible');
+  }
+
+  const answeredCount = answered.filter(a => a !== null).length;
+  document.getElementById('quizScore').textContent = `Score: ${score}/${answeredCount}`;
+  document.getElementById('prevBtn').disabled = currentQ === 0;
+}
+
+function selectAnswer(idx) {
+  if (answered[currentQ] !== null) return;
+  answered[currentQ] = idx;
+  if (idx === questions[currentQ].correct) score++;
+  renderQuestion();
+}
+
+function nextQuestion() {
+  if (currentQ < questions.length - 1) { currentQ++; renderQuestion(); }
+}
+
+function prevQuestion() {
+  if (currentQ > 0) { currentQ--; renderQuestion(); }
+}
+
+// ── SERVICES FILTER ──
+function filterServices(cat, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.service-card').forEach(card => {
+    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+  });
+}
+
+// ── INTERSECTION OBSERVER ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // Animate progress bars
+      e.target.querySelectorAll('.progress-fill').forEach(bar => {
+        bar.style.width = bar.dataset.target + '%';
+      });
+      if (e.target.classList.contains('domain-card')) {
+        const bar = e.target.querySelector('.progress-fill');
+        if (bar) bar.style.width = bar.dataset.target + '%';
+      }
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+
+// Init quiz
+renderQuestion();
+</script>
+</body>
+</html>
