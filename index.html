@@ -577,6 +577,75 @@
       color: var(--aws-orange);
     }
 
+    /* ── CHEAT TABLES ── */
+    .cheat-tables-section {
+      margin-top: 3rem;
+    }
+
+    .cheat-tables-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--aws-orange);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .cheat-tables-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .cheat-table-card {
+      background: var(--aws-card);
+      border: 1px solid var(--aws-border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .cheat-table-card-header {
+      background: rgba(255,153,0,0.08);
+      border-bottom: 1px solid var(--aws-border);
+      padding: 0.65rem 1rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--aws-orange);
+    }
+
+    .cheat-table-card table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.78rem;
+    }
+
+    .cheat-table-card table th {
+      background: rgba(255,255,255,0.03);
+      color: var(--aws-muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.45rem 0.85rem;
+      text-align: left;
+      border-bottom: 1px solid var(--aws-border);
+    }
+
+    .cheat-table-card table td {
+      padding: 0.5rem 0.85rem;
+      color: var(--aws-light);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      line-height: 1.4;
+    }
+
+    .cheat-table-card table tr:last-child td { border-bottom: none; }
+    .cheat-table-card table tr:hover td { background: rgba(255,153,0,0.04); }
+    .cheat-table-card table td:first-child { color: var(--aws-muted); }
+    .cheat-table-card table td:last-child { color: var(--aws-light); font-weight: 600; }
+
+    /* Trap card special styling */
+    .cheat-table-card.trap td:last-child { color: var(--aws-green); }
+
     /* ── FOOTER ── */
     footer {
       position: relative;
@@ -1614,6 +1683,21 @@
     <button class="tab-btn" onclick="filterQuiz('services', this)">AWS Services</button>
     <button class="tab-btn" onclick="filterQuiz('scenario', this)">Scenario-Based</button>
     <button class="tab-btn" onclick="filterQuiz('governance', this)">Governance</button>
+    <button class="tab-btn" onclick="filterQuiz('prompting', this)">Prompt Engineering</button>
+    <button class="tab-btn" onclick="filterQuiz('opensearch', this)">OpenSearch</button>
+    <button class="tab-btn" onclick="filterQuiz('glue', this)">AWS Glue</button>
+    <button class="tab-btn" onclick="filterQuiz('s3', this)">Amazon S3</button>
+    <button class="tab-btn" onclick="filterQuiz('polly', this)">Amazon Polly</button>
+    <button class="tab-btn" onclick="filterQuiz('comprehend', this)">Amazon Comprehend</button>
+    <button class="tab-btn" onclick="filterQuiz('transcribe', this)">Amazon Transcribe</button>
+    <button class="tab-btn" onclick="filterQuiz('rekognition', this)">Amazon Rekognition</button>
+    <button class="tab-btn" onclick="filterQuiz('clarify', this)">SageMaker Clarify</button>
+    <button class="tab-btn" onclick="filterQuiz('autopilot', this)">SageMaker Autopilot</button>
+    <button class="tab-btn" onclick="filterQuiz('sagemaker', this)">Amazon SageMaker</button>
+    <button class="tab-btn" onclick="filterQuiz('agents', this)">Bedrock Agents</button>
+    <button class="tab-btn" onclick="filterQuiz('knowledgebases', this)">Knowledge Bases</button>
+    <button class="tab-btn" onclick="filterQuiz('amazonq', this)">Amazon Q</button>
+    <button class="tab-btn" onclick="filterQuiz('bedrock', this)">Amazon Bedrock</button>
   </div>
 
   <div class="quiz-container animate-in">
@@ -1727,9 +1811,123 @@
       </ul>
     </div>
   </div>
-</section>
 
-<!-- STUDY PLAN -->
+  <!-- Quick Reference Tables -->
+  <div class="cheat-tables-section">
+    <p class="cheat-tables-label">▸ AWS Service Quick Reference</p>
+    <div class="cheat-tables-grid">
+
+      <!-- Generative AI -->
+      <div class="cheat-table-card">
+        <div class="cheat-table-card-header">🤖 1. Generative AI</div>
+        <table>
+          <thead><tr><th>Use Case</th><th>Service</th></tr></thead>
+          <tbody>
+            <tr><td>Build GenAI apps</td><td>Amazon Bedrock</td></tr>
+            <tr><td>Enterprise AI assistant</td><td>Amazon Q</td></tr>
+            <tr><td>Use company data (RAG)</td><td>Knowledge Bases for Bedrock</td></tr>
+            <tr><td>Automate workflows</td><td>Amazon Bedrock Agents</td></tr>
+            <tr><td>Safety & filtering</td><td>Guardrails for Bedrock</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Core AI/ML Services -->
+      <div class="cheat-table-card">
+        <div class="cheat-table-card-header">🧠 2. Core AI/ML Services</div>
+        <table>
+          <thead><tr><th>Input Type</th><th>Service</th></tr></thead>
+          <tbody>
+            <tr><td>Text analysis (NLP, PII, sentiment)</td><td>Amazon Comprehend</td></tr>
+            <tr><td>Speech → Text</td><td>Amazon Transcribe</td></tr>
+            <tr><td>Text → Speech</td><td>Amazon Polly</td></tr>
+            <tr><td>Image / Video analysis</td><td>Amazon Rekognition</td></tr>
+            <tr><td>OCR (documents)</td><td>Amazon Textract</td></tr>
+            <tr><td>Chatbots</td><td>Amazon Lex</td></tr>
+            <tr><td>Translation</td><td>Amazon Translate</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ML Platforms -->
+      <div class="cheat-table-card">
+        <div class="cheat-table-card-header">🔬 3. Machine Learning Platforms</div>
+        <table>
+          <thead><tr><th>Need</th><th>Service</th></tr></thead>
+          <tbody>
+            <tr><td>Full ML lifecycle</td><td>Amazon SageMaker</td></tr>
+            <tr><td>No-code ML</td><td>SageMaker Canvas</td></tr>
+            <tr><td>Data labeling</td><td>SageMaker Ground Truth</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Data & Storage -->
+      <div class="cheat-table-card">
+        <div class="cheat-table-card-header">🗄️ 4. Data & Storage</div>
+        <table>
+          <thead><tr><th>Purpose</th><th>Service</th></tr></thead>
+          <tbody>
+            <tr><td>Store datasets</td><td>Amazon S3</td></tr>
+            <tr><td>Structured DB</td><td>Amazon RDS</td></tr>
+            <tr><td>NoSQL DB</td><td>Amazon DynamoDB</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Security & Monitoring -->
+      <div class="cheat-table-card">
+        <div class="cheat-table-card-header">🔐 5. Security, Compliance & Monitoring</div>
+        <table>
+          <thead><tr><th>Function</th><th>Service</th></tr></thead>
+          <tbody>
+            <tr><td>API logging</td><td>AWS CloudTrail</td></tr>
+            <tr><td>Resource tracking</td><td>AWS Config</td></tr>
+            <tr><td>Monitoring & alerts</td><td>Amazon CloudWatch</td></tr>
+            <tr><td>Threat detection</td><td>Amazon GuardDuty</td></tr>
+            <tr><td>Vulnerability scanning</td><td>Amazon Inspector</td></tr>
+            <tr><td>Sensitive data detection</td><td>Amazon Macie</td></tr>
+            <tr><td>Audit automation</td><td>AWS Audit Manager</td></tr>
+            <tr><td>Compliance reports</td><td>AWS Artifact</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Responsible AI -->
+      <div class="cheat-table-card">
+        <div class="cheat-table-card-header">⚖️ 6. Responsible AI</div>
+        <table>
+          <thead><tr><th>Concept</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>Bias</td><td>Unfair model outcomes</td></tr>
+            <tr><td>Hallucination</td><td>Model generates incorrect info</td></tr>
+            <tr><td>Explainability</td><td>Understand model decisions</td></tr>
+            <tr><td>Fairness</td><td>Equal outcomes across groups</td></tr>
+            <tr><td>Robustness</td><td>Handles edge cases well</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Common Exam Traps -->
+      <div class="cheat-table-card trap">
+        <div class="cheat-table-card-header">⚠️ 7. Common Exam Traps</div>
+        <table>
+          <thead><tr><th>Scenario</th><th>Correct Answer</th></tr></thead>
+          <tbody>
+            <tr><td>"Use company data with LLM"</td><td>Knowledge Bases</td></tr>
+            <tr><td>"Filter harmful content"</td><td>Guardrails</td></tr>
+            <tr><td>"Automate tasks using AI"</td><td>Bedrock Agents</td></tr>
+            <tr><td>"Enterprise chatbot"</td><td>Amazon Q</td></tr>
+            <tr><td>"Build ML model from scratch"</td><td>SageMaker</td></tr>
+            <tr><td>"No-code ML"</td><td>SageMaker Canvas</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+</section>
 <section id="study-plan">
   <p class="section-label">▸ Structured Preparation</p>
   <h2 class="section-title">4-Week Study Plan</h2>
@@ -1810,6 +2008,7 @@
         <button class="modal-tab" onclick="switchTab('svc-bedrock','nova')">📦 Nova Models</button>
         <button class="modal-tab" onclick="switchTab('svc-bedrock','features')">⚙️ Features</button>
         <button class="modal-tab" onclick="switchTab('svc-bedrock','tips')">🎯 Exam Tips</button>
+        <button class="modal-tab" onclick="switchTab('svc-bedrock','genai-pipeline'); renderMermaid('svc-bedrock-genai-pipeline')">🗺️ GenAI Pipeline</button>
       </div>
       <div class="modal-panel active" id="svc-bedrock-overview">
         <h4>What is Amazon Bedrock?</h4>
@@ -1906,6 +2105,43 @@
           <div class="tip-item"><span class="tip-icon">🎯</span>RAG via Knowledge Bases does NOT update model weights — it retrieves at inference time.</div>
           <div class="tip-item"><span class="tip-icon">🎯</span>Amazon Titan = AWS's own FM family. Claude = Anthropic. Not interchangeable terms.</div>
           <div class="tip-item"><span class="tip-icon">⚡</span>Bedrock is serverless — you pay per token, not per hour of compute.</div>
+        </div>
+      </div>
+
+      <div class="modal-panel" id="svc-bedrock-genai-pipeline">
+        <h4>GenAI Full Stack Pipeline — Foundation to Evaluation</h4>
+        <p style="font-size:0.8rem;color:var(--aws-muted);margin-bottom:0.75rem;">How a GenAI application is built layer by layer — from base model through improvement, retrieval, deployment, and evaluation.</p>
+        <div class="mermaid-wrap" id="svc-bedrock-genai-pipeline-wrap">
+          <button class="mermaid-expand-btn" onclick="expandDiagram('svc-bedrock-genai-pipeline')">⤢ Expand</button>
+          <div class="mermaid" id="svc-bedrock-genai-pipeline-src">
+flowchart LR
+    subgraph L1["Foundation Model"]
+        F[Base Model\nAmazon Bedrock]:::foundation
+    end
+    subgraph L2["Model Improvement"]
+        M[Improved Model\nSFT / RLHF / Distillation]:::model
+    end
+    subgraph L3["Knowledge Retrieval (RAG)"]
+        R[RAG Layer\nEmbedding + Vector DB + Enterprise Data\nOpenSearch / Aurora pgvector / Neptune / S3 Vectors]:::rag
+    end
+    subgraph L4["Application"]
+        A[AI Application\nChatbot / Enterprise Assistant / Search]:::app
+    end
+    subgraph L5["Evaluation"]
+        E[Evaluation\nBLEU / ROUGE / BERTScore / Perplexity]:::eval
+    end
+    F --> M --> R --> A --> E
+    classDef foundation fill:#f5f5f5,stroke:#333,stroke-width:1px,color:#000
+    classDef model fill:#b8f5c2,stroke:#333,stroke-width:2px,color:#000
+    classDef rag fill:#b3d9ff,stroke:#333,stroke-width:2px,color:#000
+    classDef app fill:#fff4b3,stroke:#333,stroke-width:2px,color:#000
+    classDef eval fill:#f5c2c2,stroke:#333,stroke-width:2px,color:#000
+          </div>
+        </div>
+        <div class="tip-list" style="margin-top:1.25rem;">
+          <div class="tip-item"><span class="tip-icon">🎯</span>Base Model → SFT/RLHF = weight updates. RAG → no weight updates, retrieves at inference.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>BLEU = translation quality. ROUGE = summarization quality. BERTScore = semantic similarity. Perplexity = fluency.</div>
+          <div class="tip-item"><span class="tip-icon">⚡</span>This pipeline is the full lifecycle: build → improve → ground → deploy → measure. Each layer maps to AWS services.</div>
         </div>
       </div>
     </div>
@@ -2226,6 +2462,7 @@
         <button class="modal-tab active" onclick="switchTab('svc-guardrails','overview')">📖 Overview</button>
         <button class="modal-tab" onclick="switchTab('svc-guardrails','features')">⚙️ Features</button>
         <button class="modal-tab" onclick="switchTab('svc-guardrails','tips')">🎯 Exam Tips</button>
+        <button class="modal-tab" onclick="switchTab('svc-guardrails','monitoring'); renderMermaid('svc-guardrails-monitoring')">🗺️ Monitoring</button>
       </div>
       <div class="modal-panel active" id="svc-guardrails-overview">
         <h4>What are Bedrock Guardrails?</h4>
@@ -2258,6 +2495,33 @@
           <div class="tip-item"><span class="tip-icon">🎯</span>"Redact PII from model outputs automatically" → <strong>Guardrails Sensitive Info Redaction</strong>.</div>
           <div class="tip-item"><span class="tip-icon">🎯</span>Guardrails works across ALL Bedrock foundation models — it's model-agnostic.</div>
           <div class="tip-item"><span class="tip-icon">⚡</span>Grounding check compares responses to source documents — great for reducing hallucinations in RAG apps.</div>
+        </div>
+      </div>
+
+      <div class="modal-panel" id="svc-guardrails-monitoring">
+        <h4>Amazon Bedrock — Monitoring with CloudWatch</h4>
+        <p style="font-size:0.8rem;color:var(--aws-muted);margin-bottom:0.75rem;">How Bedrock API calls flow through CloudWatch for metrics, logs, dashboards, and alarms.</p>
+        <div class="mermaid-wrap" id="svc-guardrails-monitoring-wrap">
+          <button class="mermaid-expand-btn" onclick="expandDiagram('svc-guardrails-monitoring')">⤢ Expand</button>
+          <div class="mermaid" id="svc-guardrails-monitoring-src">
+flowchart TB
+    U[User / Application]:::user --> B[Amazon Bedrock\nLLM API Calls]:::bedrock
+    B --> C[CloudWatch Metrics]:::metrics
+    B --> L[CloudWatch Logs]:::logs
+    C --> D[CloudWatch Dashboards / Alarms]:::dash
+    L --> D
+    classDef user fill:#f5f5f5,stroke:#333,color:#000
+    classDef bedrock fill:#f5c2c2,stroke:#333,color:#000
+    classDef metrics fill:#b3d9ff,stroke:#333,color:#000
+    classDef logs fill:#fff4b3,stroke:#333,color:#000
+    classDef dash fill:#b8f5c2,stroke:#333,color:#000
+          </div>
+        </div>
+        <div class="tip-list" style="margin-top:1.25rem;">
+          <div class="tip-item"><span class="tip-icon">🎯</span>Bedrock sends metrics (invocation count, latency, token usage) AND logs to CloudWatch automatically.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>CloudWatch Alarms can fire when Bedrock error rates spike — enabling automated incident response.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>CloudTrail records WHO called Bedrock. CloudWatch shows HOW it performed. Both are needed for full observability.</div>
+          <div class="tip-item"><span class="tip-icon">⚡</span>Enable model invocation logging in Bedrock settings to capture full request/response logs into CloudWatch.</div>
         </div>
       </div>
     </div>
@@ -3779,6 +4043,8 @@ flowchart LR
         <button class="modal-tab" onclick="switchTab('d2','prompts'); renderMermaid('d2-prompts')">✍️ Prompt Types</button>
         <button class="modal-tab" onclick="switchTab('d2','finetune'); renderMermaid('d2-finetune')">🔧 Fine-tuning</button>
         <button class="modal-tab" onclick="switchTab('d2','evalmetrics')">📏 Eval Metrics</button>
+        <button class="modal-tab" onclick="switchTab('d2','genai-pipeline'); renderMermaid('d2-genai-pipeline')">🗺️ GenAI Pipeline</button>
+        <button class="modal-tab" onclick="switchTab('d2','awsstack'); renderMermaid('d2-awsstack')">🗺️ AWS GenAI Stack</button>
         <button class="modal-tab" onclick="switchTab('d2','tips')">🎯 Exam Tips</button>
       </div>
 
@@ -4135,6 +4401,102 @@ flowchart TB
           <div class="tip-item"><span class="tip-icon">🎯</span>RAG / Contextual = the only technique that reduces hallucinations by grounding in external facts.</div>
           <div class="tip-item"><span class="tip-icon">🎯</span>Role prompting doesn't change model weights — it only adjusts the model's response style and perspective.</div>
           <div class="tip-item"><span class="tip-icon">⚡</span>Multimodal prompting requires a multimodal model (Claude 3, GPT-4V, Nova Lite+) — text-only models can't accept images.</div>
+        </div>
+      </div>
+
+      <div class="modal-panel" id="d2-genai-pipeline">
+        <h4>GenAI Full Stack Pipeline — Foundation to Evaluation</h4>
+        <p style="font-size:0.8rem;color:var(--aws-muted);margin-bottom:0.75rem;">How a GenAI application is built layer by layer — from base model through improvement, retrieval, deployment, and evaluation.</p>
+        <div class="mermaid-wrap" id="d2-genai-pipeline-wrap">
+          <button class="mermaid-expand-btn" onclick="expandDiagram('d2-genai-pipeline')">⤢ Expand</button>
+          <div class="mermaid" id="d2-genai-pipeline-src">
+flowchart LR
+    subgraph L1["Foundation Model"]
+        F[Base Model\nAmazon Bedrock]:::foundation
+    end
+    subgraph L2["Model Improvement"]
+        M[Improved Model\nSFT / RLHF / Distillation]:::model
+    end
+    subgraph L3["Knowledge Retrieval (RAG)"]
+        R[RAG Layer\nEmbedding + Vector DB + Enterprise Data\nOpenSearch / Aurora pgvector / Neptune / S3 Vectors]:::rag
+    end
+    subgraph L4["Application"]
+        A[AI Application\nChatbot / Enterprise Assistant / Search]:::app
+    end
+    subgraph L5["Evaluation"]
+        E[Evaluation\nBLEU / ROUGE / BERTScore / Perplexity]:::eval
+    end
+    F --> M --> R --> A --> E
+    classDef foundation fill:#f5f5f5,stroke:#333,stroke-width:1px,color:#000
+    classDef model fill:#b8f5c2,stroke:#333,stroke-width:2px,color:#000
+    classDef rag fill:#b3d9ff,stroke:#333,stroke-width:2px,color:#000
+    classDef app fill:#fff4b3,stroke:#333,stroke-width:2px,color:#000
+    classDef eval fill:#f5c2c2,stroke:#333,stroke-width:2px,color:#000
+          </div>
+        </div>
+        <div class="tip-list" style="margin-top:1.25rem;">
+          <div class="tip-item"><span class="tip-icon">🎯</span>Base Model → SFT/RLHF updates weights. RAG does NOT update weights — it retrieves context at inference time.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>BLEU = translation. ROUGE = summarization. BERTScore = semantic similarity. Perplexity = fluency/confidence.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Vector DB options: OpenSearch (default Bedrock backend), Aurora pgvector (relational), Neptune (graph), S3 Vectors (large scale).</div>
+          <div class="tip-item"><span class="tip-icon">⚡</span>This 5-layer pipeline is the full GenAI lifecycle — each layer maps to specific AWS services you need to know for the exam.</div>
+        </div>
+      </div>
+
+      <div class="modal-panel" id="d2-awsstack">
+        <h4>AWS GenAI Full Stack — Data to Applications</h4>
+        <p style="font-size:0.8rem;color:var(--aws-muted);margin-bottom:0.75rem;">How enterprise data flows through the complete AWS GenAI stack — from raw sources through Bedrock to end-user applications.</p>
+        <div class="mermaid-wrap" id="d2-awsstack-wrap">
+          <button class="mermaid-expand-btn" onclick="expandDiagram('d2-awsstack')">⤢ Expand</button>
+          <div class="mermaid" id="d2-awsstack-src">
+flowchart TB
+    subgraph Data["Enterprise Data Sources"]
+        D1[Documents]
+        D2[Databases]
+        D3[Applications]
+    end
+    subgraph Knowledge["Knowledge Layer"]
+        E[Embeddings]
+        V[Vector Database]
+        R[RAG Retrieval]
+    end
+    subgraph Bedrock["Amazon Bedrock"]
+        FM[Foundation Models\nNova / Claude / Llama]
+        FT[Fine Tuning]
+        GR[Guardrails]
+    end
+    subgraph Apps["GenAI Applications"]
+        QB[Amazon Q Business]
+        QD[Amazon Q Developer]
+        QA[Amazon Q Apps]
+        PR[PartyRock]
+    end
+    D1 --> E
+    D2 --> E
+    D3 --> E
+    E --> V
+    V --> R
+    R --> FM
+    FM --> FT
+    FM --> GR
+    FM --> QB
+    FM --> QD
+    QB --> QA
+    FM --> PR
+    classDef data fill:#e6f2ff,stroke:#333,color:#000
+    classDef knowledge fill:#fff4cc,stroke:#333,color:#000
+    classDef model fill:#ffd6cc,stroke:#333,color:#000
+    classDef apps fill:#e6ffe6,stroke:#333,color:#000
+    class D1,D2,D3 data
+    class E,V,R knowledge
+    class FM,FT,GR model
+    class QB,QD,QA,PR apps
+          </div>
+        </div>
+        <div class="tip-list" style="margin-top:1.25rem;">
+          <div class="tip-item"><span class="tip-icon">🎯</span>Enterprise data → Embeddings → Vector DB → RAG → Bedrock is the core GenAI pipeline pattern for the exam.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Q Apps lives INSIDE Q Business — you need Q Business deployed before you can create Q Apps.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>PartyRock connects directly to Bedrock — it's a public GenAI playground, not enterprise-connected.</div>
+          <div class="tip-item"><span class="tip-icon">⚡</span>Fine Tuning and Guardrails both sit inside Bedrock but serve different purposes — FT improves the model; Guardrails filters its outputs.</div>
         </div>
       </div>
 
@@ -5666,7 +6028,218 @@ const allQuestions = [
   { cat:'governance', domain:"Domain 5 · Governance & Compliance", question:"Which service provides recommendations for both cost optimization AND security improvements?", options:["Amazon Inspector","AWS Config","AWS Trusted Advisor","AWS Audit Manager"], correct:2, explanation:"AWS Trusted Advisor covers five pillars: Cost Optimization, Security, Performance, Fault Tolerance, and Service Limits — making it the only service that spans both cost and security recommendations." },
   { cat:'governance', domain:"Domain 5 · Governance & Compliance", question:"Which service scans EC2 instances and container images for software vulnerabilities?", options:["Amazon GuardDuty","AWS Config","Amazon Inspector","AWS Shield"], correct:2, explanation:"Amazon Inspector automatically scans EC2 instances, Lambda functions, and container images (ECR) for software vulnerabilities and unintended network exposure." },
   { cat:'governance', domain:"Domain 5 · Governance & Compliance", question:"Which service provides configuration history showing what an AWS resource looked like at a specific point in time?", options:["AWS CloudTrail","AWS Config","Amazon Inspector","AWS Trusted Advisor"], correct:1, explanation:"AWS Config maintains a configuration history of AWS resources, letting you see what any resource looked like at any point in time. CloudTrail shows actions; Config shows resource state." },
-  { cat:'governance', domain:"Domain 5 · Governance & Compliance", question:"A company wants to detect threats like unusual login attempts and compromised instances in their AWS account. Which service should they use?", options:["Amazon Macie","Amazon Inspector","Amazon GuardDuty","AWS Security Hub"], correct:2, explanation:"Amazon GuardDuty uses ML and threat intelligence to detect malicious activity including unusual login patterns, cryptocurrency mining, and compromised instances — analyzing CloudTrail, VPC Flow Logs, and DNS." }
+  { cat:'governance', domain:"Domain 5 · Governance & Compliance", question:"A company wants to detect threats like unusual login attempts and compromised instances in their AWS account. Which service should they use?", options:["Amazon Macie","Amazon Inspector","Amazon GuardDuty","AWS Security Hub"], correct:2, explanation:"Amazon GuardDuty uses ML and threat intelligence to detect malicious activity including unusual login patterns, cryptocurrency mining, and compromised instances — analyzing CloudTrail, VPC Flow Logs, and DNS." },
+
+  // ── PROMPT ENGINEERING ──
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"A developer wants an LLM to summarize long legal documents concisely. What type of prompt should they use?", options:["Few-shot prompting with examples","Instruction-based prompt: 'Summarize in 3 sentences'","Chain-of-thought reasoning","Role prompting as a lawyer"], correct:1, explanation:"Instruction-based prompting gives the model a clear, explicit directive. 'Summarize the document in 3 sentences' tells the model exactly what format and length of output is expected. Use Amazon Bedrock to send this prompt to a foundation model." },
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"A business wants to extract customer entities (name, email, company) from unstructured text consistently. What prompt approach works best?", options:["Zero-shot open-ended prompt","Structured output prompt specifying JSON format","Chain-of-thought prompting","Role prompting as a data analyst"], correct:1, explanation:"A structured output prompt specifies the exact format required — e.g. 'Extract entities and return as JSON with fields: name, email, company.' This ensures consistent, parseable output from Bedrock." },
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"Developers want to reduce hallucinations in LLM answers about company products. What is the most effective prompt technique?", options:["Increase temperature to 1.0","Use role prompting only","Provide context and few-shot examples relevant to the domain","Use a longer stop sequence"], correct:2, explanation:"Providing relevant context (RAG) and few-shot examples grounds the model's responses in real facts. This is the most direct prompt-level technique for reducing hallucinations alongside Bedrock Knowledge Bases." },
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"A team wants the LLM to always respond using bullet points. How should the prompt be structured?", options:["Provide 5 examples of bullet point responses","Include output formatting instructions: 'Respond in bullet points only'","Set temperature to 0","Use chain-of-thought prompting"], correct:1, explanation:"Output formatting instructions in the prompt directly control response structure. 'Respond in bullet points only' is an explicit constraint the model will follow consistently." },
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"A company wants to translate customer support tickets from English to Spanish using an LLM. What makes this a well-formed prompt?", options:["Asking the model to guess the language","Specifying source and target language clearly in the prompt","Using zero-shot with no language instructions","Setting Top-P to 0.1"], correct:1, explanation:"A task-specific prompt clearly specifies the task parameters — source language, target language, and the text to translate. Amazon Bedrock or Amazon Q can handle translation with a well-crafted prompt." },
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"Developers want the model to ask clarifying questions before answering ambiguous user queries. How do they achieve this?", options:["Set temperature to 0","Include a stop sequence","Instruct the model: 'If the question is unclear, ask clarifying questions first'","Use few-shot prompting with answers only"], correct:2, explanation:"This is a Socratic prompt pattern — the instruction explicitly tells the model to pause and clarify before responding. It's a chain-of-thought variant that improves accuracy on ambiguous queries in Bedrock apps." },
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"A company wants the LLM to perform sentiment analysis on user reviews and classify them. What should the prompt specify?", options:["Tell the model to 'do its best'","Specify: 'Classify as positive, negative, or neutral'","Provide no examples and let the model decide","Ask the model to write a review itself"], correct:1, explanation:"A task-focused prompt explicitly defines the output categories. 'Classify as positive, negative, or neutral' gives the model clear label options. For high-volume text, Amazon Comprehend is a purpose-built alternative." },
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"A team wants the LLM to generate valid SQL queries from plain English questions. What prompt structure achieves this?", options:["Role prompt: 'You are a database'","Structured task prompt: 'Convert the following text into a valid SQL query'","Chain-of-thought with 10 reasoning steps","Zero-shot with no context"], correct:1, explanation:"A structured task prompt frames the exact transformation required. 'Convert the following text into a valid SQL query:' tells the model its job precisely, leading to consistent SQL output from Bedrock." },
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"Developers want the model to explain its reasoning step by step before giving a final answer. Which technique should they use?", options:["Output formatting prompt","Few-shot with 5 examples","Chain-of-thought: 'Explain your reasoning before giving the final answer'","Role prompting as an expert"], correct:2, explanation:"Chain-of-thought prompting instructs the model to show its work before answering. This improves accuracy on complex multi-step questions and is especially effective for math, logic, and reasoning tasks." },
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"Developers want to avoid irrelevant or off-topic content in LLM responses. What prompt approach achieves this?", options:["Increase max tokens","Include explicit constraints: 'Do not include unrelated information'","Set temperature to 1.0","Remove all system prompts"], correct:1, explanation:"Constraint prompts add explicit restrictions to the model's instructions. 'Do not include unrelated information' and 'only answer questions about X' are effective guardrails at the prompt level, complementing Bedrock Guardrails." },
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"A team wants to generate structured test cases for software requirements in a parseable format. What prompt design is correct?", options:["Ask the model to 'write some tests'","Specify task and format: 'Generate test cases in JSON format'","Use a role prompt only","Use zero-shot with no format constraints"], correct:1, explanation:"Scenario generation prompts specify both the task (generate test cases) and the output format (JSON). This ensures the output is machine-readable and can be consumed by downstream CI/CD pipelines." },
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"Developers want the LLM to attach a confidence score to each entity it extracts. What type of prompt enables this?", options:["Style prompt","Output annotation prompt: 'Provide a confidence score for each extracted entity'","Instruction prompt to summarize","Few-shot prompt with no scores"], correct:1, explanation:"Output annotation prompts extend the model's response format to include metadata alongside each extracted item. This is useful for downstream filtering and quality assessment in Bedrock-powered pipelines." },
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"A company wants summarization to highlight key metrics and numbers. How should the prompt be written?", options:["'Summarize this document'","'Extract and highlight key numbers and metrics, then summarize'","Use temperature 0 with no instructions","Ask for bullet points only"], correct:1, explanation:"A highlighting prompt instructs the model to prioritize specific types of content (numbers, metrics) before summarizing. This combines extraction and summarization tasks in a single structured prompt." },
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"Developers want to combine LLM output with downstream services like Amazon Comprehend or SageMaker. What is the most important prompt consideration?", options:["Maximize response length","Specify a clear output format that downstream services can parse","Use the highest temperature setting","Remove all system instructions"], correct:1, explanation:"Integration prompts must specify output formats (JSON, CSV, structured text) that downstream services can consume programmatically. Clear output formatting is essential when chaining Bedrock with other AWS AI services." },
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"A business wants multilingual summarization — input in English, output in French. What should the prompt include?", options:["No language instructions — let the model infer","Explicitly state: 'Summarize in French'","Use Amazon Translate as a separate step only","Set Top-K to control language"], correct:1, explanation:"Language-specific prompts include the target language as an explicit instruction. 'Summarize the following in French' tells the model both the task and the output language. Amazon Translate can also be chained for more complex pipelines." },
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"A team wants dynamic prompts that change based on each user's input at runtime. What is this technique called?", options:["Few-shot prompting","Chain-of-thought prompting","Parameterized prompting — prompts generated dynamically from input variables","Role prompting"], correct:2, explanation:"Parameterized prompting uses template strings with variables that are filled at runtime based on user input. This enables personalized, context-aware prompts for each user interaction in a Bedrock-powered application." },
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"Developers want to consistently improve model accuracy over many iterations of the same task. What approach should they take?", options:["Change the model every time","Use prompt refinement — continuously adjust prompts and examples based on output quality","Set temperature to 0 permanently","Delete all previous prompts"], correct:1, explanation:"Iterative prompt refinement is the process of systematically testing and adjusting prompts, examples, and instructions to improve model reliability over time. This is a core practice when building production apps on Amazon Bedrock." },
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"Developers want to test how a model behaves under different phrasings before deploying to production. What is this practice called?", options:["Model fine-tuning","Prompt testing and iteration in Bedrock","Continued pre-training","Supervised learning"], correct:1, explanation:"Prompt testing involves running different phrasings of the same prompt to compare outputs before deployment. Amazon Bedrock's playground and model evaluation features support this iterative testing workflow." },
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"A business wants the LLM to always respond in a formal, professional tone. How should this be specified?", options:["Set temperature to 0","Include style instructions in the prompt: 'Respond formally and professionally'","Use a shorter max tokens limit","Switch to a different foundation model"], correct:1, explanation:"Style prompts include tone and voice instructions as part of the system or user prompt. 'Respond formally and professionally' is an effective style constraint that persists across all responses in that conversation." },
+  { cat:'prompting', domain:"Prompt Engineering · Scenarios", question:"A business wants to extract multiple entity types simultaneously — name, email, address, and phone — from customer text. What prompt technique is used?", options:["Run four separate single-entity prompts","Multi-entity extraction prompt specifying all entities in one structured request","Use Amazon Rekognition for entity detection","Apply chain-of-thought only"], correct:1, explanation:"Multi-entity extraction prompts list all required entities in a single structured request, e.g. 'Extract the following fields: name, email, address, phone. Return as JSON.' This is more efficient and consistent than multiple sequential calls." },
+
+  // ── OPENSEARCH ──
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"A company wants to perform full-text search across large website content. Which AWS service should they use?", options:["Amazon RDS","Amazon DynamoDB","Amazon OpenSearch Service","Amazon Athena"], correct:2, explanation:"Amazon OpenSearch Service provides scalable, distributed full-text search across large datasets. It supports structured, unstructured, and JSON data — making it ideal for website and content search." },
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"Developers want to analyze server logs in near real-time and visualize metrics. Which combination should they use?", options:["Amazon RDS + QuickSight","OpenSearch + Kibana / OpenSearch Dashboards","Amazon Redshift + Athena","CloudWatch + Lambda"], correct:1, explanation:"OpenSearch stores and indexes logs while Kibana / OpenSearch Dashboards provides real-time visualization and operational insights. This is the standard log analytics stack for near real-time monitoring." },
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"A business wants dashboards for application metrics and time-series data visualization. Which feature of OpenSearch provides this?", options:["OpenSearch REST APIs","OpenSearch Snapshots","OpenSearch Dashboards","OpenSearch Index Templates"], correct:2, explanation:"OpenSearch Dashboards (formerly Kibana) provides built-in visualization tools for creating dashboards, charts, and time-series graphs directly from OpenSearch indexed data." },
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"A company wants to monitor security events from multiple sources and detect anomalies. Which combination is most suitable?", options:["Amazon Inspector + Config","OpenSearch + AWS CloudTrail + Kinesis","AWS Trusted Advisor + Artifact","Amazon Macie + S3"], correct:1, explanation:"OpenSearch aggregates security logs from CloudTrail and Kinesis, then applies anomaly detection to identify unusual patterns — making it a powerful SIEM-like security monitoring solution." },
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"Developers want to search product catalogs quickly for an e-commerce platform. Which service enables fast, accurate catalog search?", options:["Amazon DynamoDB","Amazon S3","Amazon Kendra","Amazon OpenSearch Service"], correct:3, explanation:"Amazon OpenSearch Service enables fast full-text and faceted search for product catalogs. It supports filtering, ranking, and autocomplete — all essential for e-commerce search experiences." },
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"A business wants to detect trends from clickstream data in real time. Which combination should they use?", options:["S3 + Glue + Athena","OpenSearch + Amazon Kinesis Data Firehose","RDS + CloudWatch","DynamoDB + Lambda"], correct:1, explanation:"Kinesis Data Firehose streams clickstream data into OpenSearch in near real-time, where it can be analyzed and visualized — enabling trend detection and behavioral insights." },
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"A company wants to receive alerts when operational anomalies exceed defined thresholds. Which solution fits best?", options:["AWS Config + SNS","OpenSearch Alerting + Amazon SNS","CloudTrail + EventBridge","Trusted Advisor + Email"], correct:1, explanation:"OpenSearch's built-in Alerting feature monitors index data against defined conditions and sends notifications via Amazon SNS when thresholds are breached — enabling proactive operational monitoring." },
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"Developers want to store and search both structured (numeric) and unstructured (text) data in one place. Which service handles this?", options:["Amazon RDS","Amazon DynamoDB","Amazon OpenSearch Service","Amazon Redshift"], correct:2, explanation:"OpenSearch supports indexing JSON, text, numeric, and geospatial data in a single index. Its flexible schema makes it ideal for mixed data types that need fast search and retrieval." },
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"A company wants to embed search functionality into their application using APIs. Which OpenSearch capability enables this?", options:["OpenSearch Dashboards UI","OpenSearch Snapshots","OpenSearch REST APIs","OpenSearch Index Policies"], correct:2, explanation:"OpenSearch provides REST APIs for querying, indexing, updating, and retrieving data programmatically — making it easy to embed search functionality directly into application code." },
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"A business wants to ingest and query IoT device sensor data for operational insights over time. Which service fits this use case?", options:["Amazon SQS","Amazon OpenSearch Service","Amazon RDS","AWS Glue"], correct:1, explanation:"OpenSearch efficiently ingests and queries time-series IoT data. Combined with Kinesis for streaming ingestion, it provides near real-time operational insights from sensor telemetry." },
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"Developers want to implement autocomplete and search suggestions in a search bar. Which AWS service supports this natively?", options:["Amazon Lex","Amazon Kendra","Amazon OpenSearch Service","Amazon Polly"], correct:2, explanation:"OpenSearch supports completion suggesters and prefix queries that power autocomplete and search-as-you-type functionality — a standard feature for modern search bar implementations." },
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"A company wants to centralize and analyze user activity logs from a web application. Which combination is recommended?", options:["DynamoDB + RDS","OpenSearch + Kinesis Data Streams + CloudWatch Logs","S3 + Glacier","Lambda + SQS"], correct:1, explanation:"Kinesis Data Streams or CloudWatch Logs Subscriptions stream user activity logs into OpenSearch, where they can be centrally analyzed and visualized for behavioral and operational insights." },
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"A business wants to perform sentiment analysis on social media posts and search the results. Which combination is most appropriate?", options:["Rekognition + S3","OpenSearch + Amazon Comprehend","Lex + Polly","Translate + Textract"], correct:1, explanation:"Amazon Comprehend performs NLP sentiment analysis on text, and OpenSearch indexes the results for fast search and filtering. This integration enables searchable, insight-rich social media analytics." },
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"Developers want to retain application logs for auditing and compliance with periodic backups. Which approach should they use?", options:["Store logs in DynamoDB only","OpenSearch with S3 snapshots","Lambda with SQS","RDS with automated backups"], correct:1, explanation:"OpenSearch supports automated S3 snapshots for periodic backups. This allows log retention for compliance and auditing while keeping active data in OpenSearch for fast querying." },
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"A company wants real-time analytics on operational metrics from a streaming source. Which solution is most appropriate?", options:["Batch ETL with AWS Glue","OpenSearch + Kinesis Data Firehose","Athena + S3","RDS + CloudWatch"], correct:1, explanation:"Kinesis Data Firehose delivers streaming operational metrics to OpenSearch in near real-time, enabling live dashboards and analytics without batch processing delays." },
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"Developers want to implement faceted search with filters (e.g. category, price range) in an e-commerce application. Which service should they use?", options:["Amazon RDS","Amazon DynamoDB","Amazon OpenSearch Service","Amazon Kendra"], correct:2, explanation:"OpenSearch natively supports faceted search, aggregations, and filtering — allowing users to narrow results by category, price, rating, and other attributes. This is a core e-commerce search capability." },
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"A business wants to visualize network traffic patterns for security monitoring. Which OpenSearch feature enables this?", options:["OpenSearch REST API","OpenSearch Snapshots","OpenSearch Dashboards","OpenSearch Alerting"], correct:2, explanation:"OpenSearch Dashboards provides network traffic visualizations including time-series graphs, geo-maps, and heatmaps — enabling security teams to spot patterns and anomalies in network data." },
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"A company wants to automatically index new data into OpenSearch whenever a file is uploaded. Which integration enables this?", options:["OpenSearch + EC2 cron job","OpenSearch + AWS Lambda (event-driven indexing)","OpenSearch + AWS Glue batch job","OpenSearch + RDS trigger"], correct:1, explanation:"AWS Lambda functions can be triggered by S3 events, DynamoDB streams, or Kinesis, and push data to OpenSearch automatically — enabling event-driven, serverless indexing pipelines." },
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"Developers want to perform complex queries across both logs and metrics using full-text and structured searches. Which service provides this flexibility?", options:["Amazon RDS","Amazon Redshift","Amazon OpenSearch Service","Amazon Athena"], correct:2, explanation:"OpenSearch supports full-text search, structured queries, range filters, aggregations, and joins across logs and metrics in a single query — offering greater flexibility than traditional databases for mixed data analysis." },
+  { cat:'opensearch', domain:"Amazon OpenSearch · Scenarios", question:"A business wants cost-effective, scalable search and analytics for large, growing datasets. Which AWS service is most appropriate?", options:["Amazon RDS Multi-AZ","Amazon OpenSearch Service","Amazon DynamoDB Global Tables","Amazon Redshift Spectrum"], correct:1, explanation:"Amazon OpenSearch Service offers managed, auto-scaling search infrastructure with flexible storage tiers (UltraWarm, Cold Storage) — providing cost-effective search and analytics that scales with data growth." },
+
+  // ── AWS GLUE ──
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"A company wants to catalog all datasets stored in S3 for easy discovery and integration. Which AWS Glue feature should they use?", options:["Glue ETL Jobs","Glue Workflows","AWS Glue Data Catalog","Glue Studio"], correct:2, explanation:"AWS Glue Data Catalog stores metadata (schema, location, format) about datasets stored in S3 and other sources — making them discoverable and usable by services like Athena, Redshift, and SageMaker." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"Developers want to clean and transform raw data before loading it into a data warehouse. Which AWS service handles this?", options:["Amazon RDS","AWS Glue ETL Jobs","Amazon Kinesis","AWS Lambda"], correct:1, explanation:"AWS Glue ETL Jobs process and transform data at scale using Python (PySpark) or Scala. They can clean, filter, join, and reformat data before loading it into Redshift or other targets." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"A business wants to schedule periodic data processing jobs automatically without manual triggers. Which Glue feature enables this?", options:["Glue Crawlers","Glue Data Catalog","Glue Workflows and Triggers","Glue Studio"], correct:2, explanation:"AWS Glue Workflows and Triggers allow automated execution of ETL pipelines on a defined schedule (cron) or in response to events — enabling fully automated data processing pipelines." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"A company wants to automatically discover the schema of semi-structured data stored in S3. Which Glue feature does this?", options:["Glue ETL Jobs","Glue Crawlers","Glue Studio","Glue Triggers"], correct:1, explanation:"AWS Glue Crawlers scan data sources (S3, RDS, etc.), infer the schema, and automatically create or update table definitions in the Glue Data Catalog — eliminating manual schema definition." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"Developers want to integrate and consolidate data from S3, RDS, and Redshift into a single pipeline. Which service provides this multi-source integration?", options:["Amazon Athena","Amazon DynamoDB","AWS Glue","AWS Step Functions"], correct:2, explanation:"AWS Glue supports ETL from multiple AWS data sources including S3, RDS, Redshift, DynamoDB, and JDBC-compatible databases — making it the go-to service for data integration pipelines." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"A business wants to transform JSON log files into columnar Parquet format for faster analytics. Which Glue feature handles this?", options:["Glue Crawlers","Glue Data Catalog","Glue ETL Jobs","Glue Studio Triggers"], correct:2, explanation:"Glue ETL Jobs convert unstructured or semi-structured data (JSON, CSV) into columnar formats like Parquet or ORC — significantly improving query performance and reducing storage costs in Athena and Redshift." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"A company wants to create a data lake for AI/ML workloads. Which combination is recommended?", options:["RDS + SageMaker","DynamoDB + Lambda","AWS Glue + Amazon S3","Kinesis + Redshift"], correct:2, explanation:"AWS Glue catalogs and transforms raw data stored in S3, making it ready for consumption by SageMaker (ML training), Athena (querying), and Redshift (analytics) — forming the foundation of a data lake." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"Developers want to track data lineage — knowing the source, transformation steps, and destination of data across ETL jobs. Which service provides this?", options:["AWS CloudTrail","AWS Glue","Amazon Inspector","AWS Config"], correct:1, explanation:"AWS Glue tracks source, transformation, and destination metadata across ETL jobs, providing data lineage information useful for auditing, debugging, and compliance reporting." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"A business wants serverless ETL that requires no infrastructure provisioning or management. Which service is best?", options:["Amazon EMR","AWS Glue","Amazon EC2 with Spark","AWS Batch"], correct:1, explanation:"AWS Glue is a fully managed, serverless ETL service. You pay only for the resources used during job execution — no servers to provision, patch, or manage. It scales automatically based on workload." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"Developers want to write custom ETL logic using Python or Scala with Apache Spark. Which service supports this?", options:["Amazon Athena","AWS Glue","AWS Lambda","Amazon SageMaker"], correct:1, explanation:"AWS Glue supports custom PySpark (Python) and Scala-based ETL scripts, giving developers full flexibility to write complex transformation logic while still benefiting from managed infrastructure." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"A company wants to convert CSV sales data into Parquet format to optimize Redshift query performance. Which Glue component handles this?", options:["Glue Crawler","Glue Data Catalog","Glue ETL Job","Glue Workflow"], correct:2, explanation:"A Glue ETL Job reads CSV files from S3, applies a format conversion transformation, and writes the output as Parquet — optimizing storage and query speed in Redshift Spectrum and Athena." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"A business wants ETL jobs to trigger automatically when new files arrive in S3. Which integration achieves this?", options:["Glue + RDS Events","Glue + AWS Lambda","Glue + CloudWatch only","Glue + SNS only"], correct:1, explanation:"AWS Lambda can be triggered by S3 events (e.g. ObjectCreated) and then invoke a Glue ETL job — enabling event-driven, serverless ETL pipelines that react to new data arrivals automatically." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"Developers want schema versioning to handle evolving dataset structures over time. Which Glue feature supports this?", options:["Glue Triggers","Glue ETL Jobs","Glue Data Catalog (versioned schemas)","Glue Studio"], correct:2, explanation:"The AWS Glue Data Catalog maintains a version history of table schemas, allowing teams to track schema evolution, revert to previous versions, and ensure backward compatibility across pipeline stages." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"A company wants to discover and classify sensitive data such as PII in their S3 data lake for compliance. Which combination should they use?", options:["S3 + CloudTrail","Glue + Lake Formation Classifiers","Inspector + Config","Macie only"], correct:1, explanation:"Glue Crawlers with custom classifiers (or integrated Lake Formation) can detect PII and sensitive data types during cataloging — enabling data governance and compliance classification at scale." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"A business wants to query both raw and transformed S3 data without moving it to a separate database. Which combination enables this?", options:["RDS + QuickSight","Glue Data Catalog + Amazon Athena","Redshift + Lambda","DynamoDB + AppSync"], correct:1, explanation:"The Glue Data Catalog integrates directly with Amazon Athena — allowing serverless SQL queries against data stored in S3 without ETL or data movement. Athena uses Glue as its default metastore." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"Developers want to process multiple large S3 files in parallel for bulk transformation. Which Glue capability supports this?", options:["Glue Crawlers with single thread","Glue ETL Jobs with parallel execution","Glue Studio manual processing","Glue Triggers with delays"], correct:1, explanation:"Glue ETL Jobs use Apache Spark under the hood, enabling parallel processing of multiple files across distributed workers — making it suitable for large-scale bulk transformations." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"A company wants to enrich a customer dataset by joining it with a product reference table from another source. Which Glue feature handles this?", options:["Glue Crawlers","Glue ETL Jobs (joins and enrichment)","Glue Data Catalog only","Glue Studio Triggers"], correct:1, explanation:"Glue ETL Jobs support SQL-style joins and data enrichment operations across multiple source datasets — enabling teams to combine and augment data from different sources in a single pipeline." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"Developers want a visual interface to design, monitor, and manage ETL workflows without writing code. Which Glue feature provides this?", options:["Glue Crawlers","Glue Data Catalog","AWS Glue Studio","Glue Triggers"], correct:2, explanation:"AWS Glue Studio provides a graphical drag-and-drop interface for designing ETL pipelines, monitoring job runs, and visualizing data flow — reducing the need for manual coding." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"A business wants cost-efficient ETL for datasets that are only updated infrequently (e.g. weekly). Which Glue pricing model makes this cost-effective?", options:["Reserved capacity pricing","On-demand serverless pricing — pay per DPU-hour used","Dedicated cluster pricing","Fixed monthly subscription"], correct:1, explanation:"AWS Glue uses serverless, on-demand pricing charged per DPU-hour (Data Processing Unit). For infrequent workloads, this means you only pay when jobs run — with no cost for idle time." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"Developers want to use Glue-prepared datasets directly in SageMaker for ML model training. Which integration enables this?", options:["Glue → DynamoDB → SageMaker","Glue ETL → S3 → SageMaker Training Jobs","Glue → RDS → SageMaker","Glue Studio → Lambda → SageMaker"], correct:1, explanation:"AWS Glue transforms and catalogs raw data, writes the cleaned output to S3, and SageMaker Training Jobs read directly from S3 — making Glue the standard data preparation step in ML pipelines." },
+  { cat:'glue', domain:"AWS Glue · Scenarios", question:"A company wants a fully automated data pipeline: ingest raw files → transform → catalog → query. Which set of AWS services achieves this end-to-end?", options:["Kinesis → Lambda → RDS → QuickSight","S3 → Glue ETL → Glue Data Catalog → Athena","DynamoDB → EMR → Redshift → Tableau","SQS → EC2 → RDS → CloudWatch"], correct:1, explanation:"S3 stores raw data → Glue ETL transforms and cleans it → Glue Data Catalog stores the schema → Athena queries the results. This is the standard AWS serverless data lake pipeline for analytics." },
+
+  // ── AMAZON S3 ──
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"A company wants to store large volumes of structured and unstructured data in the cloud. Which AWS service is best for scalable object storage?", options:["Amazon RDS","Amazon EBS","Amazon S3","Amazon EFS"], correct:2, explanation:"Amazon S3 provides virtually unlimited, highly durable object storage for any data type — structured, unstructured, images, logs, backups, and ML datasets. It is the foundational storage service in AWS." },
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"Developers want to encrypt sensitive data stored in S3 at rest. Which feature should they use?", options:["S3 Versioning","S3 Transfer Acceleration","S3 Server-Side Encryption (SSE-KMS or SSE-S3)","S3 Object Lock"], correct:2, explanation:"S3 supports Server-Side Encryption with three options: SSE-S3 (AWS-managed keys), SSE-KMS (customer-managed KMS keys), and SSE-C (customer-provided keys). SSE-KMS is recommended for compliance workloads." },
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"A business wants fine-grained control over who can access specific S3 buckets and objects. Which combination provides this?", options:["S3 Versioning + CloudWatch","S3 Bucket Policies + IAM Roles","S3 Object Lock + Glacier","S3 Transfer Acceleration + CloudFront"], correct:1, explanation:"S3 Bucket Policies define resource-level permissions, while IAM Roles grant identity-level access. Together they implement least-privilege access control for S3 buckets and individual objects." },
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"A company wants to recover accidentally deleted or overwritten documents. Which S3 feature enables this?", options:["S3 Lifecycle Policies","S3 Object Lock","S3 Versioning","S3 Transfer Acceleration"], correct:2, explanation:"S3 Versioning maintains multiple versions of every object. When an object is deleted or overwritten, the previous version is preserved and can be restored — protecting against accidental data loss." },
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"Developers want to automatically move infrequently accessed data to cheaper storage tiers after 90 days. Which S3 feature handles this?", options:["S3 Versioning","S3 Object Tags","S3 Lifecycle Policies","S3 Event Notifications"], correct:2, explanation:"S3 Lifecycle Policies define rules that automatically transition objects between storage classes (Standard → Standard-IA → Glacier) based on age or last-accessed time — reducing storage costs without manual intervention." },
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"A business wants to host a static website (HTML, CSS, JavaScript) directly from cloud storage. Which S3 feature enables this?", options:["S3 Transfer Acceleration","S3 Website Hosting","S3 Object Lock","S3 Cross-Region Replication"], correct:1, explanation:"S3 Static Website Hosting allows you to serve static content (HTML, CSS, JS, images) directly from an S3 bucket with a public endpoint — no web server required. Combine with CloudFront for global delivery." },
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"A company wants to audit who accessed or modified S3 objects for compliance. Which combination provides this audit trail?", options:["S3 Versioning + Glacier","S3 Access Logs + AWS CloudTrail","S3 Object Lock + Lifecycle","S3 CRR + SNS"], correct:1, explanation:"S3 Server Access Logs record detailed request information, while CloudTrail captures S3 API calls (who, when, from where). Together they provide a complete audit trail for compliance and security investigations." },
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"Developers want to ensure data is protected when being uploaded or downloaded from S3. Which mechanism secures data in transit?", options:["SSE-KMS encryption","S3 Object Lock","SSL/HTTPS (enforced via bucket policy)","S3 Versioning"], correct:2, explanation:"Enforcing HTTPS via an S3 bucket policy (denying requests without aws:SecureTransport) ensures all data transfers to and from S3 are encrypted in transit using TLS/SSL." },
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"A company wants to run SQL queries against large datasets stored in S3 without loading data into a database. Which combination enables this?", options:["S3 + RDS","S3 + Athena or Redshift Spectrum","S3 + DynamoDB","S3 + ElastiCache"], correct:1, explanation:"Amazon Athena and Redshift Spectrum both query data directly in S3 using standard SQL — with no ETL or data movement required. Glue Data Catalog provides the schema metadata for these queries." },
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"A business wants to replicate S3 data to another AWS Region automatically for disaster recovery. Which feature does this?", options:["S3 Versioning","S3 Lifecycle Policies","S3 Cross-Region Replication (CRR)","S3 Transfer Acceleration"], correct:2, explanation:"S3 Cross-Region Replication (CRR) automatically copies objects from a source bucket to a destination bucket in a different AWS Region — providing geographic redundancy and disaster recovery capability." },
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"Developers want to trigger a Lambda function automatically whenever a new file is uploaded to S3. Which S3 feature enables this?", options:["S3 Versioning","S3 Event Notifications","S3 Object Lock","S3 Lifecycle Policies"], correct:1, explanation:"S3 Event Notifications can trigger Lambda functions, SQS queues, or SNS topics when objects are created, deleted, or modified — enabling serverless, event-driven workflows that react to new data arrivals." },
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"A company wants to archive old backup files at the lowest possible cost. Which S3 storage class is cheapest?", options:["S3 Standard","S3 Standard-IA","S3 Glacier Flexible Retrieval","S3 Glacier Deep Archive"], correct:3, explanation:"S3 Glacier Deep Archive is the lowest-cost S3 storage class, designed for data accessed less than once per year. It has a 12+ hour retrieval time and a 180-day minimum storage duration." },
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"A business wants 11 nines (99.999999999%) durability for critical business files. Which S3 storage class provides this by default?", options:["S3 One Zone-IA","S3 Standard","S3 Reduced Redundancy","S3 Intelligent-Tiering"], correct:1, explanation:"Amazon S3 Standard (and most S3 storage classes) provide 99.999999999% (11 nines) durability by redundantly storing data across a minimum of three Availability Zones. S3 One Zone-IA is the exception — it stores in only one AZ." },
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"Developers want to restrict S3 bucket access to requests coming only from within a specific VPC. Which combination achieves this?", options:["S3 Lifecycle Policies + Glacier","S3 Bucket Policies + VPC Endpoint","S3 CRR + CloudFront","S3 Versioning + IAM only"], correct:1, explanation:"A VPC Endpoint for S3 (Gateway endpoint) keeps traffic within AWS private network, and an S3 Bucket Policy with aws:SourceVpc condition restricts access to only requests from that specific VPC." },
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"A company wants to store ML training datasets that Amazon SageMaker will read directly. Which service stores these datasets?", options:["Amazon EBS","Amazon EFS","Amazon S3","Amazon RDS"], correct:2, explanation:"Amazon S3 is the standard storage for SageMaker training datasets. SageMaker Training Jobs read input data directly from S3 channels, and write model artifacts back to S3 after training." },
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"A business wants to speed up large file uploads to S3 across long geographic distances. Which feature improves transfer performance?", options:["S3 CRR","S3 Multipart Upload + Transfer Acceleration","S3 Lifecycle Policies","S3 Object Lock"], correct:1, explanation:"S3 Transfer Acceleration uses CloudFront edge locations to route data over the optimized AWS global network, significantly speeding up uploads from distant locations. Multipart Upload further parallelizes large file transfers." },
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"Developers want to tag S3 objects with department and project metadata for cost allocation reporting. Which S3 feature enables this?", options:["S3 Versioning","S3 Object Tags","S3 Lifecycle Policies","S3 Bucket Policies"], correct:1, explanation:"S3 Object Tags are key-value metadata pairs attached to objects. They enable cost allocation (via AWS Cost Explorer), fine-grained access control in bucket policies, and lifecycle rule targeting." },
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"A company wants S3 data encrypted using their own customer-managed keys in AWS KMS. Which encryption option provides this?", options:["SSE-S3","SSE-C","SSE-KMS","S3 Object Lock"], correct:2, explanation:"SSE-KMS encrypts S3 objects using customer-managed keys (CMKs) stored in AWS Key Management Service. This gives teams control over key rotation, access auditing, and cross-account key sharing." },
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"A business wants to deliver S3-hosted content to global users with minimum latency. Which combination achieves this?", options:["S3 + RDS read replicas","S3 + CloudFront CDN","S3 + Direct Connect","S3 + VPC Peering"], correct:1, explanation:"Combining S3 with Amazon CloudFront (CDN) caches content at 400+ edge locations worldwide — delivering files to users from the nearest edge location with low latency and high transfer speeds." },
+  { cat:'s3', domain:"Amazon S3 · Scenarios", question:"Developers want to prevent S3 objects from being deleted or modified for a fixed retention period to meet regulatory requirements. Which feature enforces this?", options:["S3 Versioning","S3 Lifecycle Policies","S3 Object Lock (Governance or Compliance Mode)","S3 Bucket Policies"], correct:2, explanation:"S3 Object Lock implements WORM (Write Once Read Many) protection. Governance Mode allows privileged users to override, while Compliance Mode prevents deletion by anyone — including the root account — for the full retention period." },
+
+  // ── AMAZON POLLY ──
+  { cat:'polly', domain:"Amazon Polly · Scenarios", question:"A company wants to convert text notifications into speech for visually impaired users. Which service should they use?", options:["Amazon Transcribe","Amazon Lex","Amazon Polly","Amazon Rekognition"], correct:2, explanation:"Amazon Polly converts text into natural-sounding speech using deep learning, supporting dozens of languages and voice options — ideal for accessibility applications." },
+  { cat:'polly', domain:"Amazon Polly · Scenarios", question:"A developer wants to build a multilingual audiobook app with multiple voice options. Which service provides this?", options:["Amazon Translate","Amazon Polly","Amazon Transcribe","Amazon Comprehend"], correct:1, explanation:"Amazon Polly supports dozens of languages and multiple voice options — ideal for multilingual audiobook apps that need natural-sounding narration." },
+  { cat:'polly', domain:"Amazon Polly · Scenarios", question:"A business wants real-time spoken responses in a chatbot. Which Polly capability enables near real-time TTS?", options:["Polly Batch Mode","Polly SSML only","Amazon Polly Streaming","Polly Lexicons"], correct:2, explanation:"Amazon Polly Streaming converts text to audio in near real-time — enabling low-latency speech responses in live chatbots and interactive voice applications." },
+  { cat:'polly', domain:"Amazon Polly · Scenarios", question:"Developers want to adjust speech tone, pitch, emphasis, and rate. Which Polly feature provides fine-grained control?", options:["Polly Neural Voices","Polly Lexicons","Polly SSML (Speech Synthesis Markup Language)","Polly Batch Mode"], correct:2, explanation:"SSML tags provide fine-grained control over pronunciation, emphasis, speed, pauses, and prosody — enabling precise control over how Polly synthesizes speech." },
+  { cat:'polly', domain:"Amazon Polly · Scenarios", question:"A company wants to adjust pronunciation of brand names in Polly output. Which feature enables custom pronunciation?", options:["Polly SSML","Polly Neural Voices","Polly Lexicons","Polly Streaming"], correct:2, explanation:"Polly Lexicons are custom pronunciation dictionaries mapping words to phonetic pronunciations — ensuring brand names and technical terms are spoken correctly." },
+  { cat:'polly', domain:"Amazon Polly · Scenarios", question:"Developers want Polly-generated audio stored in S3 for later playback. Which integration achieves this?", options:["Polly to DynamoDB","Polly to Lambda only","Amazon Polly + Amazon S3","Polly to RDS"], correct:2, explanation:"Amazon Polly outputs synthesized audio (MP3, OGG, PCM) directly to Amazon S3 — where it can be stored and served via CloudFront or consumed by downstream services." },
+  { cat:'polly', domain:"Amazon Polly · Scenarios", question:"Developers want speech generated with emotional tones like cheerfulness. Which Polly feature supports expressive speech?", options:["Polly Standard Voices","Polly Lexicons","Polly Neural TTS Voices","Polly SSML only"], correct:2, explanation:"Polly Neural TTS Voices use deep learning for more expressive speech — some support speaking styles like 'conversational' or 'news' for different emotional tones." },
+  { cat:'polly', domain:"Amazon Polly · Scenarios", question:"A business wants multilingual IVR systems for automated phone menus. Which service is standard for this?", options:["Amazon Lex only","Amazon Transcribe","Amazon Polly","Amazon Translate only"], correct:2, explanation:"Amazon Polly supports dozens of languages for automated voice prompts — making it the standard choice for multilingual IVR systems in contact center applications." },
+  { cat:'polly', domain:"Amazon Polly · Scenarios", question:"Developers want to trigger Polly audio generation automatically when events occur. Which integration enables event-driven TTS?", options:["Polly + S3 only","Amazon Polly + AWS Lambda","Polly + CloudWatch only","Polly + SageMaker"], correct:1, explanation:"AWS Lambda invokes the Polly API in response to events — generating audio automatically and enabling event-driven TTS workflows." },
+  { cat:'polly', domain:"Amazon Polly · Scenarios", question:"A company wants to combine text translation with speech output across languages. Which combination achieves this?", options:["Transcribe + Rekognition","Comprehend + Polly","Amazon Translate + Amazon Polly","Lex + Transcribe"], correct:2, explanation:"Amazon Translate converts text to the target language, then Amazon Polly synthesizes it into speech — enabling a complete multilingual TTS pipeline." },
+  { cat:'polly', domain:"Amazon Polly · Scenarios", question:"A company wants to generate pre-recorded audio announcements stored as files. Which Polly output format supports this?", options:["Polly Streaming only","Polly outputs to MP3, OGG, or PCM files","Polly outputs to DynamoDB","Polly outputs to Kinesis only"], correct:1, explanation:"Amazon Polly synthesizes speech into MP3, OGG, or PCM files — which can be stored in S3 and played on any audio system for pre-recorded announcements." },
+
+  // ── AMAZON COMPREHEND ──
+  { cat:'comprehend', domain:"Amazon Comprehend · Scenarios", question:"A company wants to determine customer sentiment from product reviews. Which service analyzes text sentiment?", options:["Amazon Lex","Amazon Rekognition","Amazon Comprehend","Amazon Translate"], correct:2, explanation:"Amazon Comprehend analyzes text to identify sentiment as positive, negative, neutral, or mixed — the primary AWS NLP service for sentiment analysis on customer feedback at scale." },
+  { cat:'comprehend', domain:"Amazon Comprehend · Scenarios", question:"Developers want to extract entities like names, dates, and locations from unstructured documents. Which service provides Named Entity Recognition?", options:["Amazon Textract","Amazon Polly","Amazon Comprehend","Amazon Transcribe"], correct:2, explanation:"Amazon Comprehend performs Named Entity Recognition (NER), automatically detecting entities such as people, organizations, locations, and dates in unstructured text." },
+  { cat:'comprehend', domain:"Amazon Comprehend · Scenarios", question:"A business wants to categorize incoming support tickets into predefined topics automatically. Which service handles text classification?", options:["Amazon Lex","Amazon Comprehend","Amazon Rekognition","Amazon Kendra"], correct:1, explanation:"Amazon Comprehend classifies text into predefined or custom categories — ideal for automated ticket routing and categorization systems without manual tagging." },
+  { cat:'comprehend', domain:"Amazon Comprehend · Scenarios", question:"A company wants to automatically redact PII from sensitive documents. Which service detects and masks PII in text?", options:["Amazon Macie","Amazon Rekognition","Amazon Comprehend","AWS Glue"], correct:2, explanation:"Amazon Comprehend detects PII entities (names, SSNs, emails, phone numbers) in text and supports redaction — ideal for automated privacy compliance in document processing pipelines." },
+  { cat:'comprehend', domain:"Amazon Comprehend · Scenarios", question:"Developers want to detect the language of user content automatically across a global platform. Which Comprehend feature handles this?", options:["Comprehend Sentiment Analysis","Comprehend Custom Classifiers","Comprehend Language Detection","Comprehend Topic Modeling"], correct:2, explanation:"Amazon Comprehend's language detection automatically identifies the dominant language of text — supporting dozens of languages for global content processing pipelines." },
+  { cat:'comprehend', domain:"Amazon Comprehend · Scenarios", question:"A company wants to discover trending topics in social media posts without predefined labels. Which Comprehend technique is used?", options:["Named Entity Recognition","Sentiment Analysis","Topic Modeling","Key Phrase Extraction"], correct:2, explanation:"Comprehend Topic Modeling groups documents into topics based on shared content — useful for discovering trends in unstructured text like social media posts without predefined categories." },
+  { cat:'comprehend', domain:"Amazon Comprehend · Scenarios", question:"Developers need custom classifiers trained on business-specific categories not in Comprehend defaults. Which capability enables this?", options:["Comprehend Standard Sentiment","Amazon Comprehend Custom Classification","Comprehend Topic Modeling","Comprehend Key Phrases"], correct:1, explanation:"Amazon Comprehend Custom Classification trains a custom text classification model on your own labeled data — enabling business-specific categorization beyond built-in Comprehend categories." },
+  { cat:'comprehend', domain:"Amazon Comprehend · Scenarios", question:"A business wants batch NLP analysis of large S3 text files. Which Comprehend capability handles this cost-effectively?", options:["Comprehend Streaming API","Comprehend Real-time only","Amazon Comprehend Batch Analysis + S3","Comprehend Custom Entities only"], correct:2, explanation:"Amazon Comprehend supports async batch jobs processing large volumes of text from S3 — enabling cost-effective large-scale NLP without real-time API overhead." },
+  { cat:'comprehend', domain:"Amazon Comprehend · Scenarios", question:"A company wants automated call center insights by combining transcription and NLP analysis. Which combination is correct?", options:["Rekognition + Comprehend","Amazon Transcribe + Amazon Comprehend","Polly + Comprehend","Lex + Translate"], correct:1, explanation:"Amazon Transcribe converts call audio to text, then Amazon Comprehend analyzes sentiment, entities, and topics — creating a complete automated call analytics pipeline." },
+  { cat:'comprehend', domain:"Amazon Comprehend · Scenarios", question:"A business wants to track sentiment trends over time and visualize them on a dashboard. Which AWS combination achieves this?", options:["Comprehend + RDS only","Amazon Comprehend + Athena + QuickSight","Comprehend + DynamoDB + Lambda","Comprehend + EC2 + S3"], correct:1, explanation:"Comprehend analyzes sentiment, results are stored in S3, Athena queries the data, and QuickSight visualizes trends — the standard AWS serverless sentiment analytics pipeline." },
+  { cat:'comprehend', domain:"Amazon Comprehend · Scenarios", question:"Developers want to combine NLP analysis with translation for multilingual content. Which combination is correct?", options:["Polly + Rekognition","Amazon Comprehend + Amazon Translate","Lex + Transcribe","Textract + Comprehend"], correct:1, explanation:"Amazon Translate converts foreign-language text, then Amazon Comprehend performs sentiment or entity analysis on the translated text — enabling multilingual NLP pipelines." },
+
+  // ── AMAZON TRANSCRIBE ──
+  { cat:'transcribe', domain:"Amazon Transcribe · Scenarios", question:"A call center wants to convert customer call recordings to text for analysis. Which service provides speech-to-text transcription?", options:["Amazon Polly","Amazon Lex","Amazon Transcribe","Amazon Comprehend"], correct:2, explanation:"Amazon Transcribe automatically converts audio recordings to accurate text transcripts — the primary AWS service for call center speech-to-text transcription." },
+  { cat:'transcribe', domain:"Amazon Transcribe · Scenarios", question:"A company wants to transcribe live meeting audio in real-time. Which Transcribe capability supports live transcription?", options:["Transcribe Batch Mode","Amazon Transcribe Streaming","Transcribe Medical only","Transcribe S3 batch only"], correct:1, explanation:"Amazon Transcribe Streaming provides real-time speech-to-text via WebSocket or HTTP/2 — delivering instant transcripts for live meetings and contact centers." },
+  { cat:'transcribe', domain:"Amazon Transcribe · Scenarios", question:"A healthcare provider wants HIPAA-compliant medical transcription with specialized vocabulary. Which service should they use?", options:["Amazon Transcribe Standard","Amazon Transcribe Medical","Amazon Comprehend Medical","Amazon Lex"], correct:1, explanation:"Amazon Transcribe Medical is HIPAA-eligible, designed for clinical conversations — with specialized vocabulary for medical terms, medications, and procedures." },
+  { cat:'transcribe', domain:"Amazon Transcribe · Scenarios", question:"A business wants to generate subtitles for video content automatically. Which service provides timestamped transcription?", options:["Amazon Polly","Amazon Rekognition","Amazon Transcribe","Amazon Comprehend"], correct:2, explanation:"Amazon Transcribe converts video speech to text with timestamps — producing subtitle-ready transcripts that can be formatted as SRT or VTT files for closed captioning." },
+  { cat:'transcribe', domain:"Amazon Transcribe · Scenarios", question:"A company wants to identify and label different speakers in a meeting recording. Which Transcribe feature enables this?", options:["Keyword Spotting","Amazon Transcribe Speaker Diarization","Transcribe Custom Vocabulary","Transcribe Streaming"], correct:1, explanation:"Speaker Diarization in Amazon Transcribe automatically differentiates and labels speakers in multi-person recordings — identifying who said what throughout the audio." },
+  { cat:'transcribe', domain:"Amazon Transcribe · Scenarios", question:"A call center wants real-time keyword detection in live calls. Which combination enables this automated monitoring?", options:["Transcribe S3 batch only","Transcribe Streaming + Lambda","Transcribe Medical + Comprehend","Transcribe + Rekognition"], correct:1, explanation:"Transcribe Streaming converts live audio to text in real-time, and Lambda monitors the transcript for specific keywords — triggering automated alerts when they appear." },
+  { cat:'transcribe', domain:"Amazon Transcribe · Scenarios", question:"A business wants automatic punctuation and capitalization in transcribed output. Which service provides this formatting?", options:["Amazon Polly","Amazon Comprehend","Amazon Transcribe","Amazon Lex"], correct:2, explanation:"Amazon Transcribe automatically adds punctuation (commas, periods, question marks) and proper capitalization — producing readable, formatted text without manual post-processing." },
+  { cat:'transcribe', domain:"Amazon Transcribe · Scenarios", question:"A company wants to translate transcribed audio into another language. Which service combination achieves this?", options:["Transcribe + Polly only","Transcribe + Rekognition","Amazon Transcribe + Amazon Translate","Transcribe + Comprehend only"], correct:2, explanation:"Amazon Transcribe converts speech to text, then Amazon Translate converts to the target language — enabling a complete speech-transcription-plus-translation pipeline." },
+  { cat:'transcribe', domain:"Amazon Transcribe · Scenarios", question:"A developer wants to summarize meeting notes from recorded audio automatically. Which combination achieves this?", options:["Transcribe + Rekognition","Amazon Transcribe + Amazon Comprehend","Transcribe + Polly","Transcribe + Lex"], correct:1, explanation:"Amazon Transcribe converts audio to text, then Amazon Comprehend performs key phrase extraction — automating the creation of meeting notes and summaries from recordings." },
+  { cat:'transcribe', domain:"Amazon Transcribe · Scenarios", question:"A company wants cost-effective transcription of a large historical audio archive stored in S3. Which approach is most cost-effective?", options:["Real-time Transcribe Streaming","Transcribe Medical Streaming","Amazon Transcribe Batch Jobs from S3","Transcribe + Kinesis Firehose"], correct:2, explanation:"Amazon Transcribe batch jobs process audio files from S3 asynchronously — cost-effective for high-volume historical archives where real-time processing is not required." },
+
+  // ── AMAZON REKOGNITION ──
+  { cat:'rekognition', domain:"Amazon Rekognition · Scenarios", question:"A company wants to detect faces in images for identity verification. Which service provides facial detection with bounding boxes?", options:["Amazon Textract","Amazon Comprehend","Amazon Rekognition","Amazon Polly"], correct:2, explanation:"Amazon Rekognition detects faces, landmarks, and attributes in images and video — providing confidence scores and bounding boxes for identity verification applications." },
+  { cat:'rekognition', domain:"Amazon Rekognition · Scenarios", question:"A business wants to detect inappropriate content in user-uploaded images. Which service provides automated content moderation?", options:["Amazon Macie","Amazon Comprehend","Amazon Rekognition","Amazon Inspector"], correct:2, explanation:"Rekognition content moderation detects nudity, violence, hate symbols, and unsafe content — providing confidence scores to trigger automated moderation workflows." },
+  { cat:'rekognition', domain:"Amazon Rekognition · Scenarios", question:"A security team wants to search live camera feeds for known individuals using a stored face database. Which Rekognition feature enables this?", options:["Rekognition Text Detection","Rekognition Custom Labels","Rekognition Face Collection + SearchFacesByImage","Rekognition Video Segments"], correct:2, explanation:"Rekognition Face Collections store face embeddings. SearchFacesByImage compares detected faces against stored collections — enabling real-time face search in security systems." },
+  { cat:'rekognition', domain:"Amazon Rekognition · Scenarios", question:"A company wants to identify objects and scenes in photos for automated image cataloging. Which Rekognition feature handles this?", options:["Rekognition Text Detection","Rekognition Facial Analysis","Rekognition DetectLabels","Rekognition Custom Labels"], correct:2, explanation:"Rekognition's DetectLabels API recognizes thousands of objects, scenes, and activities — automatically generating labels for photo cataloging and content tagging." },
+  { cat:'rekognition', domain:"Amazon Rekognition · Scenarios", question:"Developers want to extract text from images such as signs and product labels. Which Rekognition feature provides OCR?", options:["Rekognition Facial Analysis","Rekognition Text Detection","Amazon Textract","Rekognition Custom Labels"], correct:1, explanation:"Rekognition Text Detection extracts text from images — for signs, labels, and license plates. For structured documents and forms, Amazon Textract is more appropriate." },
+  { cat:'rekognition', domain:"Amazon Rekognition · Scenarios", question:"A company wants real-time video monitoring for security threats and unusual activities. Which Rekognition capability enables this?", options:["Rekognition Image Analysis only","Rekognition Custom Labels","Amazon Rekognition Video Analysis","Rekognition Facial Comparison"], correct:2, explanation:"Amazon Rekognition Video analyzes streaming or stored video to detect people, objects, and activities — supporting real-time surveillance and safety monitoring." },
+  { cat:'rekognition', domain:"Amazon Rekognition · Scenarios", question:"A retail store wants to estimate customer age range and emotions from camera feeds. Which Rekognition API provides this?", options:["Rekognition Text Detection","Rekognition DetectFaces","Rekognition Custom Labels","Rekognition Object Detection"], correct:1, explanation:"Rekognition's DetectFaces API analyzes facial attributes including estimated age range, gender, and emotions (happy, sad, angry) — enabling customer analytics without storing PII." },
+  { cat:'rekognition', domain:"Amazon Rekognition · Scenarios", question:"A business wants to detect specific company logos not in Rekognition's default library. Which feature enables custom object detection?", options:["Rekognition Standard Labels","Rekognition Text Detection","Amazon Rekognition Custom Labels","Rekognition Facial Analysis"], correct:2, explanation:"Rekognition Custom Labels trains a custom CV model on your own labeled images — enabling detection of business-specific logos and objects beyond the default label library." },
+  { cat:'rekognition', domain:"Amazon Rekognition · Scenarios", question:"A company wants to redact detected faces in video for privacy compliance. Which Rekognition capability enables automated face blurring?", options:["Rekognition Facial Comparison","Rekognition Custom Labels","Rekognition Video bounding box face blurring","Rekognition Text Detection"], correct:2, explanation:"Rekognition Video returns bounding box coordinates for detected faces per frame — applications use these to apply blur or pixelation for automated face redaction and privacy." },
+  { cat:'rekognition', domain:"Amazon Rekognition · Scenarios", question:"A company wants facial recognition for employee login authentication. Which Rekognition API enables biometric identity verification?", options:["Rekognition Text Detection","Rekognition Custom Labels","Rekognition CompareFaces API","Rekognition Object Detection"], correct:2, explanation:"Rekognition CompareFaces compares two face images and returns a similarity score — enabling biometric authentication where a live photo is matched against a stored reference." },
+
+  // ── SAGEMAKER CLARIFY ──
+  { cat:'clarify', domain:"SageMaker Clarify · Scenarios", question:"A company wants to check if their ML model is biased against certain age groups. Which service detects model bias?", options:["SageMaker Autopilot","SageMaker Ground Truth","Amazon SageMaker Clarify","SageMaker Model Monitor"], correct:2, explanation:"SageMaker Clarify computes fairness metrics across demographic groups — identifying bias in training data and model predictions such as disparate impact against age or gender groups." },
+  { cat:'clarify', domain:"SageMaker Clarify · Scenarios", question:"Developers want to explain why a model made a specific prediction. Which service provides SHAP-based feature importance?", options:["SageMaker Autopilot","SageMaker Clarify","SageMaker Pipelines","SageMaker Model Registry"], correct:1, explanation:"SageMaker Clarify provides explainability using SHAP values — showing how much each input feature contributed to a prediction, making ML models interpretable to analysts." },
+  { cat:'clarify', domain:"SageMaker Clarify · Scenarios", question:"A company wants continuous fairness monitoring of a deployed model over time. Which combination is recommended?", options:["SageMaker Clarify pre-deployment only","SageMaker Clarify + SageMaker Model Monitor","SageMaker Autopilot + CloudWatch","SageMaker Ground Truth + Pipelines"], correct:1, explanation:"Clarify performs bias analysis and Model Monitor checks live predictions for bias drift — providing ongoing post-deployment fairness monitoring with automated alerts." },
+  { cat:'clarify', domain:"SageMaker Clarify · Scenarios", question:"A hiring AI system must evaluate training data for discrimination before deployment. Which service performs pre-deployment bias analysis?", options:["SageMaker Ground Truth","Amazon SageMaker Clarify","SageMaker Autopilot","Amazon Comprehend"], correct:1, explanation:"SageMaker Clarify evaluates training datasets for bias metrics (class imbalance, disparate impact) before training — enabling teams to detect and address discrimination risks early." },
+  { cat:'clarify', domain:"SageMaker Clarify · Scenarios", question:"A business analyst wants to understand which features most influence model predictions. Which Clarify output provides this insight?", options:["Bias Reports only","SHAP-based Feature Importance Scores","SageMaker Experiments","SageMaker Pipelines"], correct:1, explanation:"SageMaker Clarify generates SHAP feature importance scores — showing the relative contribution of each input variable to model predictions in an interpretable format." },
+  { cat:'clarify', domain:"SageMaker Clarify · Scenarios", question:"A company wants automated fairness reports for compliance audits. Which service generates these reports?", options:["AWS Audit Manager","Amazon SageMaker Clarify","SageMaker Model Registry","AWS Config"], correct:1, explanation:"SageMaker Clarify generates visual and tabular bias and fairness reports — providing documented evidence of fairness checks for regulatory compliance and audit purposes." },
+  { cat:'clarify', domain:"SageMaker Clarify · Scenarios", question:"Developers want automated fairness checks integrated into their ML CI/CD pipeline before deployment. Which combination achieves this?", options:["Clarify + CloudTrail","SageMaker Clarify + SageMaker Pipelines","Clarify + Lambda only","Clarify + Glue"], correct:1, explanation:"SageMaker Pipelines orchestrates ML workflows and Clarify bias checks can be added as a pipeline step — automatically running fairness analysis before any model proceeds to deployment." },
+  { cat:'clarify', domain:"SageMaker Clarify · Scenarios", question:"A model in production shows predictions skewed toward a demographic group. Which tool detects post-deployment bias?", options:["SageMaker Autopilot","SageMaker Clarify + Model Monitor","SageMaker Ground Truth","Amazon Inspector"], correct:1, explanation:"SageMaker Model Monitor runs Clarify bias checks on live traffic — alerting teams when production model predictions show unexpected demographic skew after deployment." },
+
+  // ── SAGEMAKER AUTOPILOT ──
+  { cat:'autopilot', domain:"SageMaker Autopilot · Scenarios", question:"A business analyst wants to build ML models without writing code. Which service provides no-code AutoML from tabular data?", options:["SageMaker Studio","Amazon SageMaker Autopilot","SageMaker Feature Store","SageMaker Clarify"], correct:1, explanation:"SageMaker Autopilot is a fully automated ML service that builds, trains, and tunes models from tabular CSV data — no coding or ML expertise required." },
+  { cat:'autopilot', domain:"SageMaker Autopilot · Scenarios", question:"A company wants to automatically try multiple algorithms and find the best one for their dataset. Which service does this?", options:["SageMaker Ground Truth","Amazon SageMaker Autopilot","SageMaker Clarify","SageMaker Experiments"], correct:1, explanation:"SageMaker Autopilot automatically tries multiple algorithms, performs feature engineering, and ranks candidate models — selecting the best without manual algorithm selection." },
+  { cat:'autopilot', domain:"SageMaker Autopilot · Scenarios", question:"A developer wants automatic hyperparameter tuning without manual configuration. Which AutoML service includes this?", options:["SageMaker Pipelines","SageMaker Clarify","Amazon SageMaker Autopilot","SageMaker Ground Truth"], correct:2, explanation:"SageMaker Autopilot automatically optimizes hyperparameters as part of its AutoML workflow — eliminating the need for manual hyperparameter search." },
+  { cat:'autopilot', domain:"SageMaker Autopilot · Scenarios", question:"A company wants to quickly deploy a regression model without deep ML expertise. Which service handles end-to-end AutoML?", options:["SageMaker Canvas","Amazon SageMaker Autopilot","SageMaker Feature Store","SageMaker Ground Truth"], correct:1, explanation:"SageMaker Autopilot handles preprocessing, feature engineering, algorithm selection, training, tuning, and deployment for regression and classification tasks end-to-end." },
+  { cat:'autopilot', domain:"SageMaker Autopilot · Scenarios", question:"Developers want full transparency into which algorithm Autopilot selected and how it processed data. Which Autopilot output provides this?", options:["Autopilot generates only accuracy scores","Autopilot generates explainable Jupyter notebooks","Autopilot requires CloudTrail to inspect","Autopilot produces opaque black-box models"], correct:1, explanation:"SageMaker Autopilot generates Jupyter notebooks showing the selected algorithm, preprocessing steps, and training logic — providing full transparency into the AutoML pipeline." },
+  { cat:'autopilot', domain:"SageMaker Autopilot · Scenarios", question:"A team wants to compare multiple AutoML pipeline candidates before selecting one for production. Which service generates these comparisons?", options:["SageMaker Experiments","SageMaker Ground Truth","Amazon SageMaker Autopilot","SageMaker Clarify"], correct:2, explanation:"SageMaker Autopilot generates multiple candidate pipelines, evaluates each with standard metrics, and ranks them — enabling transparent model selection before production deployment." },
+  { cat:'autopilot', domain:"SageMaker Autopilot · Scenarios", question:"A company wants automatic handling of missing values, encoding, and normalization before training. Which service does this preprocessing?", options:["SageMaker Feature Store","SageMaker Ground Truth","Amazon SageMaker Autopilot","SageMaker Clarify"], correct:2, explanation:"SageMaker Autopilot automatically handles data preprocessing — imputing missing values, encoding categories, and normalizing numeric features — as part of its AutoML pipeline." },
+  { cat:'autopilot', domain:"SageMaker Autopilot · Scenarios", question:"A company wants periodic AutoML retraining as new data arrives. Which integration enables scheduled retraining?", options:["Autopilot standalone only","SageMaker Autopilot + SageMaker Pipelines","Autopilot + DynamoDB triggers","Autopilot + Glue only"], correct:1, explanation:"SageMaker Pipelines orchestrates periodic workflows that invoke SageMaker Autopilot jobs on new data — enabling automated, scheduled model retraining." },
+
+  // ── AMAZON SAGEMAKER ──
+  { cat:'sagemaker', domain:"Amazon SageMaker · Scenarios", question:"A company wants to build, train, and deploy ML models without managing servers. Which fully managed ML platform should they use?", options:["Amazon EC2 with custom setup","AWS Glue","Amazon SageMaker","Amazon Bedrock"], correct:2, explanation:"Amazon SageMaker is AWS's fully managed ML platform — providing tools for every lifecycle stage including data prep, training, tuning, deployment, and monitoring without managing infrastructure." },
+  { cat:'sagemaker', domain:"Amazon SageMaker · Scenarios", question:"A business analyst wants to build ML models using a visual, no-code interface. Which SageMaker tool provides this?", options:["SageMaker Studio","SageMaker Autopilot","Amazon SageMaker Canvas","SageMaker Ground Truth"], correct:2, explanation:"Amazon SageMaker Canvas provides a visual point-and-click interface for building ML models — designed for business analysts who want predictions without coding expertise." },
+  { cat:'sagemaker', domain:"Amazon SageMaker · Scenarios", question:"A company has a large dataset requiring human labeling for supervised ML. Which SageMaker service manages labeling at scale?", options:["SageMaker Feature Store","SageMaker Clarify","Amazon SageMaker Ground Truth","SageMaker Autopilot"], correct:2, explanation:"SageMaker Ground Truth manages data labeling with human reviewers and ML-assisted labeling — providing high-quality labels for supervised ML training at scale." },
+  { cat:'sagemaker', domain:"Amazon SageMaker · Scenarios", question:"A developer wants to deploy an ML model for real-time low-latency predictions via REST API. Which SageMaker feature enables this?", options:["SageMaker Batch Transform","SageMaker Pipelines","Amazon SageMaker Real-Time Endpoints","SageMaker Ground Truth"], correct:2, explanation:"SageMaker Real-Time Endpoints host models behind managed HTTPS endpoints — serving predictions with milliseconds-to-seconds latency for interactive production applications." },
+  { cat:'sagemaker', domain:"Amazon SageMaker · Scenarios", question:"A company wants overnight batch predictions on millions of S3 records. Which SageMaker feature is designed for this?", options:["SageMaker Real-Time Endpoints","SageMaker Clarify","Amazon SageMaker Batch Transform","SageMaker Ground Truth"], correct:2, explanation:"SageMaker Batch Transform processes large datasets asynchronously from S3 — ideal for overnight or scheduled batch scoring where real-time latency is not required." },
+  { cat:'sagemaker', domain:"Amazon SageMaker · Scenarios", question:"A company wants to monitor deployed models for data drift and performance issues. Which SageMaker service does continuous monitoring?", options:["SageMaker Clarify","SageMaker Ground Truth","Amazon SageMaker Model Monitor","SageMaker Autopilot"], correct:2, explanation:"SageMaker Model Monitor continuously evaluates live predictions against baselines — detecting data quality, model drift, and bias drift with automated CloudWatch alerts." },
+  { cat:'sagemaker', domain:"Amazon SageMaker · Scenarios", question:"A developer wants to track ML experiments comparing runs with different hyperparameters and algorithms. Which tool manages this?", options:["SageMaker Pipelines","SageMaker Model Registry","Amazon SageMaker Experiments","SageMaker Ground Truth"], correct:2, explanation:"SageMaker Experiments tracks runs automatically — logging parameters, metrics, and artifacts — enabling comparison of experiments across the model development lifecycle." },
+  { cat:'sagemaker', domain:"Amazon SageMaker · Scenarios", question:"A company wants to version models, manage approval workflows, and track production deployments centrally. Which SageMaker service manages this?", options:["SageMaker Ground Truth","SageMaker Feature Store","Amazon SageMaker Model Registry","SageMaker Clarify"], correct:2, explanation:"SageMaker Model Registry tracks model versions, manages approval statuses (Pending/Approved/Rejected), and records which version is deployed — serving as the central model governance system." },
+  { cat:'sagemaker', domain:"Amazon SageMaker · Scenarios", question:"A business wants to store, share, and reuse ML features consistently across teams. Which SageMaker service provides this?", options:["SageMaker Experiments","SageMaker Clarify","Amazon SageMaker Feature Store","SageMaker Ground Truth"], correct:2, explanation:"SageMaker Feature Store is a purpose-built repository for storing and sharing ML features — ensuring consistent feature definitions between training and inference across teams." },
+  { cat:'sagemaker', domain:"Amazon SageMaker · Scenarios", question:"A developer wants to automate the full ML workflow from data prep through training, evaluation, and deployment. Which SageMaker tool provides this?", options:["SageMaker Canvas","SageMaker Clarify","Amazon SageMaker Pipelines","SageMaker Ground Truth"], correct:2, explanation:"SageMaker Pipelines is ML workflow orchestration — defining and automating every step from preprocessing through training, evaluation, and deployment as a reproducible pipeline." },
+
+  // ── BEDROCK AGENTS ──
+  { cat:'agents', domain:"Bedrock Agents · Scenarios", question:"A company wants AI to automatically book flights by calling external APIs based on natural language employee requests. Which service enables this?", options:["Amazon Q","Bedrock Knowledge Bases","Amazon Bedrock Agents","Bedrock Guardrails"], correct:2, explanation:"Amazon Bedrock Agents perform multi-step tasks by calling external APIs — enabling AI to take real-world actions like bookings and database updates based on natural language instructions." },
+  { cat:'agents', domain:"Bedrock Agents · Scenarios", question:"Developers want AI to complete multi-step workflows automatically when triggered by a prompt. Which Bedrock feature enables this?", options:["Bedrock Guardrails","Bedrock Knowledge Bases","Bedrock Model Evaluation","Amazon Bedrock Agents"], correct:3, explanation:"Bedrock Agents orchestrate multi-step task chains — breaking prompts into subtasks, calling APIs or Lambda functions, and combining results into a response." },
+  { cat:'agents', domain:"Bedrock Agents · Scenarios", question:"A business wants AI to retrieve internal data AND execute automated actions based on it. Which combination achieves this?", options:["Guardrails + Bedrock only","Knowledge Bases + Bedrock Agents","Bedrock + Comprehend only","Bedrock + SageMaker only"], correct:1, explanation:"Knowledge Bases retrieves relevant enterprise data (RAG), and Bedrock Agents execute follow-up actions (API calls, Lambda) — enabling grounded, agentic automation." },
+  { cat:'agents', domain:"Bedrock Agents · Scenarios", question:"Employees want AI to schedule meetings by interacting with calendar APIs after reading email context. Which service enables this?", options:["Amazon Q Business only","Bedrock Knowledge Bases","Amazon Bedrock Agents","Bedrock Guardrails"], correct:2, explanation:"Bedrock Agents can interact with calendar APIs and email services autonomously — completing scheduling tasks based on natural language instructions." },
+  { cat:'agents', domain:"Bedrock Agents · Scenarios", question:"AI must follow company safety policies while executing automated workflows. Which combination enforces this?", options:["Agents alone","Bedrock Agents + Bedrock Guardrails","Agents + SageMaker","Agents + CloudTrail only"], correct:1, explanation:"Bedrock Guardrails enforce content safety and compliance rules — combined with Bedrock Agents, they ensure automated actions comply with corporate policies and regulatory requirements." },
+  { cat:'agents', domain:"Bedrock Agents · Scenarios", question:"Developers want AI to notify team members via Slack after completing an automated task. Which Bedrock service enables notification workflows?", options:["Knowledge Bases only","Bedrock Guardrails","Amazon Bedrock Agents (Action Groups)","Bedrock Model Evaluation"], correct:2, explanation:"Bedrock Agents invoke Action Groups calling external APIs — including messaging services like Slack, email systems, or SNS — enabling automated post-task notifications." },
+  { cat:'agents', domain:"Bedrock Agents · Scenarios", question:"A company wants AI to sequentially update multiple databases after analyzing internal data. Which service orchestrates this?", options:["Amazon Q","Bedrock Knowledge Bases","Amazon Bedrock Agents","SageMaker Pipelines"], correct:2, explanation:"Bedrock Agents execute sequential actions across backend systems — calling different APIs or Lambda functions in order — enabling complex multi-step data update workflows." },
+  { cat:'agents', domain:"Bedrock Agents · Scenarios", question:"Developers want a single AI system that both generates conversational responses AND executes backend actions. Which Bedrock feature provides this?", options:["Amazon Q + Knowledge Bases only","Amazon Bedrock Agents","Bedrock Guardrails + S3","SageMaker + Bedrock only"], correct:1, explanation:"Bedrock Agents generate conversational responses while executing backend actions (API calls, Lambda) in the same workflow — combining conversational AI with real-world automation." },
+
+  // ── KNOWLEDGE BASES ──
+  { cat:'knowledgebases', domain:"Knowledge Bases · Scenarios", question:"A company wants a chatbot to answer questions using internal S3 documents with accurate, grounded responses. Which service enables this?", options:["Amazon Q only","Amazon Bedrock Guardrails","Knowledge Bases for Amazon Bedrock","Bedrock Agents alone"], correct:2, explanation:"Knowledge Bases for Amazon Bedrock implements RAG — connecting LLMs to enterprise S3 data — enabling chatbots to provide accurate answers grounded in internal company documents." },
+  { cat:'knowledgebases', domain:"Knowledge Bases · Scenarios", question:"A chatbot produces incorrect answers about company policies. What is the most effective fix?", options:["Increase model temperature","Use a larger model","Ground responses using Knowledge Bases (RAG)","Retrain the model from scratch"], correct:2, explanation:"RAG via Knowledge Bases grounds LLM responses in verified internal documents — reducing hallucinations by ensuring answers come from authoritative content rather than model memory." },
+  { cat:'knowledgebases', domain:"Knowledge Bases · Scenarios", question:"Employees want to query internal documentation in natural language without SQL or API knowledge. Which service enables this?", options:["Amazon Athena","Amazon Kendra","Knowledge Bases for Amazon Bedrock","SageMaker Feature Store"], correct:2, explanation:"Knowledge Bases enables natural language queries against internal documents — the LLM translates questions into retrieval queries and generates plain-language answers." },
+  { cat:'knowledgebases', domain:"Knowledge Bases · Scenarios", question:"A company wants AI that only answers from authorized internal data, not general internet knowledge. Which approach ensures this?", options:["Zero-shot prompt only","Knowledge Bases + IAM Policies","Disable all Guardrails","Use high temperature"], correct:1, explanation:"Knowledge Bases restricts responses to retrieved internal content, and IAM Policies control which data is accessible — ensuring AI answers only from authorized enterprise sources." },
+  { cat:'knowledgebases', domain:"Knowledge Bases · Scenarios", question:"Employees need AI responses that include source citations for traceability. Which feature enables this?", options:["Bedrock Guardrails","Bedrock Model Evaluation","Knowledge Bases (returns source citations)","SageMaker Clarify"], correct:2, explanation:"Knowledge Bases for Bedrock returns source document references alongside answers — enabling users to verify AI responses against the original internal documents." },
+  { cat:'knowledgebases', domain:"Knowledge Bases · Scenarios", question:"A company wants AI to ingest and search across PDFs, Word files, and HTML pages. Which service supports this multiformat ingestion?", options:["Amazon Textract only","Amazon S3 only","Knowledge Bases for Amazon Bedrock","Bedrock Guardrails"], correct:2, explanation:"Knowledge Bases for Bedrock ingests multiple formats (PDF, DOCX, HTML, Markdown, CSV) from S3 — enabling semantic search across diverse enterprise content types." },
+  { cat:'knowledgebases', domain:"Knowledge Bases · Scenarios", question:"Developers want to combine knowledge retrieval with automated task execution in one AI workflow. Which combination achieves this?", options:["Knowledge Bases alone","Knowledge Bases + Amazon Bedrock Agents","Guardrails + Knowledge Bases","Knowledge Bases + SageMaker"], correct:1, explanation:"Knowledge Bases retrieves enterprise data (RAG), and Bedrock Agents execute follow-up actions — enabling AI that both retrieves knowledge and acts on it in a unified workflow." },
+  { cat:'knowledgebases', domain:"Knowledge Bases · Scenarios", question:"A business wants AI responses to always reflect the latest internal data changes without retraining the model. Which approach enables this?", options:["Fine-tune the model weekly","Use a larger base model","Re-sync Knowledge Bases with updated data sources","Use higher temperature"], correct:2, explanation:"Knowledge Bases retrieves from current data sources at inference time — ensuring responses reflect the latest information without model retraining or weight updates." },
+
+  // ── AMAZON Q ──
+  { cat:'amazonq', domain:"Amazon Q · Scenarios", question:"Employees need an AI assistant to query internal company data and provide grounded answers. Which AWS service is designed for this?", options:["Amazon Bedrock alone","Amazon SageMaker","Amazon Q","AWS Glue"], correct:2, explanation:"Amazon Q is AWS's enterprise AI assistant — connecting to internal data sources and providing grounded answers to employee questions for workplace productivity." },
+  { cat:'amazonq', domain:"Amazon Q · Scenarios", question:"A company wants a no-code enterprise AI assistant without ML expertise to deploy. Which service simplifies this?", options:["SageMaker Autopilot","Amazon Bedrock raw API","Amazon Q","AWS Glue"], correct:2, explanation:"Amazon Q simplifies enterprise AI assistant deployment — connecting to internal data and providing a managed interface without requiring custom ML pipeline development." },
+  { cat:'amazonq', domain:"Amazon Q · Scenarios", question:"A business wants AI responses to comply with company safety policies in their enterprise assistant. Which combination achieves this?", options:["Amazon Q alone","Amazon Q + Bedrock Guardrails","Amazon Q + SageMaker only","Amazon Q + CloudTrail only"], correct:1, explanation:"Amazon Q combined with Bedrock Guardrails enforces content safety policies, denied topics, and PII redaction — ensuring the assistant operates within company boundaries." },
+  { cat:'amazonq', domain:"Amazon Q · Scenarios", question:"Employees want real-time answers from recently updated internal reports. Which combination keeps responses current?", options:["Amazon Q + S3 batch only","Amazon Q + Knowledge Bases (RAG)","Amazon Q + SageMaker Autopilot","Amazon Q + Athena only"], correct:1, explanation:"Amazon Q with Knowledge Bases implements RAG — retrieving current content from internal data at inference time — ensuring responses reflect the latest document updates." },
+  { cat:'amazonq', domain:"Amazon Q · Scenarios", question:"A company wants to audit all AI assistant queries for compliance. Which service provides the audit trail?", options:["Amazon Q + AWS CloudTrail","Amazon Q + SageMaker Clarify","Amazon Q + Macie","Amazon Q + Config"], correct:0, explanation:"AWS CloudTrail records all API calls to Amazon Q — providing a complete audit trail of who asked what and when — supporting compliance monitoring and governance requirements." },
+  { cat:'amazonq', domain:"Amazon Q · Scenarios", question:"Employees want AI to summarize meeting notes and email threads automatically. Which Amazon Q product enables document summarization?", options:["Amazon Q Developer only","Amazon Q Business","Amazon Q Apps only","Amazon Q + Rekognition"], correct:1, explanation:"Amazon Q Business can summarize internal documents including meeting notes and emails — enabling employees to get concise summaries of lengthy internal content quickly." },
+  { cat:'amazonq', domain:"Amazon Q · Scenarios", question:"A company wants AI responses restricted to data each employee is authorized to see. Which feature enforces per-user data governance?", options:["Prompt engineering alone","Amazon Q + IAM Policies + data source permissions","Amazon Q with high temperature","Amazon Q + SageMaker Clarify"], correct:1, explanation:"Amazon Q integrates with IAM Policies and data source-level ACLs — ensuring each employee's queries only surface data they are authorized to access." },
+  { cat:'amazonq', domain:"Amazon Q · Scenarios", question:"A developer wants an AI coding assistant with inline suggestions and AWS CLI help inside their IDE. Which Amazon Q product is designed for this?", options:["Amazon Q Business","Amazon Q Apps","Amazon Q Developer","Amazon Q Knowledge Bases"], correct:2, explanation:"Amazon Q Developer provides inline code suggestions, debugging help, AWS CLI assistance, and code explanations directly in IDEs like VS Code and JetBrains." },
+
+  // ── AMAZON BEDROCK ──
+  { cat:'bedrock', domain:"Amazon Bedrock · Scenarios", question:"A developer wants to build a generative AI app without managing ML infrastructure. Which service provides fully managed FM access?", options:["Amazon SageMaker","Amazon EC2 with GPUs","Amazon Bedrock","AWS Lambda alone"], correct:2, explanation:"Amazon Bedrock provides fully managed foundation model access via a single API — no infrastructure to provision, train, or manage. You pay per token consumed." },
+  { cat:'bedrock', domain:"Amazon Bedrock · Scenarios", question:"A chatbot produces confident but incorrect answers. Which Bedrock feature most directly reduces hallucinations?", options:["Bedrock Guardrails","Bedrock Model Evaluation","Knowledge Bases for Bedrock (RAG)","Bedrock Fine-tuning"], correct:2, explanation:"Knowledge Bases implements RAG — grounding responses in verified internal documents at inference time — making hallucinations less likely by anchoring answers to real source content." },
+  { cat:'bedrock', domain:"Amazon Bedrock · Scenarios", question:"AI-generated content must comply with GDPR and company safety policies. Which Bedrock feature enforces this?", options:["Bedrock Knowledge Bases","Bedrock Model Evaluation","Bedrock Fine-tuning","Bedrock Guardrails"], correct:3, explanation:"Bedrock Guardrails applies content filters, denied topic lists, PII redaction, and grounding checks — ensuring generated content meets regulatory and corporate safety requirements." },
+  { cat:'bedrock', domain:"Amazon Bedrock · Scenarios", question:"A company wants to compare multiple foundation models side by side before committing to one. Which Bedrock feature enables this?", options:["Bedrock Agents","Bedrock Guardrails","Bedrock Model Evaluation","Bedrock Knowledge Bases"], correct:2, explanation:"Bedrock Model Evaluation lets teams test multiple FMs against the same dataset with automatic or human-review scoring — enabling objective comparison before production selection." },
+  { cat:'bedrock', domain:"Amazon Bedrock · Scenarios", question:"A company wants to adapt a foundation model to their domain using labeled prompt-response pairs. Which Bedrock capability updates model weights?", options:["RAG with Knowledge Bases","Bedrock Guardrails","Bedrock Fine-tuning (SFT)","Prompt Engineering only"], correct:2, explanation:"Bedrock Fine-tuning (SFT) updates model weights using your labeled pairs — adapting the FM's behavior for domain-specific tasks like legal or medical content." },
+  { cat:'bedrock', domain:"Amazon Bedrock · Scenarios", question:"Developers want to improve AI outputs by refining prompt instructions without retraining. Which technique is fastest and cheapest?", options:["Model fine-tuning","Continued pre-training","Prompt Engineering","Bedrock Model Evaluation"], correct:2, explanation:"Prompt Engineering improves LLM output quality by crafting better instructions and examples — without weight updates. It's the fastest and cheapest way to improve Bedrock results." },
+  { cat:'bedrock', domain:"Amazon Bedrock · Scenarios", question:"A company wants a no-maintenance AI platform for rapid R&D experiments with multiple FMs. Which service is best?", options:["Amazon SageMaker custom training","Amazon EC2 GPU clusters","Amazon Bedrock","AWS Batch"], correct:2, explanation:"Amazon Bedrock provides instant serverless access to multiple foundation models via API — enabling rapid experimentation without infrastructure setup or provisioning." },
+  { cat:'bedrock', domain:"Amazon Bedrock · Scenarios", question:"A business wants to generate images from text prompts using a foundation model on AWS. Which service provides this?", options:["Amazon Rekognition","Amazon Polly","Amazon Bedrock (Nova Canvas or Stability AI)","Amazon Comprehend"], correct:2, explanation:"Amazon Bedrock supports image generation models including Amazon Nova Canvas and Stability AI — enabling text-to-image generation via the same Bedrock API." }
 ];
 
 let activeQuestions = [...allQuestions];
