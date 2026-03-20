@@ -3672,6 +3672,7 @@ flowchart LR
         <button class="modal-tab active" onclick="switchTab('svc-glue','overview')">📖 Overview</button>
         <button class="modal-tab" onclick="switchTab('svc-glue','features')">⚙️ Features</button>
         <button class="modal-tab" onclick="switchTab('svc-glue','tips')">🎯 Exam Tips</button>
+        <button class="modal-tab" onclick="switchTab('svc-glue','diagram'); renderMermaid('svc-glue-diagram')">🗺️ Services Map</button>
       </div>
       <div class="modal-panel active" id="svc-glue-overview">
         <h4>What is AWS Glue for AI/ML?</h4>
@@ -3703,6 +3704,55 @@ flowchart LR
           <div class="tip-item"><span class="tip-icon">🎯</span>"Catalog all data sources for ML discovery" → <strong>Glue Data Catalog</strong>.</div>
           <div class="tip-item"><span class="tip-icon">🎯</span>"No-code data transformation for business analysts" → <strong>Glue DataBrew</strong>.</div>
           <div class="tip-item"><span class="tip-icon">⚡</span>Glue = data prep for ML. It runs BEFORE SageMaker training. Think of it as the data cleaning step in the ML lifecycle.</div>
+        </div>
+      </div>
+
+      <div class="modal-panel" id="svc-glue-diagram">
+        <h4>AWS Data Services with Glue — Services Map</h4>
+        <p style="font-size:0.8rem;color:var(--aws-muted);margin-bottom:0.75rem;">How AWS Glue organizes across Data Integration, ETL, Cataloging, Job Orchestration, and Monitoring layers.</p>
+        <div class="mermaid-wrap" id="svc-glue-diagram-wrap">
+          <button class="mermaid-expand-btn" onclick="expandDiagram('svc-glue-diagram')">⤢ Expand</button>
+          <div class="mermaid" id="svc-glue-diagram-src">
+flowchart LR
+    AWS[AWS Data Services]
+    DataIntegration[Data Integration]
+    ETL[ETL & Data Transformation]
+    Cataloging[Data Cataloging]
+    JobOrchestration[Job Orchestration]
+    Monitoring[Monitoring & Logging]
+    GlueStudio["Glue Studio<br/>Visual interface to author, run, and monitor ETL jobs"]
+    GlueJobs["Glue Jobs<br/>Serverless ETL for data processing"]
+    GlueCrawler["Glue Crawlers<br/>Discover data schemas and populate catalog"]
+    GlueDataCatalog["Glue Data Catalog<br/>Central metadata repository"]
+    GlueTriggers["Glue Triggers<br/>Schedule jobs or event-driven execution"]
+    GlueWorkflows["Glue Workflows<br/>Orchestrate multiple ETL jobs"]
+    CloudWatch["CloudWatch Integration<br/>Monitor job metrics, logs, and alerts"]
+    AWS --> DataIntegration
+    AWS --> ETL
+    AWS --> Cataloging
+    AWS --> JobOrchestration
+    AWS --> Monitoring
+    DataIntegration --> GlueStudio
+    DataIntegration --> GlueJobs
+    ETL --> GlueJobs
+    Cataloging --> GlueCrawler
+    Cataloging --> GlueDataCatalog
+    JobOrchestration --> GlueTriggers
+    JobOrchestration --> GlueWorkflows
+    Monitoring --> CloudWatch
+    classDef root fill:#b3d9ff,stroke:#333,color:#000
+    classDef purpose fill:#b8f5c2,stroke:#333,color:#000
+    classDef feature fill:#fff4b3,stroke:#333,color:#000
+    class AWS root
+    class DataIntegration,ETL,Cataloging,JobOrchestration,Monitoring purpose
+    class GlueStudio,GlueJobs,GlueCrawler,GlueDataCatalog,GlueTriggers,GlueWorkflows,CloudWatch feature
+          </div>
+        </div>
+        <div class="tip-list" style="margin-top:1.25rem;">
+          <div class="tip-item"><span class="tip-icon">🎯</span>Glue Studio = visual drag-and-drop ETL builder. Glue Jobs = the underlying serverless execution engine.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Glue Crawlers automatically scan data sources, infer schemas, and register tables in the Glue Data Catalog.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Glue Triggers start jobs on a cron schedule or in response to events. Glue Workflows chain multiple jobs into a pipeline.</div>
+          <div class="tip-item"><span class="tip-icon">⚡</span>Glue Data Catalog is the shared metadata store used by Athena, Redshift Spectrum, and SageMaker — one catalog, many consumers.</div>
         </div>
       </div>
     </div>
