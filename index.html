@@ -2030,6 +2030,7 @@
         <button class="modal-tab" onclick="switchTab('svc-bedrock','features')">⚙️ Features</button>
         <button class="modal-tab" onclick="switchTab('svc-bedrock','tips')">🎯 Exam Tips</button>
         <button class="modal-tab" onclick="switchTab('svc-bedrock','genai-pipeline'); renderMermaid('svc-bedrock-genai-pipeline')">🗺️ GenAI Pipeline</button>
+        <button class="modal-tab" onclick="switchTab('svc-bedrock','finetune'); renderMermaid('svc-bedrock-awsml')">🗺️ AWS AI & ML Map</button>
       </div>
       <div class="modal-panel active" id="svc-bedrock-overview">
         <h4>What is Amazon Bedrock?</h4>
@@ -2163,6 +2164,98 @@ flowchart LR
           <div class="tip-item"><span class="tip-icon">🎯</span>Base Model → SFT/RLHF = weight updates. RAG → no weight updates, retrieves at inference.</div>
           <div class="tip-item"><span class="tip-icon">🎯</span>BLEU = translation quality. ROUGE = summarization quality. BERTScore = semantic similarity. Perplexity = fluency.</div>
           <div class="tip-item"><span class="tip-icon">⚡</span>This pipeline is the full lifecycle: build → improve → ground → deploy → measure. Each layer maps to AWS services.</div>
+        </div>
+      </div>
+
+      <!-- Fine-tuning Flows Panel -->
+      <div class="modal-panel" id="svc-bedrock-finetune">
+        <h4>AWS AI & ML Services with Bedrock — Full Map</h4>
+        <p style="font-size:0.8rem;color:var(--aws-muted);margin-bottom:0.75rem;">Complete overview of all Amazon Bedrock capabilities across Model Access, Customization, Knowledge Integration, Agents, Security, Deployment, and Monitoring.</p>
+        <div class="mermaid-wrap" id="svc-bedrock-awsml-wrap">
+          <button class="mermaid-expand-btn" onclick="expandDiagram('svc-bedrock-awsml')">⤢ Expand</button>
+          <div class="mermaid" id="svc-bedrock-awsml-src">
+flowchart LR
+    AWS[AWS AI & ML Services with Bedrock]
+    Access[Model Access]
+    Customize[Model Customization]
+    RAG[Knowledge Integration]
+    Agents[Agent Orchestration]
+    Security[Security & Governance]
+    Deploy[Deployment & Integration]
+    Monitor[Monitoring & Evaluation]
+    FM[Foundation Model APIs\nAccess prebuilt models for text, image, embeddings]
+    TextModels[Text Models\nLLMs: Claude, Titan; NLP, summarization, Q&A]
+    ImageModels[Image Models\nText-to-Image, Image-to-Text for visual generation]
+    EmbeddingModels[Embedding Models\nSemantic embeddings for search & recommendation]
+    FineTune[Fine-Tuning\nCustomize foundation models for your tasks]
+    SFT[Supervised Fine-Tuning\nTrain with labeled data for task-specific improvements]
+    Reinforce[Reinforcement Learning\nOptimize model behavior via reward signals]
+    Distill[Distillation\nCreate smaller, faster models retaining knowledge]
+    CustomModels[Custom Model Import\nBring your own models for deployment]
+    KnowledgeBase[Knowledge Bases\nOrganize documents & structured knowledge]
+    S3Docs[Amazon S3 Documents\nStore unstructured text, PDFs, datasets]
+    RDS[Amazon RDS Tables\nStructured data storage for queries]
+    Chunking[Chunking & Retrieval\nSplit documents for semantic search]
+    VectorDB[Vector Store Integration\nConnect vector databases for embedding retrieval]
+    OpenSearch[Amazon OpenSearch\nSearch and query embeddings efficiently]
+    Pinecone[Pinecone DB\nManaged vector database for similarity search]
+    Weaviate[Weaviate DB\nVector database with semantic search]
+    AgentsSvc[Bedrock Agents\nAutomate multi-step workflows and decisions]
+    ActionGroups[Action Groups\nCombine agents and actions for complex tasks]
+    Guardrails[Guardrails\nResponsible AI rules & safety policies]
+    IAM[IAM\nManage access control & permissions]
+    Encryption[Encryption\nProtect data at rest & in transit]
+    API[Bedrock API\nIntegrate foundation models with applications]
+    Lambda[AWS Lambda Integration\nServerless execution for model inference]
+    Eval[Model Evaluation\nTest performance on benchmarks & custom datasets]
+    Logs[CloudWatch Logs\nTrack usage, monitor errors, audit model behavior]
+    AWS --> Access
+    AWS --> Customize
+    AWS --> RAG
+    AWS --> Agents
+    AWS --> Security
+    AWS --> Deploy
+    AWS --> Monitor
+    Access --> FM
+    FM --> TextModels
+    FM --> ImageModels
+    FM --> EmbeddingModels
+    Customize --> FineTune
+    FineTune --> SFT
+    FineTune --> Reinforce
+    FineTune --> Distill
+    Customize --> CustomModels
+    RAG --> KnowledgeBase
+    KnowledgeBase --> S3Docs
+    KnowledgeBase --> RDS
+    KnowledgeBase --> Chunking
+    RAG --> VectorDB
+    VectorDB --> OpenSearch
+    VectorDB --> Pinecone
+    VectorDB --> Weaviate
+    Agents --> AgentsSvc
+    Agents --> ActionGroups
+    Security --> Guardrails
+    Security --> IAM
+    Security --> Encryption
+    Deploy --> API
+    Deploy --> Lambda
+    Monitor --> Eval
+    Monitor --> Logs
+    classDef root fill:#b3d9ff,stroke:#333,color:#000
+    classDef purpose fill:#b8f5c2,stroke:#333,color:#000
+    classDef feature fill:#fff4b3,stroke:#333,color:#000
+    class AWS root
+    class Access,Customize,RAG,Agents,Security,Deploy,Monitor purpose
+    class FM,TextModels,ImageModels,EmbeddingModels,FineTune,SFT,Reinforce,Distill,CustomModels,KnowledgeBase,S3Docs,RDS,Chunking,VectorDB,OpenSearch,Pinecone,Weaviate,AgentsSvc,ActionGroups,Guardrails,IAM,Encryption,API,Lambda,Eval,Logs feature
+          </div>
+        </div>
+        <div class="tip-list" style="margin-top:1.25rem;">
+          <div class="tip-item"><span class="tip-icon">🎯</span>Bedrock spans 7 capability layers — from raw model access through customization, RAG, agents, security, deployment, and monitoring.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Fine-tuning (SFT / RFT / Distillation) updates model weights. RAG via Knowledge Bases does NOT update weights — retrieves at inference time.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Vector store options: OpenSearch (AWS-native default), Pinecone (managed), Weaviate (open-source). All integrate with Bedrock Knowledge Bases.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Guardrails + IAM + Encryption = the three security pillars for responsible Bedrock deployment.</div>
+          <div class="tip-item"><span class="tip-icon">⚡</span>Expand this diagram for the full view — it maps every major Bedrock feature and how they connect from root to leaf.</div>
         </div>
       </div>
     </div>
@@ -2566,6 +2659,7 @@ flowchart TB
         <button class="modal-tab" onclick="switchTab('svc-sagemaker','inference')">🚀 Inference Types</button>
         <button class="modal-tab" onclick="switchTab('svc-sagemaker','tips')">🎯 Exam Tips</button>
         <button class="modal-tab" onclick="switchTab('svc-sagemaker','diagram'); renderMermaid('svc-sagemaker-diagram')">🗺️ Diagram</button>
+        <button class="modal-tab" onclick="switchTab('svc-sagemaker','mlarch'); renderMermaid('svc-sagemaker-mlarch')">🗺️ ML Architecture</button>
       </div>
       <div class="modal-panel active" id="svc-sagemaker-overview">
         <h4>What is Amazon SageMaker?</h4>
@@ -2755,6 +2849,76 @@ flowchart LR
     class Wrangler,GroundTruth,FeatureStore,Studio,JumpStart,Canvas,MLflow,Clarify,Pipelines,Registry,ModelCards,RoleManager,Inference,ModelMonitor,Dashboard feature
     class CleanData,BuildModels,TrackModels,AutoML,ManagedModels,Predictions,Insights outcome
           </div>
+        </div>
+      </div>
+
+      <!-- ML Architecture Full Map Panel -->
+      <div class="modal-panel" id="svc-sagemaker-mlarch">
+        <h4>AWS Machine Learning with SageMaker — Full Component Map</h4>
+        <p style="font-size:0.8rem;color:var(--aws-muted);margin-bottom:0.75rem;">Every SageMaker component mapped to its lifecycle stage — from data preparation through monitoring and observability.</p>
+        <div class="mermaid-wrap" id="svc-sagemaker-mlarch-wrap">
+          <button class="mermaid-expand-btn" onclick="expandDiagram('svc-sagemaker-mlarch')">⤢ Expand</button>
+          <div class="mermaid" id="svc-sagemaker-mlarch-src">
+flowchart LR
+    AWS[AWS Machine Learning with SageMaker]
+    DataPrep[Data Preparation]
+    Dev[Model Development]
+    Train[Training and Explainability]
+    Auto[Workflow Automation]
+    Manage[Model Management]
+    Deploy[Deployment and Inference]
+    Monitor[Monitoring and Observability]
+    Wrangler[SageMaker Data Wrangler\nData cleaning & feature engineering]
+    GroundTruth[SageMaker Ground Truth\nData labeling]
+    FeatureStore[SageMaker Feature Store\nStore & reuse features]
+    Studio[SageMaker Studio\nIDE for ML development]
+    JumpStart[SageMaker JumpStart\nPrebuilt models & solutions]
+    Canvas[SageMaker Canvas\nNo-code ML]
+    MLflow[MLflow on SageMaker\nExperiment tracking]
+    Clarify[SageMaker Clarify\nBias detection & explainability]
+    Pipelines[SageMaker Pipelines\nML workflow automation]
+    Registry[SageMaker Model Registry\nModel versioning]
+    ModelCards[SageMaker Model Cards\nModel documentation]
+    RoleManager[SageMaker Role Manager\nAccess control]
+    Inference[SageMaker Deployment\nReal-time & batch inference]
+    ModelMonitor[SageMaker Model Monitor\nData & model drift detection]
+    Dashboard[SageMaker Dashboard\nPerformance visualization]
+    AWS --> DataPrep
+    AWS --> Dev
+    AWS --> Train
+    AWS --> Auto
+    AWS --> Manage
+    AWS --> Deploy
+    AWS --> Monitor
+    DataPrep --> Wrangler
+    DataPrep --> GroundTruth
+    DataPrep --> FeatureStore
+    Dev --> Studio
+    Dev --> JumpStart
+    Dev --> Canvas
+    Train --> MLflow
+    Train --> Clarify
+    Auto --> Pipelines
+    Manage --> Registry
+    Manage --> ModelCards
+    Manage --> RoleManager
+    Deploy --> Inference
+    Monitor --> ModelMonitor
+    Monitor --> Dashboard
+    classDef root fill:#b3d9ff,stroke:#333,color:#000
+    classDef purpose fill:#b8f5c2,stroke:#333,color:#000
+    classDef feature fill:#fff4b3,stroke:#333,color:#000
+    class AWS root
+    class DataPrep,Dev,Train,Auto,Manage,Deploy,Monitor purpose
+    class Wrangler,GroundTruth,FeatureStore,Studio,JumpStart,Canvas,MLflow,Clarify,Pipelines,Registry,ModelCards,RoleManager,Inference,ModelMonitor,Dashboard feature
+          </div>
+        </div>
+        <div class="tip-list" style="margin-top:1.25rem;">
+          <div class="tip-item"><span class="tip-icon">🎯</span>Data Prep → Wrangler (clean), Ground Truth (label), Feature Store (store & share features).</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Model Development → Studio (IDE), JumpStart (prebuilt models), Canvas (no-code ML for analysts).</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Training → MLflow (experiment tracking), Clarify (bias & SHAP explainability).</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Management → Model Registry (versions + approvals), Model Cards (documentation), Role Manager (access).</div>
+          <div class="tip-item"><span class="tip-icon">⚡</span>Monitoring: Model Monitor detects data/prediction drift; Dashboard visualizes performance metrics over time.</div>
         </div>
       </div>
     </div>
@@ -3564,7 +3728,7 @@ flowchart LR
         <button class="modal-tab active" onclick="switchTab('d1','concepts')">📖 Key Concepts</button>
         <button class="modal-tab" onclick="switchTab('d1','compare')">📊 Comparisons</button>
         <button class="modal-tab" onclick="switchTab('d1','biasvar'); renderMermaid('d1-biasvar')">📐 Bias & Variance</button>
-        <button class="modal-tab" onclick="switchTab('d1','models'); renderMermaid('d1-models')">🤖 AI/ML Models</button>
+        <button class="modal-tab" onclick="switchTab('d1','models'); renderMermaid('d1-models'); renderMermaid('d1-awsmodels')">🤖 AI/ML Models</button>
         <button class="modal-tab" onclick="switchTab('d1','evaldiagram'); renderMermaid('d1-evaldiagram')">📈 Eval & Monitor</button>
         <button class="modal-tab" onclick="switchTab('d1','hyperparams')">⚙️ Hyperparameters</button>
         <button class="modal-tab" onclick="switchTab('d1','svccomp')">🔀 Service Comparison</button>
@@ -3726,6 +3890,38 @@ flowchart TB
           <div class="tip-item"><span class="tip-icon">🎯</span>GPT = generative (creates text). BERT = understanding (classifies/searches text). Know the difference.</div>
           <div class="tip-item"><span class="tip-icon">🎯</span>GAN = two networks competing: a generator creates fake data, a discriminator judges it.</div>
           <div class="tip-item"><span class="tip-icon">⚡</span>XGBoost and SVM are traditional ML — no deep learning. Best for structured/tabular data.</div>
+        </div>
+
+        <h4 style="margin-top:1.75rem;">AWS AI & ML Models — Use Case Map</h4>
+        <p style="font-size:0.8rem;color:var(--aws-muted);margin-bottom:0.75rem;">Key models and their primary use cases mapped from a single AWS AI & ML root — useful for quick exam recall.</p>
+        <div class="mermaid-wrap" id="d1-awsmodels-wrap">
+          <button class="mermaid-expand-btn" onclick="expandDiagram('d1-awsmodels')">⤢ Expand</button>
+          <div class="mermaid" id="d1-awsmodels-src">
+flowchart TD
+    AWS[AWS AI & ML Models]
+    GPT["GPT<br/>Text generation, summarization, chatbots"]
+    BERT["BERT<br/>Text embeddings, NLP tasks, Q&A"]
+    ResNet["ResNet<br/>Image classification, feature extraction"]
+    RNN["RNN<br/>Sequence prediction, time series, language modeling"]
+    WaveNet["WaveNet<br/>Audio generation, speech synthesis"]
+    GAN["GAN<br/>Image generation, data augmentation"]
+    SVM["SVM<br/>Classification, regression on structured data"]
+    BERTScore["BERTScore<br/>Evaluate NLP model output similarity"]
+    ERT["Extra Random Trees<br/>Ensemble method for classification/regression"]
+    AWS --> GPT
+    AWS --> BERT
+    AWS --> ResNet
+    AWS --> RNN
+    AWS --> WaveNet
+    AWS --> GAN
+    AWS --> SVM
+    AWS --> BERTScore
+    AWS --> ERT
+    classDef root fill:#b3d9ff,stroke:#333,color:#000
+    classDef model fill:#fff4b3,stroke:#333,color:#000
+    class AWS root
+    class GPT,BERT,ResNet,RNN,WaveNet,GAN,SVM,BERTScore,ERT model
+          </div>
         </div>
       </div>
 
