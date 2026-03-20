@@ -4191,7 +4191,68 @@ flowchart LR
             </tbody>
           </table>
         </div>
-        <h4>Core ML Concepts — Quick Reference</h4>
+
+        <h4>Bias–Variance Quadrant — What Happens & How to Fix It</h4>
+        <div class="services-compare-wrap" style="margin-bottom:1.5rem;">
+          <table class="services-compare-table">
+            <thead>
+              <tr><th>Bias</th><th>Variance</th><th>What Happens</th><th>Fix / Solution</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span style="color:var(--aws-red);font-weight:700;">High</span></td>
+                <td>Low</td>
+                <td>Underfitting — model too simple, misses patterns</td>
+                <td>Increase model complexity, add features, reduce regularization</td>
+              </tr>
+              <tr>
+                <td><span style="color:var(--aws-red);font-weight:700;">High</span></td>
+                <td><span style="color:var(--aws-red);font-weight:700;">High</span></td>
+                <td>Rare &amp; unstable — worst of both worlds</td>
+                <td>Redesign model, check data quality, balance bias/variance</td>
+              </tr>
+              <tr>
+                <td>Low</td>
+                <td>Low</td>
+                <td><strong>Good Fit</strong> — generalizes well to new data ✅</td>
+                <td>Maintain current model, monitor performance</td>
+              </tr>
+              <tr>
+                <td>Low</td>
+                <td><span style="color:var(--aws-red);font-weight:700;">High</span></td>
+                <td>Overfitting — memorizes noise, poor on test data</td>
+                <td>Use regularization (L1/L2, dropout), get more data, simplify model</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>Bias–Variance Quadrant Diagram</h4>
+        <p style="font-size:0.8rem;color:var(--aws-muted);margin-bottom:0.75rem;">All four bias/variance combinations with their model behavior and recommended fix.</p>
+        <div class="mermaid-wrap" id="d1-biasvar-wrap">
+          <button class="mermaid-expand-btn" onclick="expandDiagram('d1-biasvar')">⤢ Expand</button>
+          <div class="mermaid" id="d1-biasvar-src">
+flowchart TD
+    Underfit["High Bias + Low Variance\nUnderfitting\nModel too simple"]
+    Overfit["Low Bias + High Variance\nOverfitting\nMemorizes training data"]
+    GoodFit["Low Bias + Low Variance\nGood Fit\nGeneralizes well"]
+    Unstable["High Bias + High Variance\nUnstable predictions"]
+    FixUnderfit["Increase model complexity\nAdd features, reduce regularization"]
+    FixOverfit["Use regularization\nAdd more data, simplify model"]
+    FixGoodFit["Maintain current model\nMonitor performance"]
+    FixUnstable["Redesign model\nCheck data quality, balance bias/variance"]
+    Underfit --> FixUnderfit
+    Overfit --> FixOverfit
+    GoodFit --> FixGoodFit
+    Unstable --> FixUnstable
+    classDef quadrant fill:#fff4b3,stroke:#333,color:#000
+    classDef fix fill:#b8f5c2,stroke:#333,color:#000
+    class Underfit,Overfit,GoodFit,Unstable quadrant
+    class FixUnderfit,FixOverfit,FixGoodFit,FixUnstable fix
+          </div>
+        </div>
+
+        <h4 style="margin-top:1.5rem;">Core ML Concepts — Quick Reference</h4>
         <table class="modal-table" style="margin-bottom:1.5rem;">
           <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
           <tbody>
@@ -4204,27 +4265,11 @@ flowchart LR
             <tr><td><strong>Underfitting</strong></td><td>Model too simple — poor on both train and test data</td></tr>
           </tbody>
         </table>
-        <h4>Underfitting → Good Fit → Overfitting Diagram</h4>
-        <div class="mermaid-wrap" id="d1-biasvar-wrap">
-          <button class="mermaid-expand-btn" onclick="expandDiagram('d1-biasvar')">⤢ Expand</button>
-          <div class="mermaid" id="d1-biasvar-src">
-flowchart LR
-    Underfit[Underfitting\nHigh Bias, Low Variance\nModel too simple]
-    GoodFit[Good Fit\nBalanced Bias & Variance\nGeneralizes well]
-    Overfit[Overfitting\nLow Bias, High Variance\nModel too complex]
-    Underfit --> GoodFit --> Overfit
-    classDef underfit fill:#ffd6cc,stroke:#333,stroke-width:2px,color:#000
-    classDef goodfit fill:#b3f7d6,stroke:#333,stroke-width:2px,color:#000
-    classDef overfit fill:#b3d9ff,stroke:#333,stroke-width:2px,color:#000
-    class Underfit underfit
-    class GoodFit goodfit
-    class Overfit overfit
-          </div>
-        </div>
-        <div class="tip-list" style="margin-top:1.25rem;">
-          <div class="tip-item"><span class="tip-icon">🎯</span>High Bias = Underfitting. High Variance = Overfitting. Good model = low bias AND low variance.</div>
-          <div class="tip-item"><span class="tip-icon">🎯</span>Fix underfitting: more complex model, more features. Fix overfitting: more data, regularization, dropout.</div>
-          <div class="tip-item"><span class="tip-icon">⚡</span>The bias-variance tradeoff = making the model more complex reduces bias but increases variance.</div>
+        <div class="tip-list">
+          <div class="tip-item"><span class="tip-icon">🎯</span>High Bias = Underfitting. High Variance = Overfitting. <strong>Goal: Low bias AND low variance</strong> = good fit.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Fix underfitting: more complex model, more features, reduce regularization. Fix overfitting: more data, L1/L2 regularization, dropout.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>High Bias + High Variance = worst case — rare but unstable. Indicates a fundamentally flawed model design or corrupt data.</div>
+          <div class="tip-item"><span class="tip-icon">⚡</span>The bias-variance tradeoff: increasing model complexity reduces bias but raises variance. Find the sweet spot = good fit.</div>
         </div>
       </div>
 
