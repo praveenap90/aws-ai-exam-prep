@@ -5205,6 +5205,12 @@ flowchart LR
         <button class="modal-tab" onclick="switchTab('d5','artifactflow'); renderMermaid('d5-artifactflow')">🗺️ Artifact</button>
         <button class="modal-tab" onclick="switchTab('d5','auditflow'); renderMermaid('d5-auditflow')">🗺️ Audit Manager</button>
         <button class="modal-tab" onclick="switchTab('d5','advisorflow'); renderMermaid('d5-advisorflow')">🗺️ Trusted Advisor</button>
+        <button class="modal-tab" onclick="switchTab('d5','encryptionmap'); renderMermaid('d5-encryptionmap')">🔒 Encryption Map</button>
+        <button class="modal-tab" onclick="switchTab('d5','computemap'); renderMermaid('d5-computemap')">⚙️ Compute Map</button>
+        <button class="modal-tab" onclick="switchTab('d5','streamingmap'); renderMermaid('d5-streamingmap')">📡 Streaming</button>
+        <button class="modal-tab" onclick="switchTab('d5','databasemap'); renderMermaid('d5-databasemap')">🗄️ Databases</button>
+        <button class="modal-tab" onclick="switchTab('d5','networkingmap'); renderMermaid('d5-networkingmap')">🌐 Networking</button>
+        <button class="modal-tab" onclick="switchTab('d5','dbdecision'); renderMermaid('d5-dbdecision')">🔀 DB Decision</button>
       </div>
 
       <div class="modal-panel active" id="d5-concepts">
@@ -6175,6 +6181,227 @@ flowchart LR
           <div class="tip-item"><span class="tip-icon">🎯</span>"Best practice recommendations" or "cost optimization" exam question → <strong>AWS Trusted Advisor</strong>.</div>
           <div class="tip-item"><span class="tip-icon">🎯</span>Trusted Advisor ≠ Config. Advisor gives proactive recommendations; Config tracks reactive compliance state.</div>
           <div class="tip-item"><span class="tip-icon">⚡</span>Business and Enterprise support plans unlock all Trusted Advisor checks — Basic/Developer plans have limited checks.</div>
+        </div>
+      </div>
+
+      <!-- Encryption & Security Map -->
+      <div class="modal-panel" id="d5-encryptionmap">
+        <h4>AWS Encryption & Security — Services Map</h4>
+        <p style="font-size:0.8rem;color:var(--aws-muted);margin-bottom:0.75rem;">Core AWS encryption services and how they map to data-at-rest and data-in-transit protection.</p>
+        <div class="mermaid-wrap" id="d5-encryptionmap-wrap">
+          <button class="mermaid-expand-btn" onclick="expandDiagram('d5-encryptionmap')">⤢ Expand</button>
+          <div class="mermaid" id="d5-encryptionmap-src">
+flowchart LR
+    AWS[AWS Encryption & Security]
+    KMS["AWS KMS<br/>Manage encryption keys, integrate with AWS services"]
+    CloudHSM["AWS CloudHSM<br/>Dedicated hardware keys, compliance workloads"]
+    Secrets["Secrets Manager<br/>Store & rotate passwords, API keys"]
+    ACM["AWS Certificate Manager<br/>Manage SSL/TLS certificates"]
+    AtRest["Encryption at Rest<br/>S3, EBS, RDS data protection"]
+    InTransit["Encryption in Transit<br/>TLS/SSL secure communication"]
+    AWS --> KMS
+    AWS --> CloudHSM
+    AWS --> Secrets
+    AWS --> ACM
+    KMS --> AtRest
+    ACM --> InTransit
+    classDef root fill:#b3d9ff,stroke:#333,color:#000
+    classDef service fill:#fff4b3,stroke:#333,color:#000
+    classDef type fill:#b8f5c2,stroke:#333,color:#000
+    class AWS root
+    class KMS,CloudHSM,Secrets,ACM service
+    class AtRest,InTransit type
+          </div>
+        </div>
+        <div class="tip-list" style="margin-top:1.25rem;">
+          <div class="tip-item"><span class="tip-icon">🎯</span>KMS = AWS-managed or customer-managed keys. Use SSE-KMS for S3, EBS, RDS encryption at rest.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>CloudHSM = dedicated hardware security module. More expensive than KMS; used for strict compliance (FIPS 140-2 Level 3).</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Secrets Manager automatically rotates credentials (DB passwords, API keys) — use instead of hardcoding secrets in code.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>ACM = free SSL/TLS certificates for HTTPS endpoints on ALB, CloudFront, API Gateway — encryption in transit.</div>
+          <div class="tip-item"><span class="tip-icon">⚡</span>KMS → at rest. ACM → in transit. Both are needed for a fully encrypted Bedrock / SageMaker ML workload.</div>
+        </div>
+      </div>
+
+      <!-- Compute Services Map -->
+      <div class="modal-panel" id="d5-computemap">
+        <h4>AWS Compute Services — Services Map</h4>
+        <p style="font-size:0.8rem;color:var(--aws-muted);margin-bottom:0.75rem;">Key AWS compute services and their primary use cases — from serverless functions to full virtual server control.</p>
+        <div class="mermaid-wrap" id="d5-computemap-wrap">
+          <button class="mermaid-expand-btn" onclick="expandDiagram('d5-computemap')">⤢ Expand</button>
+          <div class="mermaid" id="d5-computemap-src">
+flowchart LR
+    AWS[AWS Compute Services]
+    Lambda["AWS Lambda<br/>Run serverless code, event-driven processing, APIs, automation"]
+    ECS["Amazon ECS<br/>Run and manage Docker containers, microservices, batch jobs"]
+    Fargate["AWS Fargate<br/>Serverless containers, no EC2 management, scalable APIs"]
+    EC2["Amazon EC2<br/>Virtual servers, full control, custom apps, long-running workloads"]
+    AWS --> Lambda
+    AWS --> ECS
+    AWS --> Fargate
+    AWS --> EC2
+    classDef root fill:#b3d9ff,stroke:#333,color:#000
+    classDef service fill:#fff4b3,stroke:#333,color:#000
+    class AWS root
+    class Lambda,ECS,Fargate,EC2 service
+          </div>
+        </div>
+        <div class="tip-list" style="margin-top:1.25rem;">
+          <div class="tip-item"><span class="tip-icon">🎯</span>Lambda = serverless functions, event-driven, pay per invocation. No servers to manage. Max 15 min runtime.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>ECS = container orchestration using Docker. You manage EC2 nodes OR use Fargate for serverless containers.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Fargate = serverless compute engine for ECS and EKS. No EC2 provisioning — just define CPU/memory and run containers.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>EC2 = full control virtual server. Choose instance type, OS, storage. Best for long-running or GPU ML training workloads.</div>
+          <div class="tip-item"><span class="tip-icon">⚡</span>For AI/ML: SageMaker uses EC2 under the hood. Lambda is used for lightweight inference triggers. Fargate for containerized model serving.</div>
+        </div>
+      </div>
+
+      <!-- Streaming & Messaging Map -->
+      <div class="modal-panel" id="d5-streamingmap">
+        <h4>AWS Real-time Streaming & Messaging — Services Map</h4>
+        <p style="font-size:0.8rem;color:var(--aws-muted);margin-bottom:0.75rem;">Key AWS messaging and streaming services showing their roles and common integration patterns.</p>
+        <div class="mermaid-wrap" id="d5-streamingmap-wrap">
+          <button class="mermaid-expand-btn" onclick="expandDiagram('d5-streamingmap')">⤢ Expand</button>
+          <div class="mermaid" id="d5-streamingmap-src">
+flowchart LR
+    AWS[AWS Streaming & Messaging]
+    SNS["Amazon SNS<br/>Pub/Sub messaging<br/>Push notifications, fan-out to multiple subscribers"]
+    SQS["Amazon SQS<br/>Message queue<br/>Decouple services, reliable async processing"]
+    Kinesis["Amazon Kinesis<br/>Real-time data streaming<br/>Process logs, events, IoT data at scale"]
+    StepFn["AWS Step Functions<br/>Workflow orchestration<br/>Coordinate multiple services & processes"]
+    AWS --> SNS
+    AWS --> SQS
+    AWS --> Kinesis
+    AWS --> StepFn
+    SNS --> SQS
+    Kinesis --> StepFn
+    SQS --> StepFn
+    classDef root fill:#b3d9ff,stroke:#333,color:#000
+    classDef service fill:#fff4b3,stroke:#333,color:#000
+    class AWS root
+    class SNS,SQS,Kinesis,StepFn service
+          </div>
+        </div>
+        <div class="tip-list" style="margin-top:1.25rem;">
+          <div class="tip-item"><span class="tip-icon">🎯</span>SNS = pub/sub fan-out. One message → many subscribers (SQS queues, Lambda, email, SMS). Use for notifications.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>SQS = queue for decoupling. Producers write, consumers pull at their own pace. Prevents data loss between services.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Kinesis = real-time streaming at scale. Best for high-throughput IoT, clickstreams, and log pipelines. Data retained up to 365 days.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Step Functions = visual workflow orchestrator. Chains Lambda, ECS, Bedrock Agents, and other services into state machines.</div>
+          <div class="tip-item"><span class="tip-icon">⚡</span>SNS → SQS fan-out is the most common pattern: broadcast one event to multiple independent processing queues.</div>
+        </div>
+      </div>
+
+      <!-- Database & Analytics Map -->
+      <div class="modal-panel" id="d5-databasemap">
+        <h4>AWS Database & Analytics Services — Services Map</h4>
+        <p style="font-size:0.8rem;color:var(--aws-muted);margin-bottom:0.75rem;">AWS managed database and analytics services — from transactional relational databases to serverless SQL on S3.</p>
+        <div class="mermaid-wrap" id="d5-databasemap-wrap">
+          <button class="mermaid-expand-btn" onclick="expandDiagram('d5-databasemap')">⤢ Expand</button>
+          <div class="mermaid" id="d5-databasemap-src">
+flowchart LR
+    AWS[AWS Database & Analytics Services]
+    RDS["Amazon RDS<br/>Managed relational DB (MySQL, Postgres, etc.)<br/>Transactional applications"]
+    Aurora["Amazon Aurora<br/>High-performance relational DB<br/>MySQL/Postgres compatible, scalable"]
+    DynamoDB["Amazon DynamoDB<br/>NoSQL key-value DB<br/>Serverless, low-latency, high-scale apps"]
+    Redshift["Amazon Redshift<br/>Data warehouse<br/>Analytics, BI, large-scale queries"]
+    Athena["Amazon Athena<br/>Query data in S3 using SQL<br/>Serverless analytics, pay per query"]
+    AWS --> RDS
+    AWS --> Aurora
+    AWS --> DynamoDB
+    AWS --> Redshift
+    AWS --> Athena
+    classDef root fill:#b3d9ff,stroke:#333,color:#000
+    classDef service fill:#fff4b3,stroke:#333,color:#000
+    class AWS root
+    class RDS,Aurora,DynamoDB,Redshift,Athena service
+          </div>
+        </div>
+        <div class="tip-list" style="margin-top:1.25rem;">
+          <div class="tip-item"><span class="tip-icon">🎯</span>RDS = managed relational DB (MySQL, PostgreSQL, Oracle, SQL Server). Good for standard OLTP transactional apps.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Aurora = AWS-optimized relational DB, 5× faster than MySQL RDS. Supports pgvector for ML embedding storage.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>DynamoDB = serverless NoSQL key-value store. Single-digit millisecond latency. Best for high-scale, low-latency apps.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Redshift = columnar data warehouse for analytics (OLAP). Best for large BI and reporting queries across petabytes.</div>
+          <div class="tip-item"><span class="tip-icon">⚡</span>Athena = serverless SQL directly on S3. No database to manage — pay per TB scanned. Pairs with Glue Data Catalog.</div>
+        </div>
+      </div>
+
+      <!-- Networking & Delivery Map -->
+      <div class="modal-panel" id="d5-networkingmap">
+        <h4>AWS Networking & Delivery — Services Map</h4>
+        <p style="font-size:0.8rem;color:var(--aws-muted);margin-bottom:0.75rem;">How AWS networking and delivery services chain together from DNS routing through CDN caching to load-balanced backends.</p>
+        <div class="mermaid-wrap" id="d5-networkingmap-wrap">
+          <button class="mermaid-expand-btn" onclick="expandDiagram('d5-networkingmap')">⤢ Expand</button>
+          <div class="mermaid" id="d5-networkingmap-src">
+flowchart LR
+    AWS[AWS Networking & Delivery]
+    CloudFront["Amazon CloudFront<br/>CDN for caching content globally, low latency delivery"]
+    ELB["Elastic Load Balancer - ELB<br/>Distribute traffic across multiple targets, high availability"]
+    Route53["Amazon Route 53<br/>DNS service, domain routing, health checks"]
+    S3["Amazon S3<br/>Object storage, static website hosting, content origin"]
+    GlobalAccel["AWS Global Accelerator<br/>Improve global app performance, static IP, route via AWS network"]
+    AWS --> Route53
+    Route53 --> CloudFront
+    CloudFront --> ELB
+    ELB --> S3
+    AWS --> GlobalAccel
+    GlobalAccel --> ELB
+    classDef root fill:#b3d9ff,stroke:#333,color:#000
+    classDef service fill:#fff4b3,stroke:#333,color:#000
+    class AWS root
+    class CloudFront,ELB,Route53,S3,GlobalAccel service
+          </div>
+        </div>
+        <div class="tip-list" style="margin-top:1.25rem;">
+          <div class="tip-item"><span class="tip-icon">🎯</span>Route 53 = DNS. Resolves domain names → IP addresses. Also handles health checks and failover routing.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>CloudFront = CDN. Caches content at 400+ global edge locations — reducing latency for static assets and API responses.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>ELB = distributes incoming traffic across multiple targets (EC2, Lambda, containers) for high availability and fault tolerance.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Global Accelerator ≠ CloudFront. Global Accelerator uses AWS's private network for TCP/UDP — CloudFront caches HTTP content at the edge.</div>
+          <div class="tip-item"><span class="tip-icon">⚡</span>Classic delivery stack: Route 53 → CloudFront → ELB → EC2/S3. Global Accelerator is an alternative entry point bypassing the public internet.</div>
+        </div>
+      </div>
+
+      <!-- Database Decision Tree -->
+      <div class="modal-panel" id="d5-dbdecision">
+        <h4>Choose the Right AWS Database — Decision Tree</h4>
+        <p style="font-size:0.8rem;color:var(--aws-muted);margin-bottom:0.75rem;">Follow the decision path to find the correct AWS database service for any exam scenario.</p>
+        <div class="mermaid-wrap" id="d5-dbdecision-wrap">
+          <button class="mermaid-expand-btn" onclick="expandDiagram('d5-dbdecision')">⤢ Expand</button>
+          <div class="mermaid" id="d5-dbdecision-src">
+flowchart TD
+    Start[Choose AWS Database]
+    Q1["Need relational database?\n(structured schema, joins, ACID)"]
+    Q2["Need high performance & scalability?\n(cloud-optimized DB)"]
+    Q3["Need NoSQL / key-value?\n(millions of requests, low latency)"]
+    Q4["Need analytics / BI queries?\n(large datasets, reporting)"]
+    Q5["Data stored in S3?\n(data lake, no DB setup)"]
+    RDS["Amazon RDS\nTraditional relational DB\nOLTP apps, transactions"]
+    Aurora["Amazon Aurora\nHigh-performance relational DB\nScalable, faster than RDS"]
+    DynamoDB["Amazon DynamoDB\nNoSQL key-value DB\nServerless, ultra-low latency"]
+    Redshift["Amazon Redshift\nData warehouse\nAnalytics, dashboards, BI"]
+    Athena["Amazon Athena\nQuery S3 using SQL\nServerless, pay-per-query"]
+    Start --> Q1
+    Q1 -->|Yes| Q2
+    Q1 -->|No| Q3
+    Q2 -->|Yes| Aurora
+    Q2 -->|No| RDS
+    Q3 -->|Yes| DynamoDB
+    Q3 -->|No| Q4
+    Q4 -->|Yes| Q5
+    Q4 -->|No| RDS
+    Q5 -->|Yes| Athena
+    Q5 -->|No| Redshift
+    classDef start fill:#b3d9ff,stroke:#333,color:#000
+    classDef decision fill:#b8f5c2,stroke:#333,color:#000
+    classDef service fill:#fff4b3,stroke:#333,color:#000
+    class Start start
+    class Q1,Q2,Q3,Q4,Q5 decision
+    class RDS,Aurora,DynamoDB,Redshift,Athena service
+          </div>
+        </div>
+        <div class="tip-list" style="margin-top:1.25rem;">
+          <div class="tip-item"><span class="tip-icon">🎯</span>Relational + high performance/scalability → <strong>Aurora</strong>. Relational + standard OLTP → <strong>RDS</strong>.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>NoSQL / key-value / millions of requests / low latency → always <strong>DynamoDB</strong>.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Analytics / BI on large datasets AND data is in S3 → <strong>Athena</strong> (serverless, pay per query, no setup).</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Analytics / BI on large datasets NOT in S3 → <strong>Redshift</strong> (columnar data warehouse, persistent cluster).</div>
+          <div class="tip-item"><span class="tip-icon">⚡</span>Key distinction: Athena queries data WHERE IT LIVES in S3. Redshift requires data to be loaded into the warehouse first.</div>
         </div>
       </div>
 
