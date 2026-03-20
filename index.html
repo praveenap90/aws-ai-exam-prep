@@ -533,6 +533,26 @@
       margin-top: 1.5rem;
     }
 
+    .btn-retry {
+      background: rgba(255, 180, 50, 0.12);
+      color: #FFB432;
+      border: 1.5px solid rgba(255, 180, 50, 0.35);
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      font-family: 'Space Mono', monospace;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, transform 0.1s;
+      letter-spacing: 0.04em;
+    }
+    .btn-retry:hover {
+      background: rgba(255, 180, 50, 0.22);
+      border-color: rgba(255, 180, 50, 0.6);
+      transform: translateY(-1px);
+    }
+    .btn-retry:active { transform: translateY(0); }
+
     /* ── CHEAT SHEET ── */
     .cheat-grid {
       display: grid;
@@ -1714,6 +1734,7 @@
 
     <div class="quiz-controls">
       <button class="btn btn-outline" id="prevBtn" onclick="prevQuestion()">← Prev</button>
+      <button class="btn btn-retry" id="retryBtn" onclick="retryQuestion()" style="display:none;">↩ Try Again</button>
       <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Next →</button>
     </div>
   </div>
@@ -6269,6 +6290,7 @@ function renderQuestion() {
   const optionsEl = document.getElementById('quizOptions');
   optionsEl.innerHTML = '';
   const letters = ['A','B','C','D'];
+  const wasWrong = answered[currentQ] !== null && answered[currentQ] !== q.correct;
 
   q.options.forEach((opt, i) => {
     const btn = document.createElement('button');
@@ -6279,18 +6301,23 @@ function renderQuestion() {
     if (answered[currentQ] !== null) {
       btn.disabled = true;
       if (i === q.correct) btn.classList.add('correct');
-      if (i === answered[currentQ] && answered[currentQ] !== q.correct) btn.classList.add('selected-wrong');
+      if (i === answered[currentQ] && wasWrong) btn.classList.add('selected-wrong');
     }
     optionsEl.appendChild(btn);
   });
 
   const expEl = document.getElementById('quizExplanation');
   if (answered[currentQ] !== null) {
-    expEl.innerHTML = `<strong>Explanation:</strong> ${q.explanation}`;
+    const icon = wasWrong ? '❌' : '✅';
+    expEl.innerHTML = `<strong>${icon} Explanation:</strong> ${q.explanation}`;
     expEl.classList.add('visible');
   } else {
     expEl.classList.remove('visible');
   }
+
+  // Show Retry button only when a wrong answer was given
+  const retryBtn = document.getElementById('retryBtn');
+  retryBtn.style.display = wasWrong ? 'inline-flex' : 'none';
 
   const answeredCount = answered.filter(a => a !== null).length;
   document.getElementById('quizScore').textContent = `Score: ${score}/${answeredCount}`;
@@ -6301,6 +6328,15 @@ function selectAnswer(idx) {
   if (answered[currentQ] !== null) return;
   answered[currentQ] = idx;
   if (idx === activeQuestions[currentQ].correct) score++;
+  renderQuestion();
+}
+
+function retryQuestion() {
+  // Only allow retry if the answer was wrong
+  if (answered[currentQ] === null || answered[currentQ] === activeQuestions[currentQ].correct) return;
+  // Reset this question's answer so the user can try again
+  answered[currentQ] = null;
+  // Don't adjust score — the point was already not awarded
   renderQuestion();
 }
 
