@@ -553,6 +553,116 @@
     }
     .btn-retry:active { transform: translateY(0); }
 
+    /* ── FLASHCARDS ── */
+    .flashcard-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .flashcard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .flashcard-scene {
+      height: 220px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .flashcard-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .flashcard-scene.flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard-front,
+    .flashcard-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 14px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border: 1px solid var(--aws-border);
+    }
+
+    .flashcard-front {
+      background: var(--aws-card);
+    }
+
+    .flashcard-back {
+      background: linear-gradient(135deg, rgba(255,153,0,0.08), rgba(77,166,255,0.06));
+      border-color: rgba(255,153,0,0.25);
+      transform: rotateY(180deg);
+    }
+
+    .flashcard-category {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--aws-orange);
+      margin-bottom: 0.75rem;
+    }
+
+    .flashcard-term {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--aws-light);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .flashcard-hint {
+      font-size: 0.72rem;
+      color: var(--aws-muted);
+      font-family: 'Space Mono', monospace;
+    }
+
+    .flashcard-definition {
+      font-size: 0.82rem;
+      color: var(--aws-light);
+      line-height: 1.6;
+    }
+
+    .flashcard-example {
+      margin-top: 0.75rem;
+      font-size: 0.72rem;
+      color: var(--aws-orange);
+      font-family: 'Space Mono', monospace;
+      font-style: italic;
+    }
+
+    .flashcard-flip-hint {
+      font-size: 0.65rem;
+      color: var(--aws-muted);
+      margin-top: 0.75rem;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .flashcard-count {
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--aws-muted);
+      margin-bottom: 1.5rem;
+    }
+
     /* ── CHEAT SHEET ── */
     .cheat-grid {
       display: grid;
@@ -1174,6 +1284,7 @@
     <li><a href="#services-compare">Compare</a></li>
     <li><a href="#quiz">Practice</a></li>
     <li><a href="#cheatsheet">Cheat Sheet</a></li>
+    <li><a href="#flashcards">Flash Cards</a></li>
     <li><a href="#study-plan">Study Plan</a></li>
   </ul>
 </nav>
@@ -1949,6 +2060,21 @@
   </div>
 
 </section>
+<section id="flashcards">
+  <p class="section-label">▸ Flash Cards</p>
+  <h2 class="section-title">Flash Cards</h2>
+  <p class="section-desc">Click any card to flip it and reveal the definition. Filter by category to focus your study session.</p>
+
+  <!-- Category Filters -->
+  <div class="flashcard-filters">
+    <button class="tab-btn active" onclick="filterFlashcards('all', this)">All Cards</button>
+    <button class="tab-btn" onclick="filterFlashcards('iam', this)">🔑 IAM</button>
+  </div>
+
+  <div class="flashcard-count" id="flashcardCount"></div>
+  <div class="flashcard-grid" id="flashcardGrid"></div>
+</section>
+
 <section id="study-plan">
   <p class="section-label">▸ Structured Preparation</p>
   <h2 class="section-title">4-Week Study Plan</h2>
@@ -3782,6 +3908,7 @@ flowchart LR
         <button class="modal-tab" onclick="switchTab('d1','evaldiagram'); renderMermaid('d1-evaldiagram')">📈 Eval & Monitor</button>
         <button class="modal-tab" onclick="switchTab('d1','hyperparams')">⚙️ Hyperparameters</button>
         <button class="modal-tab" onclick="switchTab('d1','svccomp')">🔀 Service Comparison</button>
+        <button class="modal-tab" onclick="switchTab('d1','learningtype'); renderMermaid('d1-learningtype')">🧭 Learning Types</button>
         <button class="modal-tab" onclick="switchTab('d1','tips')">🎯 Exam Tips</button>
       </div>
 
@@ -4333,6 +4460,53 @@ flowchart TD
           <div class="tip-item"><span class="tip-icon">⚡</span>Feature engineering = transforming raw data into better inputs for the model. It's done BEFORE training.</div>
         </div>
       </div>
+
+      <!-- Learning Type Decision Tree -->
+      <div class="modal-panel" id="d1-learningtype">
+        <h4>Choose the Right Learning Type — Decision Tree</h4>
+        <p style="font-size:0.8rem;color:var(--aws-muted);margin-bottom:0.75rem;">Follow the decision path to identify which ML learning paradigm fits any scenario on the exam.</p>
+        <div class="mermaid-wrap" id="d1-learningtype-wrap">
+          <button class="mermaid-expand-btn" onclick="expandDiagram('d1-learningtype')">⤢ Expand</button>
+          <div class="mermaid" id="d1-learningtype-src">
+flowchart TD
+    Start[Choose Learning Type]
+    Q1["Do you have labeled data?\n(input + correct output)"]
+    Q2["Do you have large unlabeled data?\n(text, images, etc.)"]
+    Q3["Is it a decision-making problem?\n(actions + rewards)"]
+    Q4["Do you already have a pre-trained model?\n(similar task/domain)"]
+    Q5["Does data arrive continuously?\n(streaming / updates)"]
+    Supervised["Supervised Learning\nClassification, regression\nSpam detection, price prediction"]
+    SelfSupervised["Self-Supervised Learning\nAuto-labeling\nNLP (GPT, BERT), embeddings"]
+    Reinforcement["Reinforcement Learning\nReward-based learning\nGames, robotics, recommendations"]
+    Transfer["Transfer Learning\nFine-tune pre-trained models\nImage/NLP tasks with small data"]
+    Incremental["Incremental Learning\nContinuous updates\nFraud detection, real-time systems"]
+    Start --> Q1
+    Q1 -->|Yes| Supervised
+    Q1 -->|No| Q2
+    Q2 -->|Yes| SelfSupervised
+    Q2 -->|No| Q3
+    Q3 -->|Yes| Reinforcement
+    Q3 -->|No| Q4
+    Q4 -->|Yes| Transfer
+    Q4 -->|No| Q5
+    Q5 -->|Yes| Incremental
+    Q5 -->|No| Supervised
+    classDef start fill:#b3d9ff,stroke:#333,color:#000
+    classDef decision fill:#b8f5c2,stroke:#333,color:#000
+    classDef type fill:#fff4b3,stroke:#333,color:#000
+    class Start start
+    class Q1,Q2,Q3,Q4,Q5 decision
+    class Supervised,SelfSupervised,Reinforcement,Transfer,Incremental type
+          </div>
+        </div>
+        <div class="tip-list" style="margin-top:1.25rem;">
+          <div class="tip-item"><span class="tip-icon">🎯</span>Labeled data → <strong>Supervised Learning</strong>. No labels, large corpus → <strong>Self-Supervised</strong> (GPT, BERT).</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Rewards/penalties, agent, actions → always <strong>Reinforcement Learning</strong>.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Pre-trained model + small dataset for a similar task → <strong>Transfer Learning</strong> / fine-tuning.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Streaming data, continuous updates, real-time learning → <strong>Incremental Learning</strong>.</div>
+          <div class="tip-item"><span class="tip-icon">⚡</span>Self-Supervised ≠ Unsupervised. Self-supervised generates its own labels from the data (e.g. predict next word). Unsupervised finds patterns with no labels at all.</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -4843,6 +5017,7 @@ flowchart TB
         <button class="modal-tab" onclick="switchTab('d3','compare')">📊 Comparisons</button>
         <button class="modal-tab" onclick="switchTab('d3','genai'); renderMermaid('d3-genai')">🌐 GenAI Ecosystem</button>
         <button class="modal-tab" onclick="switchTab('d3','tokenembed')">🔤 Tokens & Embeddings</button>
+        <button class="modal-tab" onclick="switchTab('d3','vectordecision'); renderMermaid('d3-vectordecision')">🔀 Vector DB Decision</button>
         <button class="modal-tab" onclick="switchTab('d3','tips')">🎯 Exam Tips</button>
         <button class="modal-tab" onclick="switchTab('d3','diagram'); renderMermaid('d3-diagram')">🗺️ Diagram</button>
       </div>
@@ -5135,6 +5310,49 @@ flowchart LR
     class Wrangler,GroundTruth,FeatureStore,Studio,JumpStart,Canvas,MLflow,Clarify,Pipelines,Registry,ModelCards,RoleManager,Inference,ModelMonitor,Dashboard feature
     class CleanData,BuildModels,TrackModels,AutoML,ManagedModels,Predictions,Insights outcome
           </div>
+        </div>
+      </div>
+
+      <!-- Vector Storage Decision Tree -->
+      <div class="modal-panel" id="d3-vectordecision">
+        <h4>Choose the Right Vector Storage — Decision Tree</h4>
+        <p style="font-size:0.8rem;color:var(--aws-muted);margin-bottom:0.75rem;">Follow the decision path to select the correct AWS vector storage service for any RAG or embedding scenario.</p>
+        <div class="mermaid-wrap" id="d3-vectordecision-wrap">
+          <button class="mermaid-expand-btn" onclick="expandDiagram('d3-vectordecision')">⤢ Expand</button>
+          <div class="mermaid" id="d3-vectordecision-src">
+flowchart TD
+    Start[Choose Vector Storage]
+    Q1["Need real-time semantic search\nlow latency, search queries"]
+    Q2["Already using relational database\nSQL, structured data"]
+    Q3["Working with graph relationships\nconnections, networks"]
+    Q4["Need low-cost storage for large datasets\nbatch, offline processing"]
+    OpenSearch["OpenSearch\nVector search + full-text search\nReal-time semantic search, RAG, search apps"]
+    Aurora["Aurora pgvector\nRelational DB + vector support\nCombine SQL + embeddings"]
+    Neptune["Neptune\nGraph DB with vector support\nKnowledge graphs, relationship queries"]
+    S3Vectors["S3 Vectors\nLow-cost vector storage\nLarge-scale embeddings, offline retrieval"]
+    Start --> Q1
+    Q1 -->|Yes| OpenSearch
+    Q1 -->|No| Q2
+    Q2 -->|Yes| Aurora
+    Q2 -->|No| Q3
+    Q3 -->|Yes| Neptune
+    Q3 -->|No| Q4
+    Q4 -->|Yes| S3Vectors
+    Q4 -->|No| OpenSearch
+    classDef start fill:#b3d9ff,stroke:#333,color:#000
+    classDef decision fill:#b8f5c2,stroke:#333,color:#000
+    classDef service fill:#fff4b3,stroke:#333,color:#000
+    class Start start
+    class Q1,Q2,Q3,Q4 decision
+    class OpenSearch,Aurora,Neptune,S3Vectors service
+          </div>
+        </div>
+        <div class="tip-list" style="margin-top:1.25rem;">
+          <div class="tip-item"><span class="tip-icon">🎯</span>Real-time semantic search / RAG → <strong>OpenSearch</strong>. Default Bedrock Knowledge Base vector store.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Already using PostgreSQL/RDS + need vectors → <strong>Aurora pgvector</strong>. Adds embedding search to existing relational data.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Knowledge graphs + semantic relationships (who knows whom, entity connections) → <strong>Neptune</strong>.</div>
+          <div class="tip-item"><span class="tip-icon">🎯</span>Massive document corpora, cost-sensitive, no real-time latency needed → <strong>Amazon S3 Vectors</strong>.</div>
+          <div class="tip-item"><span class="tip-icon">⚡</span>When in doubt for an exam RAG question with no other constraints → choose <strong>OpenSearch Serverless</strong>. It's the default.</div>
         </div>
       </div>
     </div>
@@ -6919,6 +7137,157 @@ function switchTab(domainId, tab) {
 activeQuestions = [...allQuestions];
 answered = new Array(activeQuestions.length).fill(null);
 renderQuestion();
+
+// ── FLASHCARDS ──
+const flashcards = [
+  // IAM
+  {
+    cat: 'iam',
+    category: 'IAM',
+    term: 'AWS IAM',
+    hint: 'Identity & Access Management',
+    definition: 'The AWS service that controls who can authenticate (sign in) and what they are authorized (have permissions) to do in AWS. Central to all security in AWS.',
+    example: 'e.g. Allow only data scientists to invoke SageMaker APIs'
+  },
+  {
+    cat: 'iam',
+    category: 'IAM',
+    term: 'IAM User',
+    hint: 'A permanent identity with long-term credentials',
+    definition: 'A permanent identity representing a person or application. Has a username, password, and optional access keys. Best for human users who need console or API access.',
+    example: 'e.g. developer@company.com logging into the AWS console'
+  },
+  {
+    cat: 'iam',
+    category: 'IAM',
+    term: 'IAM Role',
+    hint: 'A temporary identity with no long-term credentials',
+    definition: 'An IAM identity that can be assumed by AWS services, applications, or users. Provides temporary security credentials via STS. The recommended way to grant permissions to services like EC2, Lambda, and SageMaker.',
+    example: 'e.g. SageMaker training job assumes a role to read from S3'
+  },
+  {
+    cat: 'iam',
+    category: 'IAM',
+    term: 'IAM Group',
+    hint: 'A collection of IAM users sharing the same permissions',
+    definition: 'A logical grouping of IAM Users. Policies attached to a group apply to all users in it. Groups cannot be nested and cannot be used as a principal in a resource policy.',
+    example: 'e.g. "DataScientists" group with SageMaker and S3 read permissions'
+  },
+  {
+    cat: 'iam',
+    category: 'IAM',
+    term: 'IAM Policy',
+    hint: 'A JSON document defining Allow or Deny permissions',
+    definition: 'A JSON document that specifies what actions are allowed or denied on which AWS resources. Attached to users, groups, or roles to grant permissions. The most common type is Identity-Based Policy.',
+    example: 'e.g. { Effect: Allow, Action: s3:GetObject, Resource: arn:aws:s3:::my-bucket/* }'
+  },
+  {
+    cat: 'iam',
+    category: 'IAM',
+    term: 'IAM Root Account',
+    hint: 'The all-powerful account — never use for daily tasks',
+    definition: 'The first account created when you open AWS. Has unrestricted access to everything and cannot be limited. Best practice: enable MFA immediately, create admin IAM users, and never use root for day-to-day tasks.',
+    example: 'e.g. Used only to close the account or restore access'
+  },
+  {
+    cat: 'iam',
+    category: 'IAM',
+    term: 'IAM Security Center / IAM Identity Center',
+    hint: 'Single Sign-On (SSO) for multiple AWS accounts',
+    definition: 'AWS IAM Identity Center (formerly SSO) enables centralized access management across multiple AWS accounts and business applications. Users sign in once and get access to all permitted accounts and apps.',
+    example: 'e.g. Employee logs in via Okta and gets access to 3 AWS accounts'
+  },
+  {
+    cat: 'iam',
+    category: 'IAM',
+    term: 'Least Privilege',
+    hint: 'The golden rule of IAM security',
+    definition: 'A security principle meaning you grant only the minimum permissions required to perform a specific task. Reduces the blast radius if credentials are compromised.',
+    example: 'e.g. Lambda function only gets s3:PutObject, not s3:* '
+  },
+  {
+    cat: 'iam',
+    category: 'IAM',
+    term: 'AWS STS',
+    hint: 'Security Token Service — issues temporary credentials',
+    definition: 'AWS Security Token Service generates temporary, limited-privilege credentials (access key, secret key, session token) when an IAM Role is assumed. Credentials expire automatically — no rotation needed.',
+    example: 'e.g. EC2 instance assumes a role → STS provides temp keys → instance reads S3'
+  },
+  {
+    cat: 'iam',
+    category: 'IAM',
+    term: 'MFA',
+    hint: 'Multi-Factor Authentication — adds a second login layer',
+    definition: 'Adds a second authentication factor (TOTP app, hardware key, SMS) in addition to a password. Required best practice for root accounts and highly-privileged IAM users.',
+    example: 'e.g. Password + Google Authenticator code to log into AWS console'
+  },
+  {
+    cat: 'iam',
+    category: 'IAM',
+    term: 'Permissions Boundary',
+    hint: 'A ceiling on what permissions a role/user can ever have',
+    definition: 'An advanced IAM feature that defines the maximum permissions an IAM user or role can have — even if their attached policies grant more. Prevents privilege escalation.',
+    example: 'e.g. Developer role cannot exceed "no admin access" even if someone adds Admin policy'
+  },
+  {
+    cat: 'iam',
+    category: 'IAM',
+    term: 'Service Control Policy (SCP)',
+    hint: 'AWS Organizations — permission guardrails across accounts',
+    definition: 'A policy applied at the AWS Organization or Organizational Unit level. Restricts what actions can ever be performed in member accounts — even by root users. SCPs restrict but do not grant permissions.',
+    example: 'e.g. SCP prevents any account from disabling CloudTrail'
+  },
+  {
+    cat: 'iam',
+    category: 'IAM',
+    term: 'Resource-Based Policy',
+    hint: 'A policy attached directly to an AWS resource',
+    definition: 'A policy stored on the resource itself (e.g. S3 bucket, KMS key) that specifies who can access it. Supports cross-account access without assuming a role.',
+    example: 'e.g. S3 bucket policy allowing Account B to read objects'
+  }
+];
+
+let activeFlashcards = [...flashcards];
+
+function filterFlashcards(cat, btn) {
+  document.querySelectorAll('.flashcard-filters .tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeFlashcards = cat === 'all' ? [...flashcards] : flashcards.filter(f => f.cat === cat);
+  renderFlashcards();
+}
+
+function renderFlashcards() {
+  const grid = document.getElementById('flashcardGrid');
+  const count = document.getElementById('flashcardCount');
+  if (!grid) return;
+  count.textContent = `${activeFlashcards.length} card${activeFlashcards.length !== 1 ? 's' : ''}`;
+  grid.innerHTML = '';
+  activeFlashcards.forEach((card, i) => {
+    const scene = document.createElement('div');
+    scene.className = 'flashcard-scene';
+    scene.setAttribute('data-index', i);
+    scene.onclick = () => scene.classList.toggle('flipped');
+    scene.innerHTML = `
+      <div class="flashcard-inner">
+        <div class="flashcard-front">
+          <div class="flashcard-category">${card.category}</div>
+          <div class="flashcard-term">${card.term}</div>
+          <div class="flashcard-hint">${card.hint}</div>
+          <div class="flashcard-flip-hint">👆 click to flip</div>
+        </div>
+        <div class="flashcard-back">
+          <div class="flashcard-category">${card.category}</div>
+          <div class="flashcard-definition">${card.definition}</div>
+          <div class="flashcard-example">${card.example}</div>
+          <div class="flashcard-flip-hint">👆 click to flip back</div>
+        </div>
+      </div>`;
+    grid.appendChild(scene);
+  });
+}
+
+// Init flashcards
+renderFlashcards();
 
 </script>
 
